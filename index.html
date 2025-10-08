@@ -27,11 +27,9 @@
         .trust-badges { display: flex; justify-content: space-around; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; }
         .badge { text-align: center; font-size: 0.9em; color: #777; }
         .badge-icon { font-size: 2em; margin-bottom: 8px; }
-        
         .question-section { text-align: center; margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 8px; }
         .question-btn { background: none; border: 2px solid #3498db; color: #3498db; padding: 10px 20px; font-size: 1.1em; font-weight: bold; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
         .question-btn:hover { background-color: #3498db; color: white; }
-
         .footer_section { text-align: center; margin-top: 40px; padding-top: 20px; font-size: 0.9em; color: #777; }
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); animation: fadeIn 0.3s; }
         .modal-content { background-color: #fefefe; margin: 10% auto; padding: 30px; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 10px; position: relative; }
@@ -40,111 +38,21 @@
         .modal-content h2 { margin-top: 0; }
         .modal-content input, .modal-content textarea { width: 100%; padding: 12px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-        
         @media (max-width: 900px) { .product-grid { grid-template-columns: 1fr; } }
         #lightgallery-links { display: none; }
-
-        /* --- STYLE DLA KALKULATORA --- */
-        .calculator-container {
-            background-color: #f8f9fa;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            margin-top: 30px;
-            border: 1px solid #eee;
-        }
-        .calculator-container h1 {
-            color: #2c3e50;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            margin-top: 0;
-        }
-        .calculator-container p {
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-        .calculator-container label {
-            display: block;
-            text-align: left;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .calculator-container input[type="number"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 1em;
-        }
-        .calculator-container button {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            padding: 15px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
-            border-radius: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: none;
-            cursor: pointer;
-            min-height: 50px;
-            box-sizing: border-box;
-            background: #ff6600;
-            color: white;
-            margin-top: 20px;
-        }
-        .calculator-container button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
-            background: #e65c00;
-        }
-        #wynik {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            font-weight: bold;
-            text-align: center;
-            line-height: 1.6;
-            display: none;
-        }
-        .wynik-ok {
-            background-color: #e6ffe6;
-            color: #16a085;
-            border: 1px solid #16a085;
-        }
-        .wynik-error {
-            background-color: #ffe6e6;
-            color: red;
-            border: 1px solid red;
-        }
-        .buy-button-dynamic {
-            display: block;
-            background: linear-gradient(145deg, #1abc9c, #16a085);
-            color: white;
-            padding: 15px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: all 0.2s;
-        }
-        .buy-button-dynamic:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(22, 160, 133, 0.3);
-        }
-        .buy-button-disabled {
-            background: #ccc !important;
-            pointer-events: none;
-            cursor: not-allowed;
-        }
+        .calculator-container { background-color: #f8f9fa; padding: 25px; border-radius: 12px; text-align: center; margin-top: 30px; border: 1px solid #eee; }
+        .calculator-container h1 { color: #2c3e50; font-size: 1.8em; margin-bottom: 15px; margin-top: 0; }
+        .calculator-container p { font-size: 0.9em; line-height: 1.5; }
+        .calculator-container label { display: block; text-align: left; margin-top: 15px; margin-bottom: 5px; font-weight: bold; }
+        .calculator-container input[type="number"] { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 1em; }
+        .calculator-container button { display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; padding: 15px; text-align: center; text-decoration: none; font-size: 1.2em; font-weight: bold; border-radius: 8px; transition: transform 0.2s, box-shadow 0.2s; border: none; cursor: pointer; min-height: 50px; box-sizing: border-box; background: #ff6600; color: white; margin-top: 20px; }
+        .calculator-container button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4); background: #e65c00; }
+        #wynik { margin-top: 20px; padding: 15px; border-radius: 8px; font-weight: bold; text-align: center; line-height: 1.6; display: none; }
+        .wynik-ok { background-color: #e6ffe6; color: #16a085; border: 1px solid #16a085; }
+        .wynik-error { background-color: #ffe6e6; color: red; border: 1px solid red; }
+        .buy-button-dynamic { display: block; background: linear-gradient(145deg, #1abc9c, #16a085); color: white; padding: 15px; text-decoration: none; border-radius: 8px; font-size: 1.2em; font-weight: bold; margin-top: 15px; transition: all 0.2s; }
+        .buy-button-dynamic:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(22, 160, 133, 0.3); }
+        .buy-button-disabled { background: #ccc !important; pointer-events: none; cursor: not-allowed; }
     </style>
 
     <script>
@@ -167,12 +75,12 @@
     <div class="container">
         <div class="product-grid">
             <div class="gallery-container">
-                <img src="https://i.imgur.com/G5g5g7p.jpeg" alt="Szyba kominkowa na wymiar" id="mainImage" class="main-image" onclick="openGallery(0)">
+                <img src="images/szyba1.jpg" alt="Szyba kominkowa na wymiar" id="mainImage" class="main-image" onclick="openGallery(0)">
                 <div class="thumbnails">
-                    <img src="https://i.imgur.com/G5g5g7p.jpeg" alt="Szyba do kominka - zbliżenie" onclick="changeImage('https://i.imgur.com/G5g5g7p.jpeg', this, 0)">
-                    <img src="https://i.imgur.com/gA3n5Fp.jpeg" alt="Szkło żaroodporne do kominka" onclick="changeImage('https://i.imgur.com/gA3n5Fp.jpeg', this, 1)">
-                    <img src="https://i.imgur.com/U16qW1e.jpeg" alt="Szyba kominkowa na zamówienie" onclick="changeImage('https://i.imgur.com/U16qW1e.jpeg', this, 2)">
-                    <img src="https://i.imgur.com/Qk9kY7T.jpeg" alt="Czysta szyba w kominku" onclick="changeImage('https://i.imgur.com/Qk9kY7T.jpeg', this, 3)">
+                    <img src="images/szyba1.jpg" alt="Szyba do kominka - zbliżenie" onclick="changeImage('images/szyba1.jpg', this, 0)">
+                    <img src="images/szyba2.jpg" alt="Szkło żaroodporne do kominka" onclick="changeImage('images/szyba2.jpg', this, 1)">
+                    <img src="images/szyba3.jpg" alt="Szyba kominkowa na zamówienie" onclick="changeImage('images/szyba3.jpg', this, 2)">
+                    <img src="images/szyba4.jpg" alt="Czysta szyba w kominku" onclick="changeImage('images/szyba4.jpg', this, 3)">
                 </div>
             </div>
 
@@ -232,10 +140,10 @@
     </div>
 
     <div id="lightgallery-links">
-        <a href="https://i.imgur.com/G5g5g7p.jpeg"></a>
-        <a href="https://i.imgur.com/gA3n5Fp.jpeg"></a>
-        <a href="https://i.imgur.com/U16qW1e.jpeg"></a>
-        <a href="https://i.imgur.com/Qk9kY7T.jpeg"></a>
+        <a href="images/szyba1.jpg"></a>
+        <a href="images/szyba2.jpg"></a>
+        <a href="images/szyba3.jpg"></a>
+        <a href="images/szyba4.jpg"></a>
     </div>
     
     <div id="questionModal" class="modal">
@@ -253,7 +161,6 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.min.js"></script>
     <script>
-        // --- SEKCJA GALERII I STRONY PRODUKTU ---
         const galleryContainer = document.getElementById('lightgallery-links');
         const gallery = lightGallery(galleryContainer);
         let currentImageIndex = 0;
@@ -292,10 +199,9 @@
             });
         }
 
-        // --- SEKCJA KALKULATORA ---
         const CENA_ZA_JEDNOSTKE = 8.5;
         const CENA_WYSYLKI = 16.99;
-        const MAX_SZYBA_DLUGOSC = 58; // Te stałe mogą nie być już potrzebne, ale zostawiam na wszelki wypadek
+        const MAX_SZYBA_DLUGOSC = 58;
         const MAX_SZYBA_SZEROKOSC = 32;
 
         function resetProductInfo() {
@@ -326,8 +232,6 @@
                 wynikDiv.innerHTML = '⚠️ Proszę podać poprawne, dodatnie wymiary w cm.';
                 return;
             }
-
-            // Walidacja wymiarów paczkomatu została usunięta z widoku, ale logikę można przywrócić w razie potrzeby
             
             const cenaMaterialu = (wysokosc * szerokosc / 100) * CENA_ZA_JEDNOSTKE;
             const cenaCalkowita = cenaMaterialu + CENA_WYSYLKI;
