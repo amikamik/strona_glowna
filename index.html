@@ -12,7 +12,7 @@
         .container { max-width: 1100px; margin: 40px auto; padding: 20px; }
         .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background-color: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
         .main-image { width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee; cursor: pointer; }
-        .thumbnails { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; } /* Zmieniono na 4 kolumny */
+        .thumbnails { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
         .thumbnails img { width: 100%; border-radius: 4px; cursor: pointer; border: 2px solid #ddd; transition: all 0.2s; aspect-ratio: 1 / 1; object-fit: cover; }
         .thumbnails img:hover, .thumbnails img.active { border-color: #ff6600; transform: scale(1.05); }
         .product-info h1 { font-size: 2.4em; margin-top: 0; line-height: 1.2; font-weight: 700; }
@@ -159,7 +159,7 @@
             </form>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.min.js"></script>
     <script>
         const galleryContainer = document.getElementById('lightgallery-links');
         const gallery = lightGallery(galleryContainer);
@@ -233,7 +233,6 @@
                 return;
             }
 
-            // Sprawdzamy wymiary paczkomatu
              const zmiesciSie = (
                 (wysokosc <= MAX_SZYBA_DLUGOSC && szerokosc <= MAX_SZYBA_SZEROKOSC) ||
                 (wysokosc <= MAX_SZYBA_SZEROKOSC && szerokosc <= MAX_SZYBA_DLUGOSC)
