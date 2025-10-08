@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       // Tworzymy nową sesję płatności w Stripe
       const session = await stripe.checkout.sessions.create({
         // Dozwolone metody płatności dla Polski
-        payment_method_types: ['card', 'p24', 'blik'],
+        payment_method_types: ['card','blik'],
         // Tryb płatności - jednorazowa
         mode: 'payment',
         // Lista produktów (w naszym przypadku jeden)
