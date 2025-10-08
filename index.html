@@ -159,7 +159,7 @@
             </form>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery.min.js"></script>
     <script>
         const galleryContainer = document.getElementById('lightgallery-links');
         const gallery = lightGallery(galleryContainer);
@@ -199,8 +199,10 @@
             });
         }
 
-        const CENA_ZA_JEDNOSTKE = 8.5;
-        const CENA_WYSYLKI = 16.99;
+        // ZAKTUALIZOWANE STAŁE I WZÓR
+        const CENA_ZA_DM2 = 8.5;
+        const MNOZNIK_CENY = 1.7;
+        const CENA_WYSYLKI = 12.0;
         const MAX_SZYBA_DLUGOSC = 58;
         const MAX_SZYBA_SZEROKOSC = 32;
 
@@ -244,14 +246,15 @@
                 return;
             }
             
-            const cenaMaterialu = (wysokosc * szerokosc / 100) * CENA_ZA_JEDNOSTKE;
-            const cenaCalkowita = cenaMaterialu + CENA_WYSYLKI;
+            // Zastosowanie nowego wzoru
+            const cenaProduktu = (((wysokosc * szerokosc) / 100) * CENA_ZA_DM2) * MNOZNIK_CENY;
+            const cenaCalkowita = cenaProduktu + CENA_WYSYLKI;
             const calculatedPrice = cenaCalkowita.toFixed(2);
 
             wynikDiv.className = 'wynik-ok';
             wynikDiv.innerHTML = `
-                Cena szyby: <strong>${cenaMaterialu.toFixed(2)} zł</strong><br>
-                Wysyłka do Paczkomatu: <strong>${CENA_WYSYLKI.toFixed(2)} zł</strong><br>
+                Cena produktu: <strong>${cenaProduktu.toFixed(2)} zł</strong><br>
+                Dostawa do Paczkomatu: <strong>${CENA_WYSYLKI.toFixed(2)} zł</strong><br>
                 <strong>CAŁKOWITY KOSZT: ${calculatedPrice} zł</strong>
             `;
 
