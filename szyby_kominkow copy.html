@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Ceny Szyby na Wymiar (Paczkomat)</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .calculator-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+        }
+        h1 {
+            color: #1abc9c;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        button {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+            min-height: 50px;
+            box-sizing: border-box;
+            background: #ff6600; /* Kolor dla przycisku akcji */
+            color: white;
+            margin-top: 20px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+            background: #e65c00;
+        }
+        #wynik {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .wynik-ok { 
+            background-color: #e6ffe6; 
+            color: #16a085; 
+            border: 1px solid #16a085; 
+        }
+        .wynik-error { 
+            background-color: #ffe6e6; 
+            color: red; 
+            border: 1px solid red; 
+        }
+        .buy-button-dynamic {
+            display: block;
+            background: linear-gradient(145deg, #1abc9c, #16a085);
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.2s;
+        }
+        .buy-button-dynamic:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(22, 160, 133, 0.3);
+        }
+        .buy-button-disabled {
+            background: #ccc !important;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator-container">
+        <h1>Kalkulator Szyby na Wymiar</h1>
+        <p>Wprowadź wymiary szyby w centymetrach (cm), aby obliczyć cenę i sprawdzić, czy zmieści się do Paczkomatu C (maks. **58 x 32 cm** po opakowaniu).</p>
+        
+        <label for="wysokosc">Wysokość szyby (cm):</label>
+        <input type="number" id="wysokosc" min="1" step="0.1" placeholder="Wysokość (np. 45.5)" required>
+            
+        <label for="szerokosc">Szerokość szyby (cm):</label>
+        <input type="number" id="szerokosc" min="1" step="0.1" placeholder="Szerokość (np. 28.0)" required>
+
+        <button onclick="obliczCeneSzyby()">OBLICZ CENĘ I SPRAWDŹ DOSTĘPNOŚĆ</button>
+        
+        <div id="wynik"></div>
+
+        <a href="#" class="buy-button-dynamic buy-button-disabled" id="buyButton">
+            ZAMÓW SZYBĘ 🔒 (Aktywuj po obliczeniu)
+        </a>
+    </div>
+
+    <script>
+        // STAŁE KALKULATORA
+        const CENA_ZA_JEDNOSTKE = 8.5; 
+        const CENA_WYSYLKI = 16.99; 
+        // Maksymalne wymiary szyby (64x38 cm - 6 cm opakowania = 58x32 cm)
+        const MAX_SZYBA_DLUGOSC = 58; 
+        const MAX_SZYBA_SZEROKOSC = 32; 
+        
+        // WAŻNE: Wprowadź tutaj swój STAŁY LINK do produktu Stripe.
+        // Pamiętaj, że do dynamicznej ceny potrzebny jest backend Stripe API.
+        const STRIPE_BASE_URL = "https://buy.stripe.com/cNi7sNfDO0czff99rz4ko16"; 
+        
+        const wynikDiv = document.getElementById('wynik');
+        const buyButton = document.getElementById('buyButton');
+
+        function resetProductInfo() {
+            wynikDiv.style.display = 'none';
+            buyButton.textContent = 'ZAMÓW SZYBĘ 🔒 (Aktywuj po obliczeniu)';
+            buyButton.classList.add('buy-button-disabled');
+            buyButton.href = '#';
+        }
+
+        function obliczCeneSzyby() {
+            const wysokosc = parseFloat(document.getElementById('wysokosc').value);
+            const szerokosc = parseFloat(document.getElementById('szerokosc').value);
+            
+            wynikDiv.style.display = 'block';
+            resetProductInfo(); // Resetuj przycisk przed nowym obliczeniem
+
+            // 1. Walidacja danych wejściowych
+            if (isNaN(wysokosc) || isNaN(szerokosc) || wysokosc <= 0 || szerokosc <= 0) {
+                wynikDiv.className = 'wynik-error';
+                wynikDiv.innerHTML = '⚠️ Proszę podać poprawne wymiary (liczby dodatnie) szyby w cm.';
+                return;
+            }
+
+            // 2. Walidacja wymiarów Paczkomatu (z uwzględnieniem obrotu)
+            const zmiesciSie = (
+                (wysokosc <= MAX_SZYBA_DLUGOSC && szerokosc <= MAX_SZYBA_SZEROKOSC) || 
+                (wysokosc <= MAX_SZYBA_SZEROKOSC && szerokosc <= MAX_SZYBA_DLUGOSC)
+            );
+
+            if (!zmiesciSie) {
+                wynikDiv.className = 'wynik-error';
+                wynikDiv.innerHTML = `❌ **BŁĄD WYMIARÓW!** Niestety, Twoja szyba (${wysokosc}x${szerokosc} cm) nie zmieści się do Paczkomatu. Maksymalny wymiar szyby (z opakowaniem 3 cm z każdej strony) to **${MAX_SZYBA_DLUGOSC} cm x ${MAX_SZYBA_SZEROKOSC} cm**.`;
+                return;
+            }
+
+            // 3. Obliczenie ceny
+            // Wzór: (wysokość * szerokość / 100) * 8.5 + cena wysyłki
+            const cenaMaterialu = (wysokosc * szerokosc / 100) * CENA_ZA_JEDNOSTKE;
+            const cenaCalkowita = cenaMaterialu + CENA_WYSYLKI;
+            
+            const calculatedPrice = cenaCalkowita.toFixed(2); 
+
+            // 4. Aktualizacja wyniku i przycisku ZAMÓW
+            wynikDiv.className = 'wynik-ok';
+            wynikDiv.innerHTML = `
+                ✅ **DOBRA WIADOMOŚĆ!** Twoja szyba zmieści się w Paczkomacie.<br>
+                Cena szyby: <strong>${cenaMaterialu.toFixed(2)} zł</strong><br>
+                Cena wysyłki: <strong>${CENA_WYSYLKI.toFixed(2)} zł</strong><br>
+                **CAŁKOWITY KOSZT: ${calculatedPrice} zł**
+            `;
+            
+            // 5. Aktywacja przycisku Kup Teraz
+            buyButton.classList.remove('buy-button-disabled');
+            
+            // Przekazanie ceny w centach (bez kropki) jako parametr (wymaga backendu Stripe)
+            const priceInCents = Math.round(cenaCalkowita * 100);
+            buyButton.href = `${STRIPE_BASE_URL}?price=${priceInCents}&w=${wysokosc}&h=${szerokosc}`;
+            buyButton.textContent = `ZAMÓW SZYBĘ (${calculatedPrice} ZŁ)`;
+        }
+
+        // Ustawienie początkowego stanu
+        window.onload = resetProductInfo;
+    </script>
+</body>
+</html>
