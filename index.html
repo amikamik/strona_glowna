@@ -335,7 +335,6 @@
         const CENA_WYSYLKI = 16.99;
         const MAX_SZYBA_DLUGOSC = 58;
         const MAX_SZYBA_SZEROKOSC = 32;
-        const STRIPE_BASE_URL = "https://buy.stripe.com/cNi7sNfDO0czff99rz4ko16"; // Pamiętaj, aby wstawić właściwy link!
 
         function resetProductInfo() {
             const wynikDiv = document.getElementById('wynik');
@@ -344,26 +343,32 @@
                 wynikDiv.style.display = 'none';
                 buyButton.textContent = 'ZAMÓW SZYBĘ 🔒 (Aktywuj po obliczeniu)';
                 buyButton.classList.add('buy-button-disabled');
+                buyButton.onclick = null; // Usuwamy poprzednie zdarzenie onclick
                 buyButton.href = '#';
             }
         }
 
-        function obliczCeneSzyby() {
+        // ZAKTUALIZOWANA FUNKCJA OBLICZANIA CENY
+        async function obliczCeneSzyby() {
             const wynikDiv = document.getElementById('wynik');
             const buyButton = document.getElementById('buyButton');
+            const calcButton = document.querySelector('.calculator-container button'); // Główny przycisk obliczający
+            
             const wysokosc = parseFloat(document.getElementById('wysokosc').value);
             const szerokosc = parseFloat(document.getElementById('szerokosc').value);
-            
-            wynikDiv.style.display = 'block';
-            resetProductInfo(); // Resetuje przycisk przed nowym obliczeniem
-            wynikDiv.style.display = 'block'; // Ponownie pokazujemy, bo reset ukrywa
 
+            // Resetowanie stanu przycisku "Zamów" przed nowym obliczeniem
+            resetProductInfo();
+            wynikDiv.style.display = 'block';
+
+            // 1. Walidacja danych wejściowych
             if (isNaN(wysokosc) || isNaN(szerokosc) || wysokosc <= 0 || szerokosc <= 0) {
                 wynikDiv.className = 'wynik-error';
                 wynikDiv.innerHTML = '⚠️ Proszę podać poprawne wymiary (liczby dodatnie) szyby w cm.';
                 return;
             }
 
+            // 2. Walidacja wymiarów Paczkomatu
             const zmiesciSie = (
                 (wysokosc <= MAX_SZYBA_DLUGOSC && szerokosc <= MAX_SZYBA_SZEROKOSC) ||
                 (wysokosc <= MAX_SZYBA_SZEROKOSC && szerokosc <= MAX_SZYBA_DLUGOSC)
@@ -375,10 +380,12 @@
                 return;
             }
 
+            // 3. Obliczenie ceny
             const cenaMaterialu = (wysokosc * szerokosc / 100) * CENA_ZA_JEDNOSTKE;
             const cenaCalkowita = cenaMaterialu + CENA_WYSYLKI;
             const calculatedPrice = cenaCalkowita.toFixed(2);
 
+            // 4. Aktualizacja wyniku
             wynikDiv.className = 'wynik-ok';
             wynikDiv.innerHTML = `
                 ✅ <strong>DOBRA WIADOMOŚĆ!</strong> Twoja szyba zmieści się w Paczkomacie.<br>
@@ -386,11 +393,52 @@
                 Cena wysyłki: <strong>${CENA_WYSYLKI.toFixed(2)} zł</strong><br>
                 <strong>CAŁKOWITY KOSZT: ${calculatedPrice} zł</strong>
             `;
-            
+
+            // 5. Aktywacja przycisku "Zamów" i przypisanie mu nowej akcji
             buyButton.classList.remove('buy-button-disabled');
-            const priceInCents = Math.round(cenaCalkowita * 100);
-            buyButton.href = `${STRIPE_BASE_URL}?price=${priceInCents}&w=${wysokosc}&h=${szerokosc}`;
             buyButton.textContent = `ZAMÓW SZYBĘ (${calculatedPrice} ZŁ)`;
+            
+            // Usuwamy stary link, teraz przycisk będzie uruchamiał płatność
+            buyButton.href = '#'; 
+            buyButton.onclick = async () => {
+                // Zmieniamy tekst i blokujemy przyciski na czas ładowania
+                buyButton.textContent = 'Przekierowuję do płatności...';
+                buyButton.classList.add('buy-button-disabled');
+                calcButton.disabled = true;
+
+                try {
+                    // Wysyłamy prośbę do naszego API na Vercel
+                    const response = await fetch('/api/create-checkout-session', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            price: cenaCalkowita,
+                            width: szerokosc,
+                            height: wysokosc,
+                        }),
+                    });
+
+                    const data = await response.json();
+
+                    if (data.url) {
+                        // Jeśli dostaliśmy link, przekierowujemy użytkownika do Stripe
+                        window.location.href = data.url;
+                    } else {
+                        // Jeśli API zwróciło błąd
+                        alert('Wystąpił błąd. Spróbuj ponownie.');
+                        resetProductInfo(); // Resetujemy stan
+                    }
+                } catch (error) {
+                    console.error('Błąd:', error);
+                    alert('Wystąpił błąd połączenia. Spróbuj ponownie.');
+                    resetProductInfo();
+                } finally {
+                    // Niezależnie od wyniku, odblokowujemy przycisk obliczania
+                    calcButton.disabled = false;
+                }
+            };
         }
 
         // --- POŁĄCZONA FUNKCJA ONLOAD ---
