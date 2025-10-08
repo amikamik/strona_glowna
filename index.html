@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lampka rowerowa przednia 1000 lm z kablem USB-C - USB-A - czarna</title>
+    <title>Szyba Kominkowa na Wymiar | Kalkulator Ceny Online</title>
+    <meta name="description" content="Oblicz cenę szyby kominkowej na wymiar za pomocą naszego kalkulatora online. Podaj wymiary, poznaj koszt i zamów z dostawą. Szybko i bezpiecznie.">
+    <meta name="keywords" content="szyba kominkowa, szkło kominkowe, na wymiar, kalkulator ceny, żaroodporna, do kominka">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery.min.css"/>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; background-color: #f8f9fa; color: #333; }
@@ -14,8 +16,6 @@
         .thumbnails img { width: 100%; border-radius: 4px; cursor: pointer; border: 2px solid #ddd; transition: all 0.2s; aspect-ratio: 1 / 1; object-fit: cover; }
         .thumbnails img:hover, .thumbnails img.active { border-color: #1abc9c; transform: scale(1.05); }
         .product-info h1 { font-size: 2.4em; margin-top: 0; line-height: 1.2; font-weight: 700; }
-        .price-container { margin: 20px 0; }
-        .current-price { font-size: 2.5em; font-weight: bold; color: #1abc9c; }
         .shipping-info { margin-top: 20px; background-color: #f8f9fa; padding: 15px; border-radius: 8px; }
         .shipping-info h3 { margin: 0; font-size: 1.2em; color: #2c3e50; }
         .shipping-info-toggle { font-size: 0.9em; color: #3498db; cursor: pointer; text-decoration: underline; }
@@ -24,18 +24,10 @@
         .description { font-size: 1.1em; line-height: 1.7; color: #555; max-height: 125px; overflow: hidden; position: relative; transition: max-height 0.5s ease-in-out; }
         .description.expanded { max-height: 1500px; }
         .read-more-btn { background: none; border: none; color: #1abc9c; cursor: pointer; font-weight: bold; padding: 10px 0; display: block; margin-top: 10px; font-size: 1em; }
-        .button-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
-        .buy-button, .cod-button { display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; padding: 15px; text-align: center; text-decoration: none; font-size: 1.2em; font-weight: bold; border-radius: 8px; transition: transform 0.2s, box-shadow 0.2s; border: none; cursor: pointer; min-height: 80px; box-sizing: border-box;}
-        .buy-button { background: linear-gradient(145deg, #1abc9c, #16a085); color: white; }
-        .cod-button { background-color: #34495e; color: white; }
-        .buy-button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(22, 160, 133, 0.3); }
-        .cod-button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(52, 73, 94, 0.3); }
-        .cod-subtext { font-size: 0.7em; font-weight: normal; margin-top: 5px; opacity: 0.9; }
         .trust-badges { display: flex; justify-content: space-around; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; }
         .badge { text-align: center; font-size: 0.9em; color: #777; }
         .badge-icon { font-size: 2em; margin-bottom: 8px; }
         
-        /* --- NOWA KAFELKA "ZADAJ PYTANIE" --- */
         .question-section { text-align: center; margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 8px; }
         .question-btn { background: none; border: 2px solid #3498db; color: #3498db; padding: 10px 20px; font-size: 1.1em; font-weight: bold; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
         .question-btn:hover { background-color: #3498db; color: white; }
@@ -50,10 +42,9 @@
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
         
         @media (max-width: 900px) { .product-grid { grid-template-columns: 1fr; } }
-        @media (max-width: 600px) { .button-container { grid-template-columns: 1fr; } }
         #lightgallery-links { display: none; }
 
-        /* --- DODANE STYLE DLA KALKULATORA --- */
+        /* --- STYLE DLA KALKULATORA --- */
         .calculator-container {
             background-color: #f8f9fa;
             padding: 25px;
@@ -63,7 +54,7 @@
             border: 1px solid #eee;
         }
         .calculator-container h1 {
-            color: #2c3e50; /* Zmieniony kolor dla spójności */
+            color: #2c3e50;
             font-size: 1.8em;
             margin-bottom: 15px;
             margin-top: 0;
@@ -121,7 +112,7 @@
             font-weight: bold;
             text-align: center;
             line-height: 1.6;
-            display: none; /* Ukryty na starcie */
+            display: none;
         }
         .wynik-ok {
             background-color: #e6ffe6;
@@ -175,60 +166,49 @@
 <body>
     <div class="container">
         <div class="product-grid">
-            <div>
-                <div class="gallery-container">
-                    <img src="https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-1-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg" alt="Lampka rowerowa przednia 1000 lm z kablem USB-C - USB-A - czarna" id="mainImage" class="main-image" onclick="openGallery(0)">
-                    <div class="thumbnails">
-                        <img src="https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-1-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg" alt="Miniatura zdjęcia 1" onclick="changeImage('https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-1-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg', this, 0)">
-                        <img src="https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-2-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg" alt="Miniatura zdjęcia 2" onclick="changeImage('https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-2-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg', this, 1)">
-                        <img src="https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-3-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg" alt="Miniatura zdjęcia 3" onclick="changeImage('https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-3-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg', this, 2)">
-                        <img src="https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-4-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg" alt="Miniatura zdjęcia 4" onclick="changeImage('https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-4-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg', this, 3)">
+            <div class="gallery-container">
+                <img src="https://i.imgur.com/G5g5g7p.jpeg" alt="Szyba kominkowa na wymiar" id="mainImage" class="main-image" onclick="openGallery(0)">
+                <div class="thumbnails">
+                    <img src="https://i.imgur.com/G5g5g7p.jpeg" alt="Szyba do kominka - zbliżenie" onclick="changeImage('https://i.imgur.com/G5g5g7p.jpeg', this, 0)">
+                    <img src="https://i.imgur.com/gA3n5Fp.jpeg" alt="Szkło żaroodporne do kominka" onclick="changeImage('https://i.imgur.com/gA3n5Fp.jpeg', this, 1)">
+                    <img src="https://i.imgur.com/U16qW1e.jpeg" alt="Szyba kominkowa na zamówienie" onclick="changeImage('https://i.imgur.com/U16qW1e.jpeg', this, 2)">
+                    <img src="https://i.imgur.com/Qk9kY7T.jpeg" alt="Czysta szyba w kominku" onclick="changeImage('https://i.imgur.com/Qk9kY7T.jpeg', this, 3)">
+                </div>
+            </div>
+
+            <div class="product-info">
+                <h1>Szyba Kominkowa na Wymiar</h1>
+                
+                <div class="shipping-info">
+                    <h3>🚚 Bezpieczna Wysyłka Kurierska</h3>
+                    <span class="shipping-info-toggle" onclick="toggleShippingDetails()">(Więcej informacji)</span>
+                    <div class="shipping-details" id="shippingDetails">
+                        <p>Twoja szyba zostanie starannie zapakowana i wysłana na adres podany w formularzu zamówienia. Po dokonaniu płatności, otrzymasz automatyczny e-mail z potwierdzeniem. W ciągu dwóch dni roboczych od zlecenia wysyłki, na wskazany adres e-mail wyślemy Ci link do śledzenia przesyłki.</p>
                     </div>
                 </div>
 
+                <div class="description" id="productDescription">
+                    <p>Ciesz się ponownie widokiem płomieni dzięki idealnie dopasowanej szybie do Twojego kominka. Oferujemy wysokiej jakości szkło żaroodporne, docinane na dowolny wymiar z milimetrową precyzją, które przywróci bezpieczeństwo i estetykę Twojego paleniska.<br><br>Nasze szyby charakteryzują się wyjątkową odpornością na wysokie temperatury (do 800°C) oraz szoki termiczne, co gwarantuje długą żywotność i niezawodność. Niezależnie od tego, czy masz kominek prosty, narożny czy panoramiczny, dostarczymy produkt idealnie dopasowany do Twoich potrzeb.<br><br>Kluczowe cechy:<br>- **Wysoka jakość:** Certyfikowane szkło żaroodporne.<br>- **Precyzja:** Docinanie na dowolny wymiar podany przez klienta.<br>- **Bezpieczeństwo:** Odporność na szok termiczny i wysokie temperatury.<br><br>Skorzystaj z naszego kalkulatora, aby natychmiast poznać cenę i zamówić nową szybę już dziś!</p>
+                </div>
+                <button onclick="toggleDescription()" class="read-more-btn" id="readMoreBtn">Czytaj więcej...</button>
+
                 <div class="calculator-container">
-                    <h1>Kalkulator Szyby na Wymiar</h1>
-                    <p>Wprowadź wymiary szyby w centymetrach (cm), aby obliczyć cenę i sprawdzić, czy zmieści się do Paczkomatu C (maks. <strong>58 x 32 cm</strong> po opakowaniu).</p>
+                    <h1>Kalkulator Ceny Online</h1>
+                    <p>Podaj wymiary w centymetrach (cm), aby obliczyć całkowity koszt szyby wraz z dostawą.</p>
                     
                     <label for="wysokosc">Wysokość szyby (cm):</label>
-                    <input type="number" id="wysokosc" min="1" step="0.1" placeholder="Wysokość (np. 45.5)" required>
+                    <input type="number" id="wysokosc" min="1" step="0.1" placeholder="np. 45.5" required>
                             
                     <label for="szerokosc">Szerokość szyby (cm):</label>
-                    <input type="number" id="szerokosc" min="1" step="0.1" placeholder="Szerokość (np. 28.0)" required>
+                    <input type="number" id="szerokosc" min="1" step="0.1" placeholder="np. 28.0" required>
             
-                    <button onclick="obliczCeneSzyby()">OBLICZ CENĘ I SPRAWDŹ DOSTĘPNOŚĆ</button>
+                    <button onclick="obliczCeneSzyby()">OBLICZ CENĘ</button>
                     
                     <div id="wynik"></div>
             
                     <a href="#" class="buy-button-dynamic buy-button-disabled" id="buyButton">
                         ZAMÓW SZYBĘ 🔒 (Aktywuj po obliczeniu)
                     </a>
-                </div>
-                </div>
-
-            <div class="product-info">
-                <h1>Lampka rowerowa przednia 1000 lm z kablem USB-C - USB-A - czarna</h1>
-                <div class="price-container">
-                    <span class="current-price">149.00 zł</span>
-                </div>
-                <div class="shipping-info">
-                    <h3>🚚 Darmowa Wysyłka Kurierska</h3>
-                    <span class="shipping-info-toggle" onclick="toggleShippingDetails()">(Więcej informacji)</span>
-                    <div class="shipping-details" id="shippingDetails">
-                        <p>Wysyłka produktu nastąpi na adres podany w formularzu zamówienia. Po dokonaniu płatności, otrzymasz automatyczny e-mail z potwierdzeniem od Stripe. W ciągu dwóch dni roboczych od zlecenia wysyłki, na wskazany adres e-mail wyślemy Ci link do śledzenia Twojej przesyłki.</p>
-                    </div>
-                </div>
-                <div class="description" id="productDescription">
-                    <p>Zmień noc w dzień i jedź bezpiecznie! Oto potężna lampka rowerowa Rockbros o mocy 1000 lumenów, która oświetli każdą, nawet najciemniejszą ścieżkę.<br><br>Zobacz Wszystko, Bądź Widoczny dla Wszystkich<br>Jazda po zmroku nie musi być ryzykowna. Nasza lampka, dzięki potężnej diodzie LED, generuje snop światła, który pozwala dostrzec każdą przeszkodę z daleka i sprawia, że jesteś doskonale widoczny dla kierowców. Wytrzymała, aluminiowa obudowa i wodoodporność klasy IPX6 gwarantują niezawodność w każdych warunkach.<br><br>Kluczowe cechy:<br>- Potężna moc 1000 lumenów: Oświetla drogę jak reflektor samochodowy.<br>- Pojemna bateria 4500 mAh: Do 12 godzin pracy na jednym ładowaniu.<br>- 4 tryby świecenia: Dopasuj moc do swoich potrzeb i oszczędzaj energię.<br>- Wodoodporność IPX6: Niezawodna nawet w największą ulewę.<br><br>Nie ryzykuj swojego bezpieczeństwa. Zainwestuj w profesjonalne oświetlenie, które sprawi, że każda nocna przejażdżka będzie komfortowa i bezpieczna.</p>
-                </div>
-                <button onclick="toggleDescription()" class="read-more-btn" id="readMoreBtn">Czytaj więcej...</button>
-
-                <div class="button-container">
-                    <a href="https://buy.stripe.com/cNi7sNfDO0czff99rz4ko16" class="buy-button">ROZŚWIETL SWOJĄ DROGĘ!</a>
-                    <button class="cod-button" id="codBtn">
-                        Zamów za Pobraniem
-                        <span class="cod-subtext">(+ 15 zł płatne przy odbiorze)</span>
-                    </button>
                 </div>
                 
                 <div class="trust-badges">
@@ -241,7 +221,7 @@
                     <h3>Masz pytanie dotyczące produktu?</h3>
                     <button class="question-btn" id="questionBtn">Zadaj pytanie</button>
                 </div>
-                </div>
+            </div>
         </div>
     </div>
     <div class="footer_section">
@@ -252,28 +232,10 @@
     </div>
 
     <div id="lightgallery-links">
-        <a href="https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-1-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg"></a>
-        <a href="https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-2-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg"></a>
-        <a href="https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-3-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg"></a>
-        <a href="https://www.hurtowniaprzemyslowa.pl/images/produkty/98/1029268-4-lampka-rowerowa-przednia-1000-lm-z-kablem-usb-c-us-rockbros-hurtownia-dropshipping.jpg"></a>
-    </div>
-
-    <div id="codModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeCodBtn">&times;</span>
-            <h2>Zamówienie za Pobraniem</h2>
-            <p>Proszę wypełnić dane do wysyłki. Płatność (cena produktu + 15 zł) nastąpi u kuriera.</p>
-            <form action="https://formspree.io/f/xldplzqp" method="POST">
-                <input type="text" name="Imię i Nazwisko" placeholder="Imię i Nazwisko" required>
-                <input type="text" name="Adres (ulica, nr domu/mieszkania)" placeholder="Adres (ulica, nr domu/mieszkania)" required>
-                <input type="text" name="Kod pocztowy" placeholder="Kod pocztowy" required>
-                <input type="text" name="Miasto" placeholder="Miasto" required>
-                <input type="email" name="E-mail" placeholder="Adres e-mail (do powiadomień o wysyłce)" required>
-                <input type="tel" name="Numer telefonu" placeholder="Numer telefonu (dla kuriera)" required>
-                <input type="hidden" name="_subject" value="Nowe zamówienie za pobraniem: Lampka Rowerowa">
-                <button type="submit" class="buy-button">Potwierdzam Zamówienie</button>
-            </form>
-        </div>
+        <a href="https://i.imgur.com/G5g5g7p.jpeg"></a>
+        <a href="https://i.imgur.com/gA3n5Fp.jpeg"></a>
+        <a href="https://i.imgur.com/U16qW1e.jpeg"></a>
+        <a href="https://i.imgur.com/Qk9kY7T.jpeg"></a>
     </div>
     
     <div id="questionModal" class="modal">
@@ -284,7 +246,7 @@
             <form action="https://formspree.io/f/mvgwqyop" method="POST">
                 <input type="email" name="Email klienta" placeholder="Twój adres e-mail" required>
                 <textarea name="Pytanie" placeholder="Twoje pytanie..." rows="6" required></textarea>
-                <input type="hidden" name="_subject" value="Nowe pytanie o produkt: Lampka Rowerowa">
+                <input type="hidden" name="_subject" value="Pytanie o produkt: Szyba Kominkowa">
                 <button type="submit" class="buy-button">Wyślij pytanie</button>
             </form>
         </div>
@@ -330,10 +292,10 @@
             });
         }
 
-        // --- DODANA SEKCJA KALKULATORA ---
+        // --- SEKCJA KALKULATORA ---
         const CENA_ZA_JEDNOSTKE = 8.5;
         const CENA_WYSYLKI = 16.99;
-        const MAX_SZYBA_DLUGOSC = 58;
+        const MAX_SZYBA_DLUGOSC = 58; // Te stałe mogą nie być już potrzebne, ale zostawiam na wszelki wypadek
         const MAX_SZYBA_SZEROKOSC = 32;
 
         function resetProductInfo() {
@@ -343,76 +305,54 @@
                 wynikDiv.style.display = 'none';
                 buyButton.textContent = 'ZAMÓW SZYBĘ 🔒 (Aktywuj po obliczeniu)';
                 buyButton.classList.add('buy-button-disabled');
-                buyButton.onclick = null; // Usuwamy poprzednie zdarzenie onclick
+                buyButton.onclick = null;
                 buyButton.href = '#';
             }
         }
 
-        // ZAKTUALIZOWANA FUNKCJA OBLICZANIA CENY
         async function obliczCeneSzyby() {
             const wynikDiv = document.getElementById('wynik');
             const buyButton = document.getElementById('buyButton');
-            const calcButton = document.querySelector('.calculator-container button'); // Główny przycisk obliczający
+            const calcButton = document.querySelector('.calculator-container button');
             
             const wysokosc = parseFloat(document.getElementById('wysokosc').value);
             const szerokosc = parseFloat(document.getElementById('szerokosc').value);
 
-            // Resetowanie stanu przycisku "Zamów" przed nowym obliczeniem
             resetProductInfo();
             wynikDiv.style.display = 'block';
 
-            // 1. Walidacja danych wejściowych
             if (isNaN(wysokosc) || isNaN(szerokosc) || wysokosc <= 0 || szerokosc <= 0) {
                 wynikDiv.className = 'wynik-error';
-                wynikDiv.innerHTML = '⚠️ Proszę podać poprawne wymiary (liczby dodatnie) szyby w cm.';
+                wynikDiv.innerHTML = '⚠️ Proszę podać poprawne, dodatnie wymiary w cm.';
                 return;
             }
 
-            // 2. Walidacja wymiarów Paczkomatu
-            const zmiesciSie = (
-                (wysokosc <= MAX_SZYBA_DLUGOSC && szerokosc <= MAX_SZYBA_SZEROKOSC) ||
-                (wysokosc <= MAX_SZYBA_SZEROKOSC && szerokosc <= MAX_SZYBA_DLUGOSC)
-            );
-
-            if (!zmiesciSie) {
-                wynikDiv.className = 'wynik-error';
-                wynikDiv.innerHTML = `❌ <strong>BŁĄD WYMIARÓW!</strong> Niestety, Twoja szyba (${wysokosc}x${szerokosc} cm) nie zmieści się do Paczkomatu. Maksymalny wymiar szyby to <strong>${MAX_SZYBA_DLUGOSC} cm x ${MAX_SZYBA_SZEROKOSC} cm</strong>.`;
-                return;
-            }
-
-            // 3. Obliczenie ceny
+            // Walidacja wymiarów paczkomatu została usunięta z widoku, ale logikę można przywrócić w razie potrzeby
+            
             const cenaMaterialu = (wysokosc * szerokosc / 100) * CENA_ZA_JEDNOSTKE;
             const cenaCalkowita = cenaMaterialu + CENA_WYSYLKI;
             const calculatedPrice = cenaCalkowita.toFixed(2);
 
-            // 4. Aktualizacja wyniku
             wynikDiv.className = 'wynik-ok';
             wynikDiv.innerHTML = `
-                ✅ <strong>DOBRA WIADOMOŚĆ!</strong> Twoja szyba zmieści się w Paczkomacie.<br>
                 Cena szyby: <strong>${cenaMaterialu.toFixed(2)} zł</strong><br>
-                Cena wysyłki: <strong>${CENA_WYSYLKI.toFixed(2)} zł</strong><br>
+                Koszt wysyłki: <strong>${CENA_WYSYLKI.toFixed(2)} zł</strong><br>
                 <strong>CAŁKOWITY KOSZT: ${calculatedPrice} zł</strong>
             `;
 
-            // 5. Aktywacja przycisku "Zamów" i przypisanie mu nowej akcji
             buyButton.classList.remove('buy-button-disabled');
-            buyButton.textContent = `ZAMÓW SZYBĘ (${calculatedPrice} ZŁ)`;
+            buyButton.textContent = `ZAMÓW ZA ${calculatedPrice} ZŁ`;
             
-            // Usuwamy stary link, teraz przycisk będzie uruchamiał płatność
             buyButton.href = '#'; 
             buyButton.onclick = async () => {
-                // Zmieniamy tekst i blokujemy przyciski na czas ładowania
                 buyButton.textContent = 'Przekierowuję do płatności...';
                 buyButton.classList.add('buy-button-disabled');
                 calcButton.disabled = true;
 
                 try {
-                    // Wysyłamy prośbę do naszego API na Vercel
                     const response = await fetch('/api/create-checkout-session', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             price: cenaCalkowita,
                             width: szerokosc,
@@ -423,36 +363,28 @@
                     const data = await response.json();
 
                     if (data.url) {
-                        // Jeśli dostaliśmy link, przekierowujemy użytkownika do Stripe
                         window.location.href = data.url;
                     } else {
-                        // Jeśli API zwróciło błąd
-                        alert('Wystąpił błąd. Spróbuj ponownie.');
-                        resetProductInfo(); // Resetujemy stan
+                        alert('Wystąpił błąd podczas tworzenia płatności. Spróbuj ponownie.');
+                        resetProductInfo();
                     }
                 } catch (error) {
                     console.error('Błąd:', error);
-                    alert('Wystąpił błąd połączenia. Spróbuj ponownie.');
+                    alert('Wystąpił błąd połączenia. Sprawdź konsolę i spróbuj ponownie.');
                     resetProductInfo();
                 } finally {
-                    // Niezależnie od wyniku, odblokowujemy przycisk obliczania
                     calcButton.disabled = false;
                 }
             };
         }
 
-        // --- POŁĄCZONA FUNKCJA ONLOAD ---
         window.onload = () => {
-            // Inicjalizacja galerii i strony produktu
             const firstThumbnail = document.querySelector('.thumbnails img');
             if(firstThumbnail) firstThumbnail.classList.add('active');
             document.getElementById('mainImage').addEventListener('click', () => {
                 openGallery(currentImageIndex);
             });
-            setupModal('codModal', 'codBtn', 'closeCodBtn');
             setupModal('questionModal', 'questionBtn', 'closeQuestionBtn');
-
-            // Inicjalizacja kalkulatora
             resetProductInfo();
         };
 
