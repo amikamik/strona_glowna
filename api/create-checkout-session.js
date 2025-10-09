@@ -16,51 +16,29 @@ export default async function handler(req, res) {
 
       // Tworzymy nową sesję płatności w Stripe
       const session = await stripe.checkout.sessions.create({
+        // Dozwolone metody płatności dla Polski
         payment_method_types: ['card','blik'],
+        // Tryb płatności - jednorazowa
         mode: 'payment',
-        
-        // ==================== POCZĄTEK POPRAWIONEGO KODU ====================
-
-        // KROK 1: Włączamy zbieranie Imienia i Nazwiska poprzez adres rozliczeniowy.
-        // To jest najprostszy sposób, aby klient podał swoje dane osobowe.
-        billing_address_collection: 'required',
-
-        // KROK 2: Włączamy dedykowane, obowiązkowe pole na NUMER TELEFONU.
-        // Jest on niezbędny do powiadomień z InPost.
-        phone_number_collection: {
-          enabled: true,
-        },
-        
-        // KROK 3: Tworzymy jedno, bardzo jasne pole na dane paczkomatu.
-        // Etykieta jest teraz maksymalnie opisowa.
-        custom_fields: [
-          {
-            key: 'paczkomat_info',
-            label: {
-              type: 'custom',
-              custom: 'Wpisz ID lub adres Paczkomatu (np. WAW123A)',
-            },
-            type: 'text',
-          },
-        ],
-
-        // ===================== KONIEC POPRAWIONEGO KODU =====================
-
+        // Lista produktów (w naszym przypadku jeden)
         line_items: [
           {
             price_data: {
               currency: 'pln',
+              // Cena musi być podana w groszach (np. 123.45 zł -> 12345)
               unit_amount: Math.round(price * 100),
               product_data: {
-                name: `Szyba na wymiar ${height}cm x ${width}cm`,
-                // Dodajemy informację o dostawie w opisie samego produktu
-                description: 'Dostawa do Paczkomatu InPost.',
+                name: 'Szyba na wymiar',
+                description: `Zamówienie na szybę o wymiarach ${height}cm x ${width}cm`,
               },
             },
             quantity: 1,
           },
         ],
+        // Adres, na który klient zostanie przeniesiony po udanej płatności
+        // Zmień ten link na docelowy, gdy będziesz gotowy
         success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+        // Adres, na który klient wróci, jeśli anuluje płatność
         cancel_url: `${req.headers.origin}/`,
       });
 
