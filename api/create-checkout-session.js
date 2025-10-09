@@ -36,13 +36,49 @@ export default async function handler(req, res) {
           },
         ],
         
-        // ==================== POCZĄTEK ZMIANY ====================
-        // Dodajemy TYLKO i wyłącznie tę jedną sekcję.
-        // To jest najbardziej podstawowa funkcja Stripe do zbierania adresu i musi zadziałać.
+        // ==================== POCZĄTEK ZMIAN ====================
+        
+        // 1. Zbieranie adresu (dla Imienia i Nazwiska) - to już masz i działa
         shipping_address_collection: {
           allowed_countries: ['PL'],
         },
-        // ===================== KONIEC ZMIANY =====================
+        
+        // 2. Włączamy zbieranie numeru telefonu
+        phone_number_collection: {
+          enabled: true,
+        },
+        
+        // 3. Tworzymy specjalne pole na dane paczkomatu
+        custom_fields: [
+          {
+            key: 'paczkomat',
+            label: {
+              type: 'custom',
+              custom: 'Adres lub numer Paczkomatu (np. KSA01M)',
+            },
+            type: 'text',
+          },
+        ],
+
+        // 4. Definiujemy darmową wysyłkę
+        shipping_options: [
+            {
+              shipping_rate_data: {
+                type: 'fixed_amount',
+                fixed_amount: {
+                  amount: 0,
+                  currency: 'pln',
+                },
+                display_name: 'Dostawa do Paczkomatu InPost',
+                delivery_estimate: {
+                  minimum: { unit: 'business_day', value: 1 },
+                  maximum: { unit: 'business_day', value: 3 },
+                },
+              },
+            },
+        ],
+        
+        // ===================== KONIEC ZMIAN =====================
 
         // Adres, na który klient zostanie przeniesiony po udanej płatności
         success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
