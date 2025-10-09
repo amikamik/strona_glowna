@@ -7,6 +7,10 @@
     <meta name="description" content="Oblicz cenę szyby kominkowej na wymiar za pomocą naszego kalkulatora online. Podaj wymiary, poznaj koszt i zamów z dostawą. Szybko i bezpiecznie.">
     <meta name="keywords" content="szyba kominkowa, szkło kominkowe, na wymiar, kalkulator ceny, żaroodporna, do kominka">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery.min.css"/>
+    
+    <link rel="stylesheet" href="https://geowidget.inpost.pl/inpost-geowidget.css" />
+    <script src="https://geowidget.inpost.pl/inpost-geowidget.js" defer></script>
+
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; background-color: #f8f9fa; color: #333; }
         .container { max-width: 1100px; margin: 40px auto; padding: 20px; }
@@ -85,18 +89,35 @@
             </div>
 
             <div class="product-info">
-                <h1>Szyba Kominkowa na Wymiar</h1>
+                <h1>Pogotowie Kominkowe: Szybka Pomoc w Razie Stłuczonej Szyby</h1>
                 
                 <div class="shipping-info">
-                    <h3>🚚 Bezpieczna Wysyłka Kurierska</h3>
+                    <h3>🚚 Pancerna Paczka do Paczkomatu 24/7</h3>
                     <span class="shipping-info-toggle" onclick="toggleShippingDetails()">(Więcej informacji)</span>
                     <div class="shipping-details" id="shippingDetails">
-                        <p>Twoja szyba zostanie starannie zapakowana i wysłana na adres podany w formularzu zamówienia. Po dokonaniu płatności, otrzymasz automatyczny e-mail z potwierdzeniem. W ciągu dwóch dni roboczych od zlecenia wysyłki, na wskazany adres e-mail wyślemy Ci link do śledzenia przesyłki.</p>
+                        <p>Twoja nowa szyba zostanie pancernie zapakowana i nadana w ciągu 1-2 dni roboczych do wybranego przez Ciebie Paczkomatu. Po opłaceniu zamówienia otrzymasz e-mail z potwierdzeniem, a następnie link do śledzenia przesyłki. Gdy paczka dotrze na miejsce, InPost powiadomi Cię SMS-em i e-mailem. Odbierasz, kiedy chcesz – wygodnie i bez czekania na kuriera!</p>
                     </div>
                 </div>
 
                 <div class="description" id="productDescription">
-                    <p>Ciesz się ponownie widokiem płomieni dzięki idealnie dopasowanej szybie do Twojego kominka. Oferujemy wysokiej jakości szkło żaroodporne, docinane na dowolny wymiar z milimetrową precyzją, które przywróci bezpieczeństwo i estetykę Twojego paleniska.<br><br>Nasze szyby charakteryzują się wyjątkową odpornością na wysokie temperatury (do 800°C) oraz szoki termiczne, co gwarantuje długą żywotność i niezawodność. Niezależnie od tego, czy masz kominek prosty, narożny czy panoramiczny, dostarczymy produkt idealnie dopasowany do Twoich potrzeb.<br><br>Kluczowe cechy:<br>- **Wysoka jakość:** Certyfikowane szkło żaroodporne.<br>- **Precyzja:** Docinanie na dowolny wymiar podany przez klienta.<br>- **Bezpieczeństwo:** Odporność na szok termiczny i wysokie temperatury.<br><br>Skorzystaj z naszego kalkulatora, aby natychmiast poznać cenę i zamówić nową szybę już dziś!</p>
+                    <p>Uszkodzona szyba kominkowa? Zaufaj profesjonalistom i przywróć pełną sprawność kominka.</p>
+                    <p>Pęknięcie szyby nie musi oznaczać kosztownych i skomplikowanych napraw. Oferujemy precyzyjnie docięte na wymiar, certyfikowane szkło kominkowe, które gwarantuje bezpieczeństwo i doskonałą widoczność ognia na lata.</p>
+                    <p><b>Nasze zobowiązanie – Twoja pewność i satysfakcja:</b></p>
+                    <p>🛡️ <b>Gwarancja Bezpiecznej Dostawy:</b> Rozumiemy obawy związane z transportem szkła. Dlatego każdą szybę zabezpieczamy przy użyciu specjalistycznych materiałów. Bierzemy pełną odpowiedzialność za przesyłkę – w przypadku stwierdzenia jakichkolwiek uszkodzeń przy odbiorze, bezzwłocznie realizujemy nowe zamówienie na nasz koszt.</p>
+                    <p><b>Co wyróżnia nasz produkt?</b></p>
+                    <ul>
+                        <li><b>Certyfikowana Odporność Termiczna do 800°C:</b> Stosujemy wyłącznie szkło ceramiczne o potwierdzonej odporności na szok termiczny, co zapewnia maksymalne bezpieczeństwo użytkowania.</li>
+                        <li><b>Precyzja wykonania:</b> Każda szyba jest docinana z milimetrową dokładnością zgodnie ze specyfikacją klienta. Krawędzie poddajemy profesjonalnemu szlifowaniu, aby zapewnić bezpieczny montaż.</li>
+                        <li><b>Niezakłócona estetyka:</b> Idealnie przejrzysta, dwustronnie polerowana powierzchnia szkła pozwala w pełni cieszyć się widokiem płomieni.</li>
+                    </ul>
+                    <p><b>🎁 W cenie zamówienia otrzymujesz kompletny pakiet montażowy:</b><br>
+                    Do każdej szyby dołączamy bezpłatnie zestaw akcesoriów: specjalistyczną taśmę montażową oraz podkładki pod zaciski, które niwelują naprężenia i wydłużają żywotność szkła.</p>
+                    <p><b>Proces zamówienia w 3 krokach:</b></p>
+                    <ol>
+                        <li>Dokonaj pomiaru.</li>
+                        <li>Skorzystaj z kalkulatora, aby poznać natychmiastową wycenę.</li>
+                        <li>Złóż zamówienie z wygodną dostawą do Paczkomatu.</li>
+                    </ol>
                 </div>
                 <button onclick="toggleDescription()" class="read-more-btn" id="readMoreBtn">Czytaj więcej...</button>
 
@@ -164,34 +185,46 @@
         const galleryContainer = document.getElementById('lightgallery-links');
         const gallery = lightGallery(galleryContainer);
         let currentImageIndex = 0;
+
         function openGallery(index) {
             currentImageIndex = index;
             gallery.openGallery(index);
         }
+
         function changeImage(imageUrl, thumbElement, index) {
             document.getElementById('mainImage').src = imageUrl;
             currentImageIndex = index;
             document.querySelectorAll('.thumbnails img').forEach(thumb => thumb.classList.remove('active'));
             thumbElement.classList.add('active');
         }
+
         function toggleDescription() {
             const description = document.getElementById('productDescription');
             const btn = document.getElementById('readMoreBtn');
             description.classList.toggle('expanded');
             btn.textContent = description.classList.contains('expanded') ? 'Zwiń opis' : 'Czytaj więcej...';
         }
+
         function toggleShippingDetails() {
             const details = document.getElementById('shippingDetails');
             details.classList.toggle('expanded');
         }
+
         function setupModal(modalId, btnId, closeBtnId) {
             const modal = document.getElementById(modalId);
             const btn = document.getElementById(btnId);
             const closeBtn = document.getElementById(closeBtnId);
 
-            if(btn) { btn.onclick = function() { modal.style.display = "block"; } }
-            if(closeBtn) { closeBtn.onclick = function() { modal.style.display = "none"; } }
-            
+            if (btn) {
+                btn.onclick = function() {
+                    modal.style.display = "block";
+                }
+            }
+            if (closeBtn) {
+                closeBtn.onclick = function() {
+                    modal.style.display = "none";
+                }
+            }
             window.addEventListener('click', function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
@@ -199,11 +232,11 @@
             });
         }
 
-        // --- POCZĄTEK ZMIAN ---
-        // Przywrócenie stałych dla walidacji wymiarów
         const MAX_SZYBA_DLUGOSC = 58;
         const MAX_SZYBA_SZEROKOSC = 32;
-        // --- KONIEC ZMIAN ---
+
+        // ZMIANA: Zmienna globalna do przechowywania danych zamówienia
+        let orderDetails = null;
 
         function resetProductInfo() {
             const wynikDiv = document.getElementById('wynik');
@@ -212,20 +245,19 @@
                 wynikDiv.style.display = 'none';
                 buyButton.textContent = 'ZAMÓW SZYBĘ 🔒 (Aktywuj po obliczeniu)';
                 buyButton.classList.add('buy-button-disabled');
-                buyButton.onclick = null;
-                buyButton.href = '#';
+                buyButton.onclick = null; // Usuwamy stary handler
+                orderDetails = null; // Resetujemy dane zamówienia
             }
         }
 
-        async function obliczCeneSzyby() {
+        function obliczCeneSzyby() {
             const wynikDiv = document.getElementById('wynik');
             const buyButton = document.getElementById('buyButton');
-            const calcButton = document.querySelector('.calculator-container button');
-            
+
             const wysokosc = parseFloat(document.getElementById('wysokosc').value);
             const szerokosc = parseFloat(document.getElementById('szerokosc').value);
 
-            resetProductInfo();
+            resetProductInfo(); // Najpierw resetujemy
             wynikDiv.style.display = 'block';
 
             if (isNaN(wysokosc) || isNaN(szerokosc) || wysokosc <= 0 || szerokosc <= 0) {
@@ -233,22 +265,25 @@
                 wynikDiv.innerHTML = '⚠️ Proszę podać poprawne, dodatnie wymiary w cm.';
                 return;
             }
-            
-            // --- POCZĄTEK ZMIAN ---
-            // Dodanie walidacji wymiarów, aby pasowały do paczkomatu
+
             const dluzszyBok = Math.max(wysokosc, szerokosc);
             const krotszyBok = Math.min(wysokosc, szerokosc);
 
             if (dluzszyBok > MAX_SZYBA_DLUGOSC || krotszyBok > MAX_SZYBA_SZEROKOSC) {
                 wynikDiv.className = 'wynik-error';
-                wynikDiv.innerHTML = `⚠️ Maksymalny wymiar szyby to ${MAX_SZYBA_DLUGOSC}x${MAX_SZYBA_SZEROKOSC} cm, aby zmieściła się do paczkomatu. Jeśli chcesz zamówić większą szybę, skontaktuj się z nami .`;
+                wynikDiv.innerHTML = `⚠️ Maksymalny wymiar szyby to ${MAX_SZYBA_DLUGOSC}x${MAX_SZYBA_SZEROKOSC} cm. Jeśli chcesz zamówić większą szybę, skontaktuj się z nami.`;
                 return;
             }
-            // --- KONIEC ZMIAN ---
 
-            // Zastosowanie nowego wzoru do obliczenia ceny całkowitej
             const cenaCalkowita = ((((wysokosc * szerokosc) / 100) * 8.5) * 1.7) + 12;
             const calculatedPrice = cenaCalkowita.toFixed(2);
+
+            // ZMIANA: Zapisujemy dane do zmiennej globalnej
+            orderDetails = {
+                price: cenaCalkowita,
+                width: szerokosc,
+                height: wysokosc
+            };
 
             wynikDiv.className = 'wynik-ok';
             wynikDiv.innerHTML = `
@@ -259,44 +294,81 @@
             buyButton.classList.remove('buy-button-disabled');
             buyButton.textContent = `ZAMÓW ZA ${calculatedPrice} ZŁ`;
             
-            buyButton.href = '#'; 
-            buyButton.onclick = async () => {
-                buyButton.textContent = 'Przekierowuję do płatności...';
-                buyButton.classList.add('buy-button-disabled');
-                calcButton.disabled = true;
+            // ZMIANA: Przycisk "Zamów" teraz zawsze wywołuje tę samą funkcję
+            buyButton.onclick = handleOrderButtonClick;
+        }
 
-                try {
-                    const response = await fetch('/api/create-checkout-session', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            price: cenaCalkowita,
-                            width: szerokosc,
-                            height: wysokosc,
-                        }),
-                    });
+        // ZMIANA: Nowa funkcja do obsługi kliknięcia przycisku "Zamów"
+        function handleOrderButtonClick() {
+            if (!orderDetails) {
+                alert("Wystąpił błąd. Proszę ponownie obliczyć cenę.");
+                return;
+            }
 
-                    const data = await response.json();
+            if (typeof easyPack === 'undefined' || !easyPack.modalMap) {
+                alert("Mapa paczkomatów jeszcze się ładuje. Proszę spróbować za chwilę.");
+                return;
+            }
 
-                    if (data.url) {
-                        window.location.href = data.url;
-                    } else {
-                        alert('Wystąpił błąd podczas tworzenia płatności. Spróbuj ponownie.');
-                        resetProductInfo();
-                    }
-                } catch (error) {
-                    console.error('Błąd:', error);
-                    alert('Wystąpił błąd połączenia. Sprawdź konsolę i spróbuj ponownie.');
+            // Krok 1: Otwórz mapę InPost
+            easyPack.modalMap(function(point, modal) {
+                modal.close();
+                const paczkomatName = point.name;
+                const paczkomatAddress = `${point.address.line1}, ${point.address.line2}`;
+
+                // Krok 2: Przejdź do płatności z danymi paczkomatu
+                goToStripeCheckout(
+                    orderDetails.price,
+                    orderDetails.width,
+                    orderDetails.height,
+                    paczkomatName,
+                    paczkomatAddress
+                );
+            });
+        }
+
+        async function goToStripeCheckout(price, width, height, paczkomatName, paczkomatAddress) {
+            const buyButton = document.getElementById('buyButton');
+            const calcButton = document.querySelector('.calculator-container button');
+
+            buyButton.textContent = 'Przekierowuję do płatności...';
+            buyButton.classList.add('buy-button-disabled');
+            calcButton.disabled = true;
+
+            try {
+                // Pamiętaj, że Twój serwer (/api/create-checkout-session) musi być gotowy na przyjęcie tych dodatkowych danych
+                const response = await fetch('/api/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        price: price,
+                        width: width,
+                        height: height,
+                        paczkomatName: paczkomatName,
+                        paczkomatAddress: paczkomatAddress
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    alert('Wystąpił błąd podczas tworzenia płatności. Spróbuj ponownie.');
                     resetProductInfo();
-                } finally {
-                    calcButton.disabled = false;
                 }
-            };
+            } catch (error) {
+                console.error('Błąd:', error);
+                alert('Wystąpił błąd połączenia. Sprawdź konsolę i spróbuj ponownie.');
+                resetProductInfo();
+            } finally {
+                calcButton.disabled = false;
+            }
         }
 
         window.onload = () => {
             const firstThumbnail = document.querySelector('.thumbnails img');
-            if(firstThumbnail) firstThumbnail.classList.add('active');
+            if (firstThumbnail) firstThumbnail.classList.add('active');
             document.getElementById('mainImage').addEventListener('click', () => {
                 openGallery(currentImageIndex);
             });
@@ -304,6 +376,17 @@
             resetProductInfo();
         };
 
+        // Inicjalizacja InPost Geowidget
+        window.easyPackAsyncInit = function () {
+            easyPack.init({
+                defaultLocale: 'pl',
+                mapType: 'osm',
+                searchType: 'osm',
+                points: {
+                    types: ['parcel_locker']
+                },
+            });
+        };
     </script>
 </body>
 </html>
