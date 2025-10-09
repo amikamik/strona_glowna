@@ -19,41 +19,32 @@ export default async function handler(req, res) {
         payment_method_types: ['card','blik'],
         mode: 'payment',
         
-        // ==================== POCZÄ„TEK FINALNYCH ZMIAN ====================
+        // ==================== POCZĄTEK POPRAWIONEGO KODU ====================
 
-        // KROK 1: Używamy adresu ROZLICZENIOWEGO, aby zebrać IMIĘ I NAZWISKO.
-        // Klient naturalnie wpisze tu swoje dane.
+        // KROK 1: Włączamy zbieranie Imienia i Nazwiska poprzez adres rozliczeniowy.
+        // To jest najprostszy sposób, aby klient podał swoje dane osobowe.
         billing_address_collection: 'required',
 
         // KROK 2: Włączamy dedykowane, obowiązkowe pole na NUMER TELEFONU.
+        // Jest on niezbędny do powiadomień z InPost.
         phone_number_collection: {
           enabled: true,
         },
         
-        // KROK 3: Tworzymy własne, obowiązkowe pole na ADRES PACZKOMATU.
+        // KROK 3: Tworzymy jedno, bardzo jasne pole na dane paczkomatu.
+        // Etykieta jest teraz maksymalnie opisowa.
         custom_fields: [
           {
-            key: 'paczkomat',
+            key: 'paczkomat_info',
             label: {
               type: 'custom',
-              // Ta etykieta będzie bardzo czytelna dla klienta
-              custom: 'ID lub adres Paczkomatu (np. WAW01A, ul. Prosta 1)',
+              custom: 'Wpisz ID lub adres Paczkomatu (np. WAW123A)',
             },
             type: 'text',
           },
         ],
 
-        // KROK 4: Dodajemy na górze formularza BARDZO WYRAŹNĄ INSTRUKCJĘ.
-        custom_text: {
-          submit: {
-            message: 'Prosimy o uzupełnienie danych niezbędnych do wysyłki Paczkomatem. Twój adres zamieszkania nie jest potrzebny.',
-          },
-        },
-        
-        // KROK 5: Zmieniamy tekst na przycisku płatności.
-        submit_type: 'pay',
-
-        // ===================== KONIEC FINALNYCH ZMIAN =====================
+        // ===================== KONIEC POPRAWIONEGO KODU =====================
 
         line_items: [
           {
@@ -62,8 +53,8 @@ export default async function handler(req, res) {
               unit_amount: Math.round(price * 100),
               product_data: {
                 name: `Szyba na wymiar ${height}cm x ${width}cm`,
-                // Dodajemy informację o dostawie w opisie produktu
-                description: 'Dostawa do Paczkomatu w cenie.',
+                // Dodajemy informację o dostawie w opisie samego produktu
+                description: 'Dostawa do Paczkomatu InPost.',
               },
             },
             quantity: 1,
