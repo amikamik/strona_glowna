@@ -16,12 +16,16 @@ export default async function handler(req, res) {
 
       // Tworzymy nową sesję płatności w Stripe
       const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card', 'blik'],
+        // Dozwolone metody płatności dla Polski
+        payment_method_types: ['card','blik'],
+        // Tryb płatności - jednorazowa
         mode: 'payment',
+        // Lista produktów (w naszym przypadku jeden)
         line_items: [
           {
             price_data: {
               currency: 'pln',
+              // Cena musi być podana w groszach (np. 123.45 zł -> 12345)
               unit_amount: Math.round(price * 100),
               product_data: {
                 name: 'Szyba na wymiar',
@@ -32,57 +36,17 @@ export default async function handler(req, res) {
           },
         ],
         
-        // ==================== POCZĄTEK ZMIAN ====================
-        
-        // KROK 1: Włączamy zbieranie numeru telefonu.
-        // Stripe doda pole "Numer telefonu" do formularza.
-        phone_number_collection: {
-          enabled: true,
-        },
-
-        // KROK 2: Włączamy standardowe zbieranie adresu (dla Imienia, Nazwiska itp.)
+        // ==================== POCZĄTEK ZMIANY ====================
+        // Dodajemy TYLKO i wyłącznie tę jedną sekcję.
+        // To jest najbardziej podstawowa funkcja Stripe do zbierania adresu i musi zadziałać.
         shipping_address_collection: {
           allowed_countries: ['PL'],
         },
-        
-        // KROK 3: Dodajemy niestandardowe pola, widoczne dla klienta.
-        // To jest idealne miejsce na dane paczkomatu!
-        custom_fields: [
-          {
-            key: 'paczkomat',
-            label: {
-              type: 'custom',
-              custom: 'Adres lub numer Paczkomatu (np. WAW01A, ul. Prosta 1)',
-            },
-            type: 'text',
-          },
-        ],
+        // ===================== KONIEC ZMIANY =====================
 
-        // KROK 4 (Opcjonalnie, ale BARDZO ZALECANE): Dodajemy tekst informacyjny.
-        // Ten tekst pojawi się na stronie płatności i wyjaśni klientowi, co ma zrobić.
-        custom_text: {
-          shipping_address: {
-            message: 'Prosimy o podanie Twoich danych (Imię, Nazwisko) oraz wklejenie pełnego adresu Paczkomatu w polach adresu dostawy.',
-          },
-        },
-        
-        // Ta sekcja bez zmian - definiuje darmową wysyłkę
-        shipping_options: [
-          {
-            shipping_rate_data: {
-              type: 'fixed_amount',
-              fixed_amount: { amount: 0, currency: 'pln' },
-              display_name: 'Dostawa do Paczkomatu InPost',
-              delivery_estimate: {
-                minimum: { unit: 'business_day', value: 1 },
-                maximum: { unit: 'business_day', value: 3 },
-              },
-            },
-          },
-        ],
-        // ===================== KONIEC ZMIAN =====================
-
+        // Adres, na który klient zostanie przeniesiony po udanej płatności
         success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+        // Adres, na który klient wróci, jeśli anuluje płatność
         cancel_url: `${req.headers.origin}/`,
       });
 
