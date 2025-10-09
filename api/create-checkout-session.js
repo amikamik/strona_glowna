@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       // Tworzymy nową sesję płatności w Stripe
       const session = await stripe.checkout.sessions.create({
         // Dozwolone metody płatności dla Polski
-        payment_method_types: ['card','blik'],
+        payment_method_types: ['card', 'blik'],
         // Tryb płatności - jednorazowa
         mode: 'payment',
         // Lista produktów (w naszym przypadku jeden)
@@ -35,8 +35,33 @@ export default async function handler(req, res) {
             quantity: 1,
           },
         ],
+
+        // ==================== POCZĄTEK ZMIAN ====================
+        // Ta sekcja to prosta komenda dla Stripe: "Hej, potrzebuję od klienta adresu do wysyłki!"
+        shipping_address_collection: {
+          allowed_countries: ['PL'], // Ograniczamy wysyłkę tylko do Polski
+        },
+        // Ta sekcja tworzy na stronie płatności opcję wysyłki do wyboru.
+        // Klient zobaczy "Dostawa do Paczkomatu InPost" z ceną 0,00 zł.
+        shipping_options: [
+          {
+            shipping_rate_data: {
+              type: 'fixed_amount',
+              fixed_amount: {
+                amount: 0, // 0 groszy = darmowa wysyłka
+                currency: 'pln',
+              },
+              display_name: 'Dostawa do Paczkomatu InPost',
+              delivery_estimate: {
+                minimum: { unit: 'business_day', value: 1 },
+                maximum: { unit: 'business_day', value: 3 },
+              },
+            },
+          },
+        ],
+        // ===================== KONIEC ZMIAN =====================
+
         // Adres, na który klient zostanie przeniesiony po udanej płatności
-        // Zmień ten link na docelowy, gdy będziesz gotowy
         success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
         // Adres, na który klient wróci, jeśli anuluje płatność
         cancel_url: `${req.headers.origin}/`,
