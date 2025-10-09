@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       // Tworzymy nową sesję płatności w Stripe
       const session = await stripe.checkout.sessions.create({
         // Dozwolone metody płatności dla Polski
-        payment_method_types: ['card','blik'],
+        payment_method_types: ['card', 'p24', 'blik'], // Dodałem 'p24' jako popularną opcję
         // Tryb płatności - jednorazowa
         mode: 'payment',
         // Lista produktów (w naszym przypadku jeden)
@@ -28,15 +28,47 @@ export default async function handler(req, res) {
               // Cena musi być podana w groszach (np. 123.45 zł -> 12345)
               unit_amount: Math.round(price * 100),
               product_data: {
-                name: 'Szyba na wymiar',
-                description: `Zamówienie na szybę o wymiarach ${height}cm x ${width}cm`,
+                // Zmieniono nazwę na bardziej szczegółową
+                name: `Szyba kominkowa na wymiar ${height}cm x ${width}cm`,
+                description: 'Produkt wykonywany na indywidualne zamówienie klienta.',
               },
             },
             quantity: 1,
           },
         ],
+        
+        // ==================== POCZĄTEK ZMIAN ====================
+        // Nakazujemy Stripe, aby zebrał od klienta adres dostawy.
+        shipping_address_collection: {
+          allowed_countries: ['PL'], // Zezwalamy na wysyłkę tylko na terenie Polski.
+        },
+        // Dodajemy opcję darmowej wysyłki, która pojawi się w formularzu Stripe.
+        shipping_options: [
+          {
+            shipping_rate_data: {
+              type: 'fixed_amount',
+              fixed_amount: {
+                amount: 0, // 0 groszy za darmową dostawę
+                currency: 'pln',
+              },
+              display_name: 'Dostawa do Paczkomatu InPost',
+              // Szacowany czas dostawy, który zobaczy klient.
+              delivery_estimate: {
+                minimum: { unit: 'business_day', value: 1 },
+                maximum: { unit: 'business_day', value: 3 },
+              },
+            },
+          },
+        ],
+        // Dodatkowe dane, które zapiszą się w Stripe, ale nie będą widoczne dla klienta.
+        // Dobre miejsce, aby trzymać wymiary dla pewności.
+        metadata: {
+            'Wysokość': height,
+            'Szerokość': width,
+        },
+        // ===================== KONIEC ZMIAN =====================
+
         // Adres, na który klient zostanie przeniesiony po udanej płatności
-        // Zmień ten link na docelowy, gdy będziesz gotowy
         success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
         // Adres, na który klient wróci, jeśli anuluje płatność
         cancel_url: `${req.headers.origin}/`,
