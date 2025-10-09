@@ -20,25 +20,55 @@ export default async function handler(req, res) {
         payment_method_types: ['card','blik'],
         // Tryb płatności - jednorazowa
         mode: 'payment',
-        // Lista produktów (w naszym przypadku jeden)
+        
+        // ==================== POCZĄTEK ZMIAN ====================
+
+        // Tworzymy trzy osobne, niestandardowe pola tekstowe.
+        // Klient będzie musiał wypełnić każde z nich.
+        custom_fields: [
+          {
+            key: 'imie_nazwisko',
+            label: {
+              type: 'custom',
+              custom: 'Imię i Nazwisko',
+            },
+            type: 'text',
+          },
+          {
+            key: 'paczkomat',
+            label: {
+              type: 'custom',
+              custom: 'Adres lub ID Paczkomatu',
+            },
+            type: 'text',
+          },
+          {
+            key: 'telefon',
+            label: {
+              type: 'custom',
+              custom: 'Numer telefonu',
+            },
+            type: 'text',
+          },
+        ],
+
+        // ===================== KONIEC ZMIAN =====================
+
         line_items: [
           {
             price_data: {
               currency: 'pln',
-              // Cena musi być podana w groszach (np. 123.45 zł -> 12345)
               unit_amount: Math.round(price * 100),
               product_data: {
                 name: 'Szyba na wymiar',
-                description: `Zamówienie na szybę o wymiarach ${height}cm x ${width}cm`,
+                // Zgodnie z Twoją prośbą, dodajemy tutaj szczegółową instrukcję
+                description: `Zamówienie na szybę o wymiarach ${height}cm x ${width}cm.\n\nWAŻNE: Prosimy o uzupełnienie poniższych pól. Adres e-mail (podany wyżej) oraz numer telefonu posłużą do wysłania powiadomień InPost.`,
               },
             },
             quantity: 1,
           },
         ],
-        // Adres, na który klient zostanie przeniesiony po udanej płatności
-        // Zmień ten link na docelowy, gdy będziesz gotowy
         success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-        // Adres, na który klient wróci, jeśli anuluje płatność
         cancel_url: `${req.headers.origin}/`,
       });
 
