@@ -16,73 +16,60 @@ export default async function handler(req, res) {
 
       // Tworzymy nową sesję płatności w Stripe
       const session = await stripe.checkout.sessions.create({
-        // Dozwolone metody płatności dla Polski
         payment_method_types: ['card','blik'],
-        // Tryb płatności - jednorazowa
         mode: 'payment',
-        // Lista produktów (w naszym przypadku jeden)
-        line_items: [
-          {
-            price_data: {
-              currency: 'pln',
-              // Cena musi być podana w groszach (np. 123.45 zł -> 12345)
-              unit_amount: Math.round(price * 100),
-              product_data: {
-                name: 'Szyba na wymiar',
-                description: `Zamówienie na szybę o wymiarach ${height}cm x ${width}cm`,
-              },
-            },
-            quantity: 1,
-          },
-        ],
         
-        // ==================== POCZĄTEK ZMIAN ====================
-        
-        // 1. Zbieranie adresu (dla Imienia i Nazwiska) - to już masz i działa
-        shipping_address_collection: {
-          allowed_countries: ['PL'],
-        },
-        
-        // 2. Włączamy zbieranie numeru telefonu
+        // ==================== POCZÄ„TEK FINALNYCH ZMIAN ====================
+
+        // KROK 1: Używamy adresu ROZLICZENIOWEGO, aby zebrać IMIĘ I NAZWISKO.
+        // Klient naturalnie wpisze tu swoje dane.
+        billing_address_collection: 'required',
+
+        // KROK 2: Włączamy dedykowane, obowiązkowe pole na NUMER TELEFONU.
         phone_number_collection: {
           enabled: true,
         },
         
-        // 3. Tworzymy specjalne pole na dane paczkomatu
+        // KROK 3: Tworzymy własne, obowiązkowe pole na ADRES PACZKOMATU.
         custom_fields: [
           {
             key: 'paczkomat',
             label: {
               type: 'custom',
-              custom: 'Adres lub numer Paczkomatu (np. KSA01M)',
+              // Ta etykieta będzie bardzo czytelna dla klienta
+              custom: 'ID lub adres Paczkomatu (np. WAW01A, ul. Prosta 1)',
             },
             type: 'text',
           },
         ],
 
-        // 4. Definiujemy darmową wysyłkę
-        shipping_options: [
-            {
-              shipping_rate_data: {
-                type: 'fixed_amount',
-                fixed_amount: {
-                  amount: 0,
-                  currency: 'pln',
-                },
-                display_name: 'Dostawa do Paczkomatu InPost',
-                delivery_estimate: {
-                  minimum: { unit: 'business_day', value: 1 },
-                  maximum: { unit: 'business_day', value: 3 },
-                },
+        // KROK 4: Dodajemy na górze formularza BARDZO WYRAŹNĄ INSTRUKCJĘ.
+        custom_text: {
+          submit: {
+            message: 'Prosimy o uzupełnienie danych niezbędnych do wysyłki Paczkomatem. Twój adres zamieszkania nie jest potrzebny.',
+          },
+        },
+        
+        // KROK 5: Zmieniamy tekst na przycisku płatności.
+        submit_type: 'pay',
+
+        // ===================== KONIEC FINALNYCH ZMIAN =====================
+
+        line_items: [
+          {
+            price_data: {
+              currency: 'pln',
+              unit_amount: Math.round(price * 100),
+              product_data: {
+                name: `Szyba na wymiar ${height}cm x ${width}cm`,
+                // Dodajemy informację o dostawie w opisie produktu
+                description: 'Dostawa do Paczkomatu w cenie.',
               },
             },
+            quantity: 1,
+          },
         ],
-        
-        // ===================== KONIEC ZMIAN =====================
-
-        // Adres, na który klient zostanie przeniesiony po udanej płatności
         success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-        // Adres, na który klient wróci, jeśli anuluje płatność
         cancel_url: `${req.headers.origin}/`,
       });
 
