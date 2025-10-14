@@ -21,6 +21,10 @@ export default async function handler(req, res) {
         // Tryb płatności - jednorazowa
         mode: 'payment',
         
+        // ==================== POCZĄTEK ZMIAN ====================
+
+        // Tworzymy trzy osobne, niestandardowe pola tekstowe.
+        // Klient będzie musiał wypełnić każde z nich.
         custom_fields: [
           {
             key: 'imie_nazwisko',
@@ -48,6 +52,8 @@ export default async function handler(req, res) {
           },
         ],
 
+        // ===================== KONIEC ZMIAN =====================
+
         line_items: [
           {
             price_data: {
@@ -55,19 +61,14 @@ export default async function handler(req, res) {
               unit_amount: Math.round(price * 100),
               product_data: {
                 name: 'Szyba na wymiar',
+                // Zgodnie z Twoją prośbą, dodajemy tutaj szczegółową instrukcję
                 description: `Zamówienie na szybę o wymiarach ${height}cm x ${width}cm.\n\nWAŻNE: Prosimy o uzupełnienie poniższych pól. Adres e-mail (podany wyżej) oraz numer telefonu posłużą do wysłania powiadomień InPost.`,
               },
             },
             quantity: 1,
           },
         ],
-        
-        // ==================== POCZĄTEK KLUCZOWEJ ZMIANY ====================
-        // Do adresu URL dodajemy parametr &amount= z dynamiczną ceną pobraną z kalkulatora.
-        // Dzięki temu strona success.html będzie wiedziała, jaką wartość zakupu wysłać do Pixela.
-        success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}&amount=${price}`,
-        // ===================== KONIEC KLUCZOWEJ ZMIANY =====================
-
+        success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/`,
       });
 

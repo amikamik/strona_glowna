@@ -22,28 +22,13 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
+    // Używamy tego samego ID Piksela co na stronie głównej
     fbq('init', '2369850443532061'); 
     fbq('track', 'PageView');
     
-    // --- POCZĄTEK ZMIAN: DYNAMICZNE ŚLEDZENIE WARTOŚCI ZAKUPU ---
-
-    // Ta funkcja odczytuje parametry z adresu URL (np. ?amount=123.45)
-    const params = new URLSearchParams(window.location.search);
-    const orderValue = params.get('amount'); // Szukamy parametru 'amount'
-
-    // Sprawdzamy, czy udało się odczytać wartość. Jeśli tak, wysyłamy ją do Facebooka.
-    if (orderValue) {
-        fbq('track', 'Purchase', {
-            value: parseFloat(orderValue), // Przekształcamy tekst na liczbę
-            currency: 'PLN'
-        });
-    } else {
-        // Jeśli z jakiegoś powodu wartość nie została przekazana, wysyłamy standardowe zdarzenie.
-        // To jest zabezpieczenie, ale w idealnej sytuacji ten kod nigdy się nie uruchomi.
-        fbq('track', 'Purchase'); 
-    }
-    
-    // --- KONIEC ZMIAN ---
+    // KROK 2: Dodajemy zdarzenie śledzące ZAKUP. To jest najważniejsza linijka!
+    // Informuje ona Facebooka, że na tej stronie doszło do sprzedaży.
+    fbq('track', 'Purchase'); 
     
     </script>
     <noscript><img height="1" width="1" style="display:none"
