@@ -54,7 +54,7 @@
         .buy-button-dynamic:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(22, 160, 133, 0.3); }
         .buy-button-disabled { background: #ccc !important; pointer-events: none; cursor: not-allowed; }
     </style>
-
+    
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -66,11 +66,19 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '2369850443532061');
     fbq('track', 'PageView');
+    
+    // PIXEL: ZDARZENIE 1 - Wyświetlenie zawartości (produktu)
+    fbq('track', 'ViewContent', {
+        content_name: 'Szyba kominkowa na wymiar',
+        content_ids: ['SZYBA_KOMINKOWA_01'], // Unikalne ID produktu
+        content_type: 'product',
+        currency: 'PLN'
+    });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=2369850443532061&ev=PageView&noscript=1"
     /></noscript>
-</head>
+    </head>
 <body>
     <div class="container">
         <div class="product-grid">
@@ -98,20 +106,16 @@
                 <div class="description" id="productDescription">
                     <p><p>Uszkodzona szyba kominkowa? Zaufaj profesjonalistom i przywróć pełną sprawność kominka.</p>
 <p>Pęknięcie szyby nie musi oznaczać kosztownych i skomplikowanych napraw. Oferujemy precyzyjnie docięte na wymiar, certyfikowane szkło kominkowe, które gwarantuje bezpieczeństwo i doskonałą widoczność ognia na lata.</p>
-
 <p><b>Nasze zobowiązanie – Twoja pewność i satysfakcja:</b></p>
 <p>🛡️ <b>Gwarancja Bezpiecznej Dostawy:</b> Rozumiemy obawy związane z transportem szkła. Dlatego każdą szybę zabezpieczamy przy użyciu specjalistycznych materiałów. Bierzemy pełną odpowiedzialność za przesyłkę – w przypadku stwierdzenia jakichkolwiek uszkodzeń przy odbiorze, bezzwłocznie realizujemy nowe zamówienie na nasz koszt.</p>
-
 <p><b>Co wyróżnia nasz produkt?</b></p>
 <ul>
     <li><b>Certyfikowana Odporność Termiczna do 800°C:</b> Stosujemy wyłącznie szkło ceramiczne o potwierdzonej odporności na szok termiczny, co zapewnia maksymalne bezpieczeństwo użytkowania.</li>
     <li><b>Precyzja wykonania:</b> Każda szyba jest docinana z milimetrową dokładnością zgodnie ze specyfikacją klienta. Krawędzie poddajemy profesjonalnemu szlifowaniu, aby zapewnić bezpieczny montaż.</li>
     <li><b>Niezakłócona estetyka:</b> Idealnie przejrzysta, dwustronnie polerowana powierzchnia szkła pozwala w pełni cieszyć się widokiem płomieni.</li>
 </ul>
-
 <p><b>🎁 W cenie zamówienia otrzymujesz kompletny pakiet montażowy:</b><br>
 Do każdej szyby dołączamy bezpłatnie zestaw akcesoriów: specjalistyczną taśmę montażową oraz podkładki pod zaciski, które niwelują naprężenia i wydłużają żywotność szkła.</p>
-
 <p><b>Proces zamówienia w 3 krokach:</b></p>
 <ol>
     <li>Dokonaj pomiaru.</li>
@@ -220,11 +224,8 @@ Do każdej szyby dołączamy bezpłatnie zestaw akcesoriów: specjalistyczną ta
             });
         }
 
-        // --- POCZĄTEK ZMIAN ---
-        // Przywrócenie stałych dla walidacji wymiarów
         const MAX_SZYBA_DLUGOSC = 58;
         const MAX_SZYBA_SZEROKOSC = 32;
-        // --- KONIEC ZMIAN ---
 
         function resetProductInfo() {
             const wynikDiv = document.getElementById('wynik');
@@ -255,8 +256,6 @@ Do każdej szyby dołączamy bezpłatnie zestaw akcesoriów: specjalistyczną ta
                 return;
             }
             
-            // --- POCZĄTEK ZMIAN ---
-            // Dodanie walidacji wymiarów, aby pasowały do paczkomatu
             const dluzszyBok = Math.max(wysokosc, szerokosc);
             const krotszyBok = Math.min(wysokosc, szerokosc);
 
@@ -265,11 +264,12 @@ Do każdej szyby dołączamy bezpłatnie zestaw akcesoriów: specjalistyczną ta
                 wynikDiv.innerHTML = `⚠️ Maksymalny wymiar szyby to ${MAX_SZYBA_DLUGOSC}x${MAX_SZYBA_SZEROKOSC} cm, aby zmieściła się do paczkomatu. Jeśli chcesz zamówić większą szybę, skontaktuj się z nami .`;
                 return;
             }
-            // --- KONIEC ZMIAN ---
 
-            // Zastosowanie nowego wzoru do obliczenia ceny całkowitej
             const cenaCalkowita = ((((wysokosc * szerokosc) / 100) * 8.5) * 1.7) + 12;
             const calculatedPrice = cenaCalkowita.toFixed(2);
+            
+            // PIXEL: ZDARZENIE 2 - Personalizacja produktu (po udanej kalkulacji)
+            fbq('track', 'CustomizeProduct');
 
             wynikDiv.className = 'wynik-ok';
             wynikDiv.innerHTML = `
@@ -282,6 +282,17 @@ Do każdej szyby dołączamy bezpłatnie zestaw akcesoriów: specjalistyczną ta
             
             buyButton.href = '#'; 
             buyButton.onclick = async () => {
+                
+                // PIXEL: ZDARZENIE 3 - Inicjacja płatności (kliknięcie zamówienia)
+                fbq('track', 'InitiateCheckout', {
+                    content_name: 'Szyba kominkowa na wymiar',
+                    content_ids: ['SZYBA_KOMINKOWA_01'],
+                    content_type: 'product',
+                    currency: 'PLN',
+                    value: parseFloat(calculatedPrice), // Przesyłamy obliczoną cenę
+                    num_items: 1
+                });
+
                 buyButton.textContent = 'Przekierowuję do płatności...';
                 buyButton.classList.add('buy-button-disabled');
                 calcButton.disabled = true;
