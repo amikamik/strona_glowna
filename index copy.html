@@ -12,8 +12,7 @@
         .container { max-width: 1100px; margin: 40px auto; padding: 20px; }
         .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background-color: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
         .main-image { width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee; cursor: pointer; }
-        /* --- ZMIANA 1: Poprawka siatki miniaturek --- */
-        .thumbnails { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+        .thumbnails { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
         .thumbnails img { width: 100%; border-radius: 4px; cursor: pointer; border: 2px solid #ddd; transition: all 0.2s; aspect-ratio: 1 / 1; object-fit: cover; }
         .thumbnails img:hover, .thumbnails img.active { border-color: #1abc9c; transform: scale(1.05); }
         .product-info h1 { font-size: 2.4em; margin-top: 0; line-height: 1.2; font-weight: 700; }
@@ -79,7 +78,7 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=2369850443532061&ev=PageView&noscript=1"
     /></noscript>
-</head>
+    </head>
 <body>
     <div class="container">
         <div class="product-grid">
@@ -90,8 +89,6 @@
                     <img src="images/szyba2.jpg" alt="Szkło żaroodporne do kominka" onclick="changeImage('images/szyba2.jpg', this, 1)">
                     <img src="images/szyba3.jpg" alt="Szyba kominkowa na zamówienie" onclick="changeImage('images/szyba3.jpg', this, 2)">
                     <img src="images/szyba4.jpg" alt="Czysta szyba w kominku" onclick="changeImage('images/szyba4.jpg', this, 3)">
-                    <img src="images/szyba5.jpg.jpeg" alt="Nowe zdjęcie szyby 5" onclick="changeImage('images/szyba5.jpg.jpeg', this, 4)">
-                    <img src="images/szyba6.jpg.jpeg" alt="Nowe zdjęcie szyby 6" onclick="changeImage('images/szyba6.jpg.jpeg', this, 5)">
                 </div>
             </div>
 
@@ -172,8 +169,6 @@ Do każdej szyby dołączamy bezpłatnie zestaw akcesoriów: specjalistyczną ta
         <a href="images/szyba2.jpg"></a>
         <a href="images/szyba3.jpg"></a>
         <a href="images/szyba4.jpg"></a>
-        <a href="images/szyba5.jpg.jpeg"></a>
-        <a href="images/szyba6.jpg.jpeg"></a>
     </div>
     
     <div id="questionModal" class="modal">
