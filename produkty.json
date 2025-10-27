@@ -1,0 +1,22 @@
+[
+  {
+    "id": "produkt-1",
+    "nazwa": "Hantla MASTER winyl 2 kg Kettlebell",
+    "cena": "46 zł",
+    "opis": "Hantla winylowa Kettlebell to niezwykle wielofunkcyjny przyrząd treningowy, wyposażony w trójkątny uchwyt. Wykonana jest z wysokiej jakości materiału winylowego z cementowym wypełnieniem. Wysoka jakość i solidna rączka hantli zapewnia komfortowy trening",
+    "link_stripe": "https://buy.stripe.com/bJefZj0IUf7t0kfdHP4ko1a",
+    "zdjecia": [
+      "produkty/produkt-1/images/zdjecie1.jpeg"
+    ]
+  },
+  {
+    "id": "produkt-2",
+    "nazwa": "Hantla MASTER winyl 4 kg Kettlebell",
+    "cena": "61 zł",
+    "opis": "Wielofunkcyjny przyrząd treningowy z trójkątnym uchwytem, wykonany z wysokiej jakości winylu z cementowym wypełnieniem. Angażuje całe ciało, idealny dla użytkowników na każdym poziomie zaawansowania. Specyfikacja: Waga - 4 kg, Materiał - winyl i cement, Wymiary opakowania - 17 x 17 x 25 cm.",
+    "link_stripe": "https://buy.stripe.com/aFaaEZcrC5wT1ojdHP4ko1b",
+    "zdjecia": [
+      "produkty/produkt-2/images/zdjecie1.jpg"
+    ]
+  }
+]

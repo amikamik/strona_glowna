@@ -1,85 +1,33 @@
-// Importujemy bibliotekę Stripe
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// Definiujemy naszą funkcję, którą Vercel będzie uruchamiał
 export default async function handler(req, res) {
-  // Akceptujemy tylko żądania typu POST
   if (req.method === 'POST') {
     try {
-      // Pobieramy cenę i wymiary z danych wysłanych przez kalkulator
-      const { price, width, height } = req.body;
+      const { price, name } = req.body;
 
-      // Prosta walidacja - sprawdzamy czy cena została podana
-      if (!price || price <= 0) {
-        return res.status(400).json({ error: 'Nie podano prawidłowej ceny.' });
-      }
-
-      // Tworzymy nową sesję płatności w Stripe
       const session = await stripe.checkout.sessions.create({
-        // Dozwolone metody płatności dla Polski
-        payment_method_types: ['card','blik'],
-        // Tryb płatności - jednorazowa
+        payment_method_types: ['card', 'blik'],
         mode: 'payment',
-        
-        custom_fields: [
-          {
-            key: 'imie_nazwisko',
-            label: {
-              type: 'custom',
-              custom: 'Imię i Nazwisko',
+        line_items: [{
+          price_data: {
+            currency: 'pln',
+            unit_amount: Math.round(price * 100),
+            product_data: {
+              name: name,
             },
-            type: 'text',
           },
-          {
-            key: 'paczkomat',
-            label: {
-              type: 'custom',
-              custom: 'Adres lub ID Paczkomatu',
-            },
-            type: 'text',
-          },
-          {
-            key: 'telefon',
-            label: {
-              type: 'custom',
-              custom: 'Numer telefonu',
-            },
-            type: 'text',
-          },
-        ],
-
-        line_items: [
-          {
-            price_data: {
-              currency: 'pln',
-              unit_amount: Math.round(price * 100),
-              product_data: {
-                name: 'Szyba na wymiar',
-                description: `Zamówienie na szybę o wymiarach ${height}cm x ${width}cm.\n\nWAŻNE: Prosimy o uzupełnienie poniższych pól. Adres e-mail (podany wyżej) oraz numer telefonu posłużą do wysłania powiadomień InPost.`,
-              },
-            },
-            quantity: 1,
-          },
-        ],
-        
-        // ==================== POCZĄTEK KLUCZOWEJ ZMIANY ====================
-        // Do adresu URL dodajemy parametr &amount= z dynamiczną ceną pobraną z kalkulatora.
-        // Dzięki temu strona success.html będzie wiedziała, jaką wartość zakupu wysłać do Pixela.
-        success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}&amount=${price}`,
-        // ===================== KONIEC KLUCZOWEJ ZMIANY =====================
-
-        cancel_url: `${req.headers.origin}/`,
+          quantity: 1,
+        }],
+        success_url: `${req.headers.origin}/success.html`, // Strona podziękowania
+        cancel_url: `${req.headers.origin}/`, // Strona powrotu w razie anulowania
       });
 
-      // Odsyłamy z powrotem do przeglądarki link do sesji płatności
       res.status(200).json({ url: session.url });
     } catch (err) {
-      // Obsługa błędów
       console.error(err);
       res.status(500).json({ error: 'Błąd serwera podczas tworzenia sesji płatności.' });
     }
   } else {
-    // Jeśli ktoś spróbuje wejść na ten link inaczej niż metodą POST
     res.setHeader('Allow', 'POST');
     res.status(405).end('Method Not Allowed');
   }

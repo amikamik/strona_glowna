@@ -1,346 +1,71 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Szyba Kominkowa na Wymiar | Kalkulator Ceny Online</title>
-    <meta name="description" content="Oblicz cenę szyby kominkowej na wymiar za pomocą naszego kalkulatora online. Podaj wymiary, poznaj koszt i zamów z dostawą. Szybko i bezpiecznie.">
-    <meta name="keywords" content="szyba kominkowa, szkło kominkowe, na wymiar, kalkulator ceny, żaroodporna, do kominka">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery.min.css"/>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; background-color: #f8f9fa; color: #333; }
-        .container { max-width: 1100px; margin: 40px auto; padding: 20px; }
-        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background-color: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
-        .main-image { width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee; cursor: pointer; }
-        /* --- ZMIANA 1: Poprawka siatki miniaturek --- */
-        .thumbnails { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
-        .thumbnails img { width: 100%; border-radius: 4px; cursor: pointer; border: 2px solid #ddd; transition: all 0.2s; aspect-ratio: 1 / 1; object-fit: cover; }
-        .thumbnails img:hover, .thumbnails img.active { border-color: #1abc9c; transform: scale(1.05); }
-        .product-info h1 { font-size: 2.4em; margin-top: 0; line-height: 1.2; font-weight: 700; }
-        .shipping-info { margin-top: 20px; background-color: #f8f9fa; padding: 15px; border-radius: 8px; }
-        .shipping-info h3 { margin: 0; font-size: 1.2em; color: #2c3e50; }
-        .shipping-info-toggle { font-size: 0.9em; color: #3498db; cursor: pointer; text-decoration: underline; }
-        .shipping-details { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out, margin-top 0.5s ease-in-out; }
-        .shipping-details.expanded { max-height: 500px; margin-top: 15px; }
-        .description { font-size: 1.1em; line-height: 1.7; color: #555; max-height: 125px; overflow: hidden; position: relative; transition: max-height 0.5s ease-in-out; }
-        .description.expanded { max-height: 1500px; }
-        .read-more-btn { background: none; border: none; color: #1abc9c; cursor: pointer; font-weight: bold; padding: 10px 0; display: block; margin-top: 10px; font-size: 1em; }
-        .trust-badges { display: flex; justify-content: space-around; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; }
-        .badge { text-align: center; font-size: 0.9em; color: #777; }
-        .badge-icon { font-size: 2em; margin-bottom: 8px; }
-        .question-section { text-align: center; margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 8px; }
-        .question-btn { background: none; border: 2px solid #3498db; color: #3498db; padding: 10px 20px; font-size: 1.1em; font-weight: bold; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
-        .question-btn:hover { background-color: #3498db; color: white; }
-        .footer_section { text-align: center; margin-top: 40px; padding-top: 20px; font-size: 0.9em; color: #777; }
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); animation: fadeIn 0.3s; }
-        .modal-content { background-color: #fefefe; margin: 10% auto; padding: 30px; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 10px; position: relative; }
-        .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; position: absolute; top: 10px; right: 20px; }
-        .close-btn:hover, .close-btn:focus { color: black; text-decoration: none; cursor: pointer; }
-        .modal-content h2 { margin-top: 0; }
-        .modal-content input, .modal-content textarea { width: 100%; padding: 12px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-        @media (max-width: 900px) { .product-grid { grid-template-columns: 1fr; } }
-        #lightgallery-links { display: none; }
-        .calculator-container { background-color: #f8f9fa; padding: 25px; border-radius: 12px; text-align: center; margin-top: 30px; border: 1px solid #eee; }
-        .calculator-container h1 { color: #2c3e50; font-size: 1.8em; margin-bottom: 15px; margin-top: 0; }
-        .calculator-container p { font-size: 0.9em; line-height: 1.5; }
-        .calculator-container label { display: block; text-align: left; margin-top: 15px; margin-bottom: 5px; font-weight: bold; }
-        .calculator-container input[type="number"] { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 1em; }
-        .calculator-container button { display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; padding: 15px; text-align: center; text-decoration: none; font-size: 1.2em; font-weight: bold; border-radius: 8px; transition: transform 0.2s, box-shadow 0.2s; border: none; cursor: pointer; min-height: 50px; box-sizing: border-box; background: #ff6600; color: white; margin-top: 20px; }
-        .calculator-container button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4); background: #e65c00; }
-        #wynik { margin-top: 20px; padding: 15px; border-radius: 8px; font-weight: bold; text-align: center; line-height: 1.6; display: none; }
-        .wynik-ok { background-color: #e6ffe6; color: #16a085; border: 1px solid #16a085; }
-        .wynik-error { background-color: #ffe6e6; color: red; border: 1px solid red; }
-        .buy-button-dynamic { display: block; background: linear-gradient(145deg, #1abc9c, #16a085); color: white; padding: 15px; text-decoration: none; border-radius: 8px; font-size: 1.2em; font-weight: bold; margin-top: 15px; transition: all 0.2s; }
-        .buy-button-dynamic:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(22, 160, 133, 0.3); }
-        .buy-button-disabled { background: #ccc !important; pointer-events: none; cursor: not-allowed; }
-    </style>
-    
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '2369850443532061');
-    fbq('track', 'PageView');
-    
-    // PIXEL: ZDARZENIE 1 - Wyświetlenie zawartości (produktu)
-    fbq('track', 'ViewContent', {
-        content_name: 'Szyba kominkowa na wymiar',
-        content_ids: ['SZYBA_KOMINKOWA_01'], // Unikalne ID produktu
-        content_type: 'product',
-        currency: 'PLN'
-    });
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=2369850443532061&ev=PageView&noscript=1"
-    /></noscript>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Kettle Sklep - Nowoczesne Kettle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Zimowa Ochrona dla Każdego: Technologia Rockbros czy Wszechstronność Qunature?</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Nie pozwól, by mróz, wiatr czy zanieczyszczenia zepsuły Twoje zimowe plany! Dla najbardziej wymagających przygotowaliśmy kominiarkę Rockbros, która dzięki filtrowi z węglem aktywnym chroni nie tylko przed zimnem, ale i smogiem, gwarantując przy tym świetną oddychalność. Jeśli natomiast cenisz sobie uniwersalność i styl, pokochasz model Qunature Panda – jej miękki polar, uroczy design i możliwość noszenia na 4 sposoby sprawiają, że jest idealnym wyborem dla całej rodziny. Wybierz technologię lub wszechstronność i ciesz się zimą bez kompromisów!</p>
+            </div>
+        </div>
+    </header>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div id="product-grid" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                </div>
+        </div>
+    </section>
+   <footer class="py-5 bg-dark">
     <div class="container">
-        <div class="product-grid">
-            <div class="gallery-container">
-                <img src="images/szyba1.jpg" alt="Szyba kominkowa na wymiar" id="mainImage" class="main-image" onclick="openGallery(0)">
-                <div class="thumbnails">
-                    <img src="images/szyba1.jpg" alt="Szyba do kominka - zbliżenie" onclick="changeImage('images/szyba1.jpg', this, 0)">
-                    <img src="images/szyba2.jpg" alt="Szkło żaroodporne do kominka" onclick="changeImage('images/szyba2.jpg', this, 1)">
-                    <img src="images/szyba3.jpg" alt="Szyba kominkowa na zamówienie" onclick="changeImage('images/szyba3.jpg', this, 2)">
-                    <img src="images/szyba4.jpg" alt="Czysta szyba w kominku" onclick="changeImage('images/szyba4.jpg', this, 3)">
-                    <img src="images/szyba5.jpg.jpeg" alt="Nowe zdjęcie szyby 5" onclick="changeImage('images/szyba5.jpg.jpeg', this, 4)">
-                    <img src="images/szyba6.jpg.jpeg" alt="Nowe zdjęcie szyby 6" onclick="changeImage('images/szyba6.jpg.jpeg', this, 5)">
-                </div>
-            </div>
-
-            <div class="product-info">
-                <h1>Pogotowie Kominkowe: Szybka Pomoc w Razie Stłuczonej Szyby</h1>
-                
-                <div class="shipping-info">
-                    <h3>🚚 Pancerna Paczka do Paczkomatu 24/7</h3>
-                    <span class="shipping-info-toggle" onclick="toggleShippingDetails()">(Więcej informacji)</span>
-                    <div class="shipping-details" id="shippingDetails">
-                        <p>Twoja nowa szyba zostanie pancernie zapakowana i nadana w ciągu 1-2 dni roboczych do wybranego przez Ciebie Paczkomatu. Po opłaceniu zamówienia otrzymasz e-mail z potwierdzeniem, a następnie link do śledzenia przesyłki. Gdy paczka dotrze na miejsce, InPost powiadomi Cię SMS-em i e-mailem. Odbierasz, kiedy chcesz – wygodnie i bez czekania na kuriera!</p>
-                    </div>
-                </div>
-
-                <div class="description" id="productDescription">
-                    <p><p>Uszkodzona szyba kominkowa? Zaufaj profesjonalistom i przywróć pełną sprawność kominka.</p>
-<p>Pęknięcie szyby nie musi oznaczać kosztownych i skomplikowanych napraw. Oferujemy precyzyjnie docięte na wymiar, certyfikowane szkło kominkowe, które gwarantuje bezpieczeństwo i doskonałą widoczność ognia na lata.</p>
-<p><b>Nasze zobowiązanie – Twoja pewność i satysfakcja:</b></p>
-<p>🛡️ <b>Gwarancja Bezpiecznej Dostawy:</b> Rozumiemy obawy związane z transportem szkła. Dlatego każdą szybę zabezpieczamy przy użyciu specjalistycznych materiałów. Bierzemy pełną odpowiedzialność za przesyłkę – w przypadku stwierdzenia jakichkolwiek uszkodzeń przy odbiorze, bezzwłocznie realizujemy nowe zamówienie na nasz koszt.</p>
-<p><b>Co wyróżnia nasz produkt?</b></p>
-<ul>
-    <li><b>Certyfikowana Odporność Termiczna do 800°C:</b> Stosujemy wyłącznie szkło ceramiczne o potwierdzonej odporności na szok termiczny, co zapewnia maksymalne bezpieczeństwo użytkowania.</li>
-    <li><b>Precyzja wykonania:</b> Każda szyba jest docinana z milimetrową dokładnością zgodnie ze specyfikacją klienta. Krawędzie poddajemy profesjonalnemu szlifowaniu, aby zapewnić bezpieczny montaż.</li>
-    <li><b>Niezakłócona estetyka:</b> Idealnie przejrzysta, dwustronnie polerowana powierzchnia szkła pozwala w pełni cieszyć się widokiem płomieni.</li>
-</ul>
-<p><b>🎁 W cenie zamówienia otrzymujesz kompletny pakiet montażowy:</b><br>
-Do każdej szyby dołączamy bezpłatnie zestaw akcesoriów: specjalistyczną taśmę montażową oraz podkładki pod zaciski, które niwelują naprężenia i wydłużają żywotność szkła.</p>
-<p><b>Proces zamówienia w 3 krokach:</b></p>
-<ol>
-    <li>Dokonaj pomiaru.</li>
-    <li>Skorzystaj z kalkulatora, aby poznać natychmiastową wycenę.</li>
-    <li>Złóż zamówienie z wygodną dostawą do Paczkomatu.</li>
-</ol></p>
-                </div>
-                <button onclick="toggleDescription()" class="read-more-btn" id="readMoreBtn">Czytaj więcej...</button>
-
-                <div class="calculator-container">
-                    <h1>Kalkulator Ceny Online</h1>
-                    <p>Podaj wymiary w centymetrach (cm), aby obliczyć całkowity koszt szyby wraz z dostawą.</p>
-                    
-                    <label for="wysokosc">Wysokość szyby (cm):</label>
-                    <input type="number" id="wysokosc" min="1" step="0.1" placeholder="np. 45.5" required>
-                            
-                    <label for="szerokosc">Szerokość szyby (cm):</label>
-                    <input type="number" id="szerokosc" min="1" step="0.1" placeholder="np. 28.0" required>
-            
-                    <button onclick="obliczCeneSzyby()">OBLICZ CENĘ</button>
-                    
-                    <div id="wynik"></div>
-            
-                    <a href="#" class="buy-button-dynamic buy-button-disabled" id="buyButton">
-                        ZAMÓW SZYBĘ 🔒 (Aktywuj po obliczeniu)
-                    </a>
-                </div>
-                
-                <div class="trust-badges">
-                    <div class="badge"><div class="badge-icon">🛡️</div>Bezpieczna Płatność</div>
-                    <div class="badge"><div class="badge-icon">📦</div>Szybka Wysyłka</div>
-                    <div class="badge"><div class="badge-icon">🌿</div>Gwarancja Jakości</div>
-                </div>
-
-                <div class="question-section">
-                    <h3>Masz pytanie dotyczące produktu?</h3>
-                    <button class="question-btn" id="questionBtn">Zadaj pytanie</button>
-                </div>
-            </div>
-        </div>
+        <p class="m-0 text-center text-white">Copyright &copy; Kettle Sklep 2025</p>
+        <p class="m-0 text-center text-white mt-2">
+            <a href="regulamin.html" class="text-white-50">Regulamin</a>
+            <span class="text-white-50 mx-2">|</span>
+            <a href="polityka-prywatnosci.html" class="text-white-50">Polityka Prywatności</a>
+        </p>
     </div>
-    <div class="footer_section">
-        <p>Sprzedawca: Amadeusz Wieczorek</p>
-        <p>Grunwaldzka 10d/5</p>
-        <p>Kontakt e-mail: amadeuszwieczorek@gmail.com</p>
-        <p><a href="regulamin.html">Regulamin</a> | <a href="polityka-prywatnosci.html">Polityka Prywatności</a></p>
-    </div>
+</footer>
 
-    <div id="lightgallery-links">
-        <a href="images/szyba1.jpg"></a>
-        <a href="images/szyba2.jpg"></a>
-        <a href="images/szyba3.jpg"></a>
-        <a href="images/szyba4.jpg"></a>
-        <a href="images/szyba5.jpg.jpeg"></a>
-        <a href="images/szyba6.jpg.jpeg"></a>
-    </div>
-    
-    <div id="questionModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeQuestionBtn">&times;</span>
-            <h2>Zadaj pytanie</h2>
-            <p>Masz wątpliwości? Chętnie pomożemy. Odpowiemy na Twojego maila najszybciej jak to możliwe.</p>
-            <form action="https://formspree.io/f/mvgwqyop" method="POST">
-                <input type="email" name="Email klienta" placeholder="Twój adres e-mail" required>
-                <textarea name="Pytanie" placeholder="Twoje pytanie..." rows="6" required></textarea>
-                <input type="hidden" name="_subject" value="Pytanie o produkt: Szyba Kominkowa">
-                <button type="submit" class="buy-button">Wyślij pytanie</button>
-            </form>
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.min.js"></script>
     <script>
-        const galleryContainer = document.getElementById('lightgallery-links');
-        const gallery = lightGallery(galleryContainer);
-        let currentImageIndex = 0;
-        function openGallery(index) {
-            currentImageIndex = index;
-            gallery.openGallery(index);
-        }
-        function changeImage(imageUrl, thumbElement, index) {
-            document.getElementById('mainImage').src = imageUrl;
-            currentImageIndex = index;
-            document.querySelectorAll('.thumbnails img').forEach(thumb => thumb.classList.remove('active'));
-            thumbElement.classList.add('active');
-        }
-        function toggleDescription() {
-            const description = document.getElementById('productDescription');
-            const btn = document.getElementById('readMoreBtn');
-            description.classList.toggle('expanded');
-            btn.textContent = description.classList.contains('expanded') ? 'Zwiń opis' : 'Czytaj więcej...';
-        }
-        function toggleShippingDetails() {
-            const details = document.getElementById('shippingDetails');
-            details.classList.toggle('expanded');
-        }
-        function setupModal(modalId, btnId, closeBtnId) {
-            const modal = document.getElementById(modalId);
-            const btn = document.getElementById(btnId);
-            const closeBtn = document.getElementById(closeBtnId);
+        document.addEventListener('DOMContentLoaded', () => {
+            const productGrid = document.getElementById('product-grid');
+            fetch('produkty.json')
+                .then(response => response.json())
+                .then(products => {
+                    products.forEach(product => {
+                        // Tworzymy link do podstrony produktu
+                        const productUrl = `produkt.html?id=${product.id}`;
 
-            if(btn) { btn.onclick = function() { modal.style.display = "block"; } }
-            if(closeBtn) { closeBtn.onclick = function() { modal.style.display = "none"; } }
-            
-            window.addEventListener('click', function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            });
-        }
-
-        const MAX_SZYBA_DLUGOSC = 58;
-        const MAX_SZYBA_SZEROKOSC = 32;
-
-        function resetProductInfo() {
-            const wynikDiv = document.getElementById('wynik');
-            const buyButton = document.getElementById('buyButton');
-            if (wynikDiv && buyButton) {
-                wynikDiv.style.display = 'none';
-                buyButton.textContent = 'ZAMÓW SZYBĘ 🔒 (Aktywuj po obliczeniu)';
-                buyButton.classList.add('buy-button-disabled');
-                buyButton.onclick = null;
-                buyButton.href = '#';
-            }
-        }
-
-        async function obliczCeneSzyby() {
-            const wynikDiv = document.getElementById('wynik');
-            const buyButton = document.getElementById('buyButton');
-            const calcButton = document.querySelector('.calculator-container button');
-            
-            const wysokosc = parseFloat(document.getElementById('wysokosc').value);
-            const szerokosc = parseFloat(document.getElementById('szerokosc').value);
-
-            resetProductInfo();
-            wynikDiv.style.display = 'block';
-
-            if (isNaN(wysokosc) || isNaN(szerokosc) || wysokosc <= 0 || szerokosc <= 0) {
-                wynikDiv.className = 'wynik-error';
-                wynikDiv.innerHTML = '⚠️ Proszę podać poprawne, dodatnie wymiary w cm.';
-                return;
-            }
-            
-            const dluzszyBok = Math.max(wysokosc, szerokosc);
-            const krotszyBok = Math.min(wysokosc, szerokosc);
-
-            if (dluzszyBok > MAX_SZYBA_DLUGOSC || krotszyBok > MAX_SZYBA_SZEROKOSC) {
-                wynikDiv.className = 'wynik-error';
-                wynikDiv.innerHTML = `⚠️ Maksymalny wymiar szyby to ${MAX_SZYBA_DLUGOSC}x${MAX_SZYBA_SZEROKOSC} cm, aby zmieściła się do paczkomatu. Jeśli chcesz zamówić większą szybę, skontaktuj się z nami .`;
-                return;
-            }
-
-            const cenaCalkowita = ((((wysokosc * szerokosc) / 100) * 8.5) * 1.7) + 12;
-            const calculatedPrice = cenaCalkowita.toFixed(2);
-            
-            // PIXEL: ZDARZENIE 2 - Personalizacja produktu (po udanej kalkulacji)
-            fbq('track', 'CustomizeProduct');
-
-            wynikDiv.className = 'wynik-ok';
-            wynikDiv.innerHTML = `
-                <strong>CAŁKOWITY KOSZT: ${calculatedPrice} zł</strong><br>
-                (Dostawa jest darmowa 🚚)
-            `;
-
-            buyButton.classList.remove('buy-button-disabled');
-            buyButton.textContent = `ZAMÓW ZA ${calculatedPrice} ZŁ`;
-            
-            buyButton.href = '#'; 
-            buyButton.onclick = async () => {
-                
-                // PIXEL: ZDARZENIE 3 - Inicjacja płatności (kliknięcie zamówienia)
-                fbq('track', 'InitiateCheckout', {
-                    content_name: 'Szyba kominkowa na wymiar',
-                    content_ids: ['SZYBA_KOMINKOWA_01'],
-                    content_type: 'product',
-                    currency: 'PLN',
-                    value: parseFloat(calculatedPrice), // Przesyłamy obliczoną cenę
-                    num_items: 1
-                });
-
-                buyButton.textContent = 'Przekierowuję do płatności...';
-                buyButton.classList.add('buy-button-disabled');
-                calcButton.disabled = true;
-
-                try {
-                    const response = await fetch('/api/create-checkout-session', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            price: cenaCalkowita,
-                            width: szerokosc,
-                            height: wysokosc,
-                        }),
+                        const productCard = `
+                            <div class="col mb-5">
+                                <div class="card h-100">
+                                    <a href="${productUrl}">
+                                        <img class="card-img-top" src="${product.zdjecia[0]}" alt="${product.nazwa}" />
+                                    </a>
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <h5 class="fw-bolder">${product.nazwa}</h5>
+                                            ${product.cena}
+                                        </div>
+                                    </div>
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center">
+                                            <a class="btn btn-outline-dark mt-auto" href="${productUrl}">Zobacz produkt</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        productGrid.innerHTML += productCard;
                     });
-
-                    const data = await response.json();
-
-                    if (data.url) {
-                        window.location.href = data.url;
-                    } else {
-                        alert('Wystąpił błąd podczas tworzenia płatności. Spróbuj ponownie.');
-                        resetProductInfo();
-                    }
-                } catch (error) {
-                    console.error('Błąd:', error);
-                    alert('Wystąpił błąd połączenia. Sprawdź konsolę i spróbuj ponownie.');
-                    resetProductInfo();
-                } finally {
-                    calcButton.disabled = false;
-                }
-            };
-        }
-
-        window.onload = () => {
-            const firstThumbnail = document.querySelector('.thumbnails img');
-            if(firstThumbnail) firstThumbnail.classList.add('active');
-            document.getElementById('mainImage').addEventListener('click', () => {
-                openGallery(currentImageIndex);
-            });
-            setupModal('questionModal', 'questionBtn', 'closeQuestionBtn');
-            resetProductInfo();
-        };
-
+                });
+        });
     </script>
 </body>
 </html>
