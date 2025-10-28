@@ -84,5 +84,20 @@
       "produkty/produkt-6/images/zdjecie4.jpeg"
       
     ]
+  },
+  {
+    "id": "produkt-7",
+    "nazwa": "Piłkarzyki na sprężynach CHEVA Champion - Kompletny zestaw",
+    "cena": "169 zł",
+    "opis": "brak",
+    "link_stripe": "https://buy.stripe.com/4gM14pcrC7F11oj0V34ko1q",
+    "zdjecia": [
+      "produkty/produkt-7/images/zdjecie1.jpeg",
+      "produkty/produkt-7/images/zdjecie2.jpeg",
+      "produkty/produkt-7/images/zdjecie3.jpeg",
+      "produkty/produkt-7/images/zdjecie4.jpeg",
+      "produkty/produkt-7/images/zdjecie5.jpeg",
+      "produkty/produkt-7/images/zdjecie6.jpeg"
+    ]
   }
 ]
