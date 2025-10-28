@@ -16,31 +16,7 @@
     "id": "produkt-2",
     "nazwa": "Selfie stick ze stojakiem i pilotem Bluetooth długi kijek do selfie 1.8m czarny",
     "cena": "119 zł",
-    "opis": "<div class="product-description-summary" style="max-width: 800px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
-
-    <h2 class="text-center mb-4" style="color: #007bff;">📸 Selfie Stick Ugreen LP680 – Osiągnij Nowy Poziom Vlogowania</h2>
-
-    <p class="lead text-center mb-4">
-        Zaprojektowany dla maksymalnej wygody i mobilności! Ten lekki, bezprzewodowy selfie stick z pilotem BT pozwala na robienie zdjęć i nagrywanie filmów z odległości niemal **1.6 metra**. Idealny do podróży, vlogowania i tworzenia treści na TikToka. Prosty, składany i zawsze gotowy do użycia.
-    </p>
-
-    <h3 style="color: #333; border-bottom: 2px solid #ffc107; padding-bottom: 5px; margin-top: 30px;">Kluczowe Zalety</h3>
-    <ul class="list-unstyled">
-        <li style="margin-bottom: 10px;"><i class="bi bi-bluetooth me-2" style="color: #17a2b8;"></i> <strong>Bezprzewodowa Łączność:</strong> Natychmiastowe połączenie z pilotem Bluetooth. Zero kabli, zero aplikacji.</li>
-        <li style="margin-bottom: 10px;"><i class="bi bi-camera me-2" style="color: #17a2b8;"></i> <strong>Prosta Obsługa:</strong> Migawka i włącznik w jednym – intuicyjny przycisk na pilocie.</li>
-        <li style="margin-bottom: 10px;"><i class="bi bi-luggage me-2" style="color: #17a2b8;"></i> <strong>Maksymalna Mobilność:</strong> Lekki i kompaktowy po złożeniu, idealnie mieści się w małym bagażu.</li>
-        <li style="margin-bottom: 10px;"><i class="bi bi-badge-ad me-2" style="color: #17a2b8;"></i> <strong>Wszechstronność:</strong> Idealny dla vlogerów, podróżników i użytkowników platform takich jak TikTok.</li>
-    </ul>
-
-    <h3 style="color: #333; border-bottom: 2px solid #ffc107; padding-bottom: 5px; margin-top: 30px;">Specyfikacja (Marka i Wymiary)</h3>
-    <ul class="list-unstyled row">
-        <li class="col-md-6"><i class="bi bi-tag-fill me-2" style="color: #6c757d;"></i> Marka: **Ugreen** (Model: LP680)</li>
-        <li class="col-md-6"><i class="bi bi-phone me-2" style="color: #6c757d;"></i> Kompatybilność: Urządzenia **4-7.2 cala**</li>
-        <li class="col-md-6"><i class="bi bi-rulers me-2" style="color: #6c757d;"></i> Długość: Rozkładany do **~1.6m**</li>
-        <li class="col-md-6"><i class="bi bi-palette me-2" style="color: #6c757d;"></i> Kolor: Czarny</li>
-    </ul>
-
-</div>",
+    "opis": "<div class="p-3"><h3 class="text-center" style="color:#007bff; margin-bottom: 15px;"><i class="bi bi-camera-reels me-2"></i> Idealny do Vlogowania i Podróży</h3><p class="lead text-center mb-4">Ten **lekki i kompaktowy** selfie stick z pilotem Bluetooth eliminuje kable i skomplikowane aplikacje. Rozkłada się aż do **1.8 metra** (długi kijek), co daje swobodę twórczą i pozwala na szerokie kadry. Po złożeniu mieści się w każdej torbie.</p><h4 style="color:#333; border-bottom: 1px solid #ffc107; padding-bottom: 5px;">Główne Zalety:</h4><ul class="list-unstyled"><li><i class="bi bi-phone-vibrate me-2" style="color: #28a745;"></i> **Maksymalna Wygoda:** Pilot Bluetooth łączy się natychmiast, zero kabli i instalacji.</li><li><i class="bi bi-arrow-down-up me-2" style="color: #28a745;"></i> **Ekstremalny Zasięg:** Aż **1.8m** długości do zdjęć grupowych i szerokich ujęć.</li><li><i class="bi bi-check-circle me-2" style="color: #28a745;"></i> **Prosta Obsługa:** Wszystko jednym przyciskiem – włącznik i migawka.</li><li><i class="bi bi-tiktok me-2" style="color: #28a745;"></i> **Dla Twórców:** Kompatybilny z aplikacjami vlogowymi (np. TikTok).</li></ul><h4 style="color:#333; border-bottom: 1px solid #ffc107; padding-bottom: 5px; margin-top: 20px;">Specyfikacja:</h4><ul class="list-unstyled"><li><i class="bi bi-bookmark-fill me-2" style="color: #6c757d;"></i> Marka/Model: **Ugreen LP680**</li><li><i class="bi bi-phone me-2" style="color: #6c757d;"></i> Kompatybilność: Telefony **4-7.2 cala**</li><li><i class="bi bi-box-seam me-2" style="color: #6c757d;"></i> Zestaw zawiera: Selfie stick ze stojakiem i pilotem.</li></ul></div>",
     "link_stripe": "https://buy.stripe.com/9B6dRb8bm2kH3wr9rz4ko1l",
     "zdjecia": [
       "produkty/produkt-2/images/zdjecie1.jpeg",
