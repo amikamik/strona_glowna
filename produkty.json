@@ -59,7 +59,7 @@
   {
     "id": "produkt-5",
     "nazwa": "Mini lampka lampa LED do czytania ekranu z klipsem szary",
-    "cena": "29 zł",
+    "cena": "89 zł",
     "opis": "brak",
     "link_stripe": "https://buy.stripe.com/eVq4gBezK2kH4AvfPX4ko1o",
     "zdjecia": [
@@ -69,6 +69,20 @@
       "produkty/produkt-5/images/zdjecie4.jpeg",
       "produkty/produkt-5/images/zdjecie5.jpeg",
       "produkty/produkt-5/images/zdjecie6.jpeg"
+    ]
+  },
+  {
+    "id": "produkt-6",
+    "nazwa": "Zestaw bokserski treningowy dla dzieci",
+    "cena": "199 zł",
+    "opis": "brak",
+    "link_stripe": "https://buy.stripe.com/5kQfZj77i3oLeb56fn4ko1p",
+    "zdjecia": [
+      "produkty/produkt-6/images/zdjecie1.jpeg",
+      "produkty/produkt-6/images/zdjecie2.jpeg",
+      "produkty/produkt-6/images/zdjecie3.jpeg",
+      "produkty/produkt-6/images/zdjecie4.jpeg"
+      
     ]
   }
 ]
