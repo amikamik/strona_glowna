@@ -1,12 +1,15 @@
 [
   {
     "id": "produkt-1",
-    "nazwa": "Hantla MASTER winyl 2 kg Kettlebell",
+    "nazwa": "Superior kabel przewód USB Iphone Lightning 2.4A 1m Biały",
     "cena": "46 zł",
     "opis": "Hantla winylowa Kettlebell to niezwykle wielofunkcyjny przyrząd treningowy, wyposażony w trójkątny uchwyt. Wykonana jest z wysokiej jakości materiału winylowego z cementowym wypełnieniem. Wysoka jakość i solidna rączka hantli zapewnia komfortowy trening",
     "link_stripe": "https://buy.stripe.com/bJefZj0IUf7t0kfdHP4ko1a",
     "zdjecia": [
-      "produkty/produkt-1/images/zdjecie1.jpeg"
+      "produkty/produkt-1/images/zdjecie1.jpeg",
+      "produkty/produkt-1/images/zdjecie2.jpeg",
+      "produkty/produkt-1/images/zdjecie3.jpeg",
+      "produkty/produkt-1/images/zdjecie4.jpeg"
     ]
   },
   {
