@@ -55,5 +55,20 @@
       "produkty/produkt-4/images/zdjecie3.jpeg"
       
     ]
+  },
+  {
+    "id": "produkt-5",
+    "nazwa": "Mini lampka lampa LED do czytania ekranu z klipsem szary",
+    "cena": "29 zł",
+    "opis": "brak",
+    "link_stripe": "https://buy.stripe.com/eVq4gBezK2kH4AvfPX4ko1o",
+    "zdjecia": [
+      "produkty/produkt-5/images/zdjecie1.jpeg",
+      "produkty/produkt-5/images/zdjecie2.jpeg",
+      "produkty/produkt-5/images/zdjecie3.jpeg",
+      "produkty/produkt-5/images/zdjecie4.jpeg",
+      "produkty/produkt-5/images/zdjecie5.jpeg",
+      "produkty/produkt-5/images/zdjecie6.jpeg"
+    ]
   }
 ]
