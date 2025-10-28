@@ -15,7 +15,7 @@
   {
     "id": "produkt-2",
     "nazwa": "Selfie stick ze stojakiem i pilotem Bluetooth długi kijek do selfie 1.8m czarny",
-    "cena": "99 zł",
+    "cena": "119 zł",
     "opis": "brak",
     "link_stripe": "https://buy.stripe.com/9B6dRb8bm2kH3wr9rz4ko1l",
     "zdjecia": [
@@ -26,6 +26,21 @@
       "produkty/produkt-2/images/zdjecie5.jpeg",
       "produkty/produkt-2/images/zdjecie6.jpeg",
       "produkty/produkt-2/images/zdjecie7.jpeg"
+    ]
+  },
+  {
+    "id": "produkt-3",
+    "nazwa": "Superior kabel przewód USB Iphone Lightning 2.4A 1m Biały",
+    "cena": "29 zł",
+    "opis": "brak",
+    "link_stripe": "https://buy.stripe.com/3cI14p77i1gD5Ez5bj4ko1m",
+    "zdjecia": [
+      "produkty/produkt-3/images/zdjecie1.jpeg",
+      "produkty/produkt-3/images/zdjecie2.jpeg",
+      "produkty/produkt-3/images/zdjecie3.jpeg",
+      "produkty/produkt-3/images/zdjecie4.jpeg",
+      "produkty/produkt-3/images/zdjecie5.jpeg",
+      "produkty/produkt-3/images/zdjecie6.jpeg"
     ]
   }
 ]
