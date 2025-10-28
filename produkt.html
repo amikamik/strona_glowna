@@ -71,10 +71,7 @@
                     document.getElementById('product-id').textContent = `SKU: ${product.id.toUpperCase()}`;
                     document.getElementById('product-name').textContent = product.nazwa;
                     document.getElementById('product-price').textContent = product.cena;
-                    
-                    //  *** TUTAJ JEST POPRAWKA ***
-                    document.getElementById('product-description').innerHTML = product.opis; 
-                    
+                    document.getElementById('product-description').textContent = product.opis;
                     document.getElementById('buy-button').href = product.link_stripe;
 
                     // Generowanie miniaturek
