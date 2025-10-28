@@ -14,12 +14,18 @@
 },
   {
     "id": "produkt-2",
-    "nazwa": "Hantla MASTER winyl 4 kg Kettlebell",
-    "cena": "61 zł",
-    "opis": "Wielofunkcyjny przyrząd treningowy z trójkątnym uchwytem, wykonany z wysokiej jakości winylu z cementowym wypełnieniem. Angażuje całe ciało, idealny dla użytkowników na każdym poziomie zaawansowania. Specyfikacja: Waga - 4 kg, Materiał - winyl i cement, Wymiary opakowania - 17 x 17 x 25 cm.",
-    "link_stripe": "https://buy.stripe.com/aFaaEZcrC5wT1ojdHP4ko1b",
+    "nazwa": "Selfie stick ze stojakiem i pilotem Bluetooth długi kijek do selfie 1.8m czarny",
+    "cena": "99 zł",
+    "opis": "brak",
+    "link_stripe": "https://buy.stripe.com/9B6dRb8bm2kH3wr9rz4ko1l",
     "zdjecia": [
-      "produkty/produkt-2/images/zdjecie1.jpg"
+      "produkty/produkt-2/images/zdjecie1.jpg",
+      "produkty/produkt-2/images/zdjecie2.jpg",
+      "produkty/produkt-2/images/zdjecie3.jpg",
+      "produkty/produkt-2/images/zdjecie4.jpg",
+      "produkty/produkt-2/images/zdjecie5.jpg",
+      "produkty/produkt-2/images/zdjecie6.jpg",
+      "produkty/produkt-2/images/zdjecie7.jpg",
     ]
   }
 ]
