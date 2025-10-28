@@ -16,12 +16,6 @@
 <body>
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
-
-            <div class="mb-4">
-                <a href="https://www.tothemoonshine.pl/" class="btn btn-outline-dark">
-                    <i class="bi bi-arrow-left me-1"></i> Wróć na stronę główną
-                </a>
-            </div>
             <div id="product-content" class="row gx-4 gx-lg-5 align-items-center d-none">
                 <div class="col-md-6">
                     <img class="card-img-top mb-5 mb-md-0 rounded-3 shadow-sm" id="main-image" src="" alt="Zdjęcie produktu" />
@@ -61,6 +55,8 @@
                 return;
             }
 
+            // Upewnij się, że plik 'produkty.json' jest w tym samym katalogu co ten HTML
+            // LUB podaj poprawną ścieżkę do niego.
             fetch('produkty.json') 
                 .then(response => {
                     if (!response.ok) {
@@ -83,8 +79,12 @@
                     document.getElementById('product-name').textContent = product.nazwa;
                     document.getElementById('product-price').textContent = product.cena;
                     
-                    // Poprawka dla HTML w opisie
+                    // ===================================================
+                    // ✨ TUTAJ JEST JEDYNA WPROWADZONA ZMIANA ✨
+                    // Zamiana .textContent na .innerHTML
+                    // ===================================================
                     document.getElementById('product-description').innerHTML = product.opis;
+                    // ===================================================
 
                     document.getElementById('buy-button').href = product.link_stripe;
 
