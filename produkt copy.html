@@ -55,15 +55,8 @@
                 return;
             }
 
-            // Upewnij się, że plik 'produkty.json' jest w tym samym katalogu co ten HTML
-            // LUB podaj poprawną ścieżkę do niego.
-            fetch('produkty.json') 
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Nie można wczytać pliku produkty.json. Sprawdź ścieżkę i czy plik istnieje.');
-                    }
-                    return response.json();
-                })
+            fetch('produkty.json')
+                .then(response => response.json())
                 .then(products => {
                     const product = products.find(p => p.id === productId);
 
@@ -78,14 +71,7 @@
                     document.getElementById('product-id').textContent = `SKU: ${product.id.toUpperCase()}`;
                     document.getElementById('product-name').textContent = product.nazwa;
                     document.getElementById('product-price').textContent = product.cena;
-                    
-                    // ===================================================
-                    // ✨ TUTAJ JEST JEDYNA WPROWADZONA ZMIANA ✨
-                    // Zamiana .textContent na .innerHTML
-                    // ===================================================
-                    document.getElementById('product-description').innerHTML = product.opis;
-                    // ===================================================
-
+                    document.getElementById('product-description').textContent = product.opis;
                     document.getElementById('buy-button').href = product.link_stripe;
 
                     // Generowanie miniaturek
@@ -106,10 +92,6 @@
                     // Pokazywanie treści po załadowaniu
                     document.getElementById('loading-spinner').classList.add('d-none');
                     document.getElementById('product-content').classList.remove('d-none');
-                })
-                .catch(error => {
-                    console.error('Błąd wczytywania produktu:', error);
-                    document.body.innerHTML = `<h1 class="text-center mt-5 text-danger">Wystąpił błąd:</h1><p class="text-center">${error.message}</p>`;
                 });
         });
     </script>
