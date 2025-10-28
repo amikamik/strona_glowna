@@ -11,10 +11,9 @@
             scroll-behavior: smooth;
         }
         /* Styl dla sekcji Kontaktu, aby była wyraźna */
-        #kontakt-formularz {
+        #kontakt {
             background-color: #f8f9fa;
-            padding: 40px 0; /* Zmniejszony padding, aby lepiej pasowało do nagłówka */
-            border-radius: 8px;
+            padding: 80px 0;
         }
     </style>
 </head>
@@ -24,46 +23,7 @@
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">✨ Witaj w Tothemoonshine – Lecimy Po Najlepszą Wartość! 🚀</h1>
                 
-                <a href="#produkty" class="btn btn-outline-light btn-lg mt-4 mb-5 px-5">Przejdź do Produktów</a>
-
-                <div class="row justify-content-center mt-5">
-                    <div class="col-lg-8">
-                        <div id="kontakt-formularz" class="p-4 p-md-5">
-                            <h2 class="fw-bolder mb-4 text-center" style="color: #007bff;">Skontaktuj Się Z Nami</h2>
-                            <p class="text-center mb-4 lead" style="color: #333;">
-                                Zadaj dowolne pytania! Nasza strona jest jeszcze w budowie, więc jeżeli chcesz zamówić produkt w innej formie, **dostosujemy się do Ciebie**. Możesz do nas zadzwonić: **577 457 146** lub skorzystaj z formularza.
-                            </p>
-
-                            <form action="[WPISZ TUTAJ SWÓJ ENDPOINT FORMSPREE]" method="POST">
-                                
-                                <input type="hidden" name="_subject" value="Zapytanie z Tothemoonshine (W Budowie)">
-                                
-                                <div class="mb-3">
-                                    <label for="imie" class="form-label text-start d-block" style="color: #333;">Imię i Nazwisko</label>
-                                    <input type="text" class="form-control" id="imie" name="Imię i Nazwisko" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label text-start d-block" style="color: #333;">Adres Email</label>
-                                    <input type="email" class="form-control" id="email" name="Email" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="temat" class="form-label text-start d-block" style="color: #333;">Temat / Zapytanie</label>
-                                    <input type="text" class="form-control" id="temat" name="Temat">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="wiadomosc" class="form-label text-start d-block" style="color: #333;">Wiadomość / Szczegóły Zamówienia</label>
-                                    <textarea class="form-control" id="wiadomosc" name="Wiadomość" rows="5" required></textarea>
-                                </div>
-                                
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-lg mt-3">Wyślij Zapytanie</button>
-                                </div>
-                            </form>
-                            </div>
-                    </div>
-                </div>
-
-                <p class="lead fw-normal text-white-50 mb-0 mt-5">
+                <p class="lead fw-normal text-white-50 mb-0">
                     <section style="max-width: 800px; margin: 40px auto; padding: 20px; font-family: 'Arial', sans-serif; color: #fff;">
                         <h2 style="color: #007bff; text-align: center; font-size: 2em; margin-bottom: 5px;">
                             Koncepcja Dopiero W Budowie, Ale Pierwszy Etap Startu Już Za Nami.
@@ -88,6 +48,8 @@
                         </p>
                     </section>
                 </p>
+
+                <a href="#produkty" class="btn btn-outline-light btn-lg mt-4 px-5">Przejdź do Produktów</a>
 
             </div>
         </div>
@@ -147,6 +109,45 @@
         </div>
     </section>
 
+    <section id="kontakt">
+        <div class="container px-4 px-lg-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="fw-bolder mb-4 text-center" style="color: #007bff;">Skontaktuj Się Z Nami</h2>
+                    <p class="text-center mb-5 lead">
+                        Zadaj dowolne pytania! Nasza strona jest jeszcze w budowie, więc jeżeli chcesz zamówić produkt w innej formie, **dostosujemy się do Ciebie**. Możesz do nas zadzwonić: **577 457 146** lub skorzystaj z formularza.
+                    </p>
+
+                    <form action="[WPISZ TUTAJ SWÓJ ENDPOINT FORMSPREE]" method="POST">
+                        
+                        <input type="hidden" name="_subject" value="Zapytanie z Tothemoonshine (W Budowie)">
+                        
+                        <div class="mb-3">
+                            <label for="imie" class="form-label">Imię i Nazwisko</label>
+                            <input type="text" class="form-control" id="imie" name="Imię i Nazwisko" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Adres Email</label>
+                            <input type="email" class="form-control" id="email" name="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="temat" class="form-label">Temat / Zapytanie (np. Zapytanie o dostawę specjalną)</label>
+                            <input type="text" class="form-control" id="temat" name="Temat">
+                        </div>
+                        <div class="mb-3">
+                            <label for="wiadomosc" class="form-label">Wiadomość / Szczegóły Zamówienia</label>
+                            <textarea class="form-control" id="wiadomosc" name="Wiadomość" rows="5" required></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg mt-3">Wyślij Zapytanie</button>
+                        </div>
+                    </form>
+                    </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Tothemoonshine 2025</p> 
@@ -161,8 +162,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const productGrid = document.getElementById('product-grid');
-            // Zmieniono ścieżkę do obrazków w JSON, jeśli używasz pliku JSON do ładowania danych
-            // Pamiętaj, aby plik 'produkty.json' istniał w głównym katalogu
             fetch('produkty.json')
                 .then(response => response.json())
                 .then(products => {
