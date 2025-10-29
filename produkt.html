@@ -20,6 +20,7 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=2369850443532061&ev=PageView&noscript=1"
     /></noscript>
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6VV7VBCXYR"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -28,6 +29,7 @@
     
       gtag('config', 'G-6VV7VBCXYR');
     </script>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     
@@ -72,12 +74,24 @@
                             <b>Ważne:</b> Ponieważ dostawa jest darmowa, skopiowany kod paczkomatu, lub adres podaj nam proszę w odpowiednim miejscu po kliknięciu "Kup Teraz".
                         </p>
                     </div>
-                    <div class="d-flex mt-4">
-                        <a id="buy-button" class="btn btn-primary btn-lg flex-shrink-0" href="#">
+
+                    <div class="d-flex mt-4 flex-wrap gap-2">
+                        <a id="buy-button" class="btn btn-primary btn-lg" href="#">
                             <i class="bi-cart-fill me-1"></i>
                             Kup Teraz
                         </a>
+                        
+                        <a id="olx-button" class="btn btn-success btn-lg d-none" href="#" target="_blank">
+                            <i class="bi bi-box-arrow-up-right me-1"></i>
+                            Zamów z OLX
+                        </a>
+                        
+                        <button id="cod-button" class="btn btn-secondary btn-lg d-none" data-bs-toggle="modal" data-bs-target="#codModal">
+                            <i class="bi bi-truck me-1"></i>
+                            Zamów za pobraniem
+                        </button>
                     </div>
+                    
                 </div>
             </div>
             <div id="loading-spinner" class="text-center">
@@ -88,6 +102,49 @@
         </div>
     </section>
 
+    <div class="modal fade" id="codModal" tabindex="-1" aria-labelledby="codModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="codModalLabel">Zamówienie za pobraniem</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="cod-form" action="" method="POST">
+              <input type="hidden" id="cod-product-name" name="produkt" value="">
+              <div class="mb-3">
+                <label for="cod-name" class="form-label">Imię i nazwisko</label>
+                <input type="text" class="form-control" id="cod-name" name="imie_nazwisko" required>
+              </div>
+              <div class="mb-3">
+                <label for="cod-address" class="form-label">Adres (Ulica i numer)</label>
+                <input type="text" class="form-control" id="cod-address" name="adres" required>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="cod-zip" class="form-label">Kod pocztowy</label>
+                  <input type="text" class="form-control" id="cod-zip" name="kod_pocztowy" placeholder="np. 00-000" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="cod-city" class="form-label">Miejscowość</label>
+                  <input type="text" class="form-control" id="cod-city" name="miejscowosc" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="cod-phone" class="form-label">Numer telefonu</label>
+                <input type="tel" class="form-control" id="cod-phone" name="telefon" required>
+              </div>
+               <div class="mb-3">
+                <label for="cod-email" class="form-label">Adres e-mail</label>
+                <input type="email" class="form-control" id="cod-email" name="email" required>
+                <div class="form-text">Potrzebny do potwierdzenia zamówienia.</div>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Potwierdzam zamówienie za pobraniem</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -98,20 +155,37 @@
                 return;
             }
 
-            fetch('produkty.json') 
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Nie można wczytać pliku produkty.json. Sprawdź ścieżkę i czy plik istnieje.');
-                    }
-                    return response.json();
-                })
-                .then(products => {
+            const fetchProducts = fetch('produkty.json').then(res => {
+                if (!res.ok) throw new Error('Nie można wczytać pliku produkty.json');
+                return res.json();
+            });
+            
+            const fetchLinks = fetch('linki.json').then(res => {
+                if (!res.ok) throw new Error('Nie można wczytać pliku linki.json');
+                return res.json();
+            });
+
+            Promise.all([fetchProducts, fetchLinks])
+                .then(([products, allLinks]) => {
+                    
                     const product = products.find(p => p.id === productId);
 
                     if (!product) {
                         document.body.innerHTML = '<h1 class="text-center mt-5">Produkt o podanym ID nie istnieje.</h1>';
                         return;
                     }
+
+                    const productLinks = allLinks[productId]; 
+
+                    // === POCZĄTEK SEKCJI DEBUGOWANIA ===
+                    // Dodałem ten kod, aby zobaczyć, co wczytuje przeglądarka
+                    console.log("--- START DEBUGOWANIA ---");
+                    console.log("Szukane ID produktu (z URL):", productId);
+                    console.log("Cała zawartość pliku linki.json:", allLinks);
+                    console.log("Wpis znaleziony dla tego ID:", productLinks);
+                    console.log("--- KONIEC DEBUGOWANIA ---");
+                    // === KONIEC SEKCJI DEBUGOWANIA ===
+
 
                     document.title = `${product.nazwa} - Kettle Sklep`;
                     document.getElementById('main-image').src = product.zdjecia[0];
@@ -120,6 +194,25 @@
                     document.getElementById('product-price').textContent = product.cena;
                     document.getElementById('product-description').innerHTML = product.opis;
                     document.getElementById('buy-button').href = product.link_stripe;
+
+                    if (productLinks) {
+                        
+                        const olxButton = document.getElementById('olx-button');
+                        if (productLinks.link_olx) {
+                            olxButton.href = productLinks.link_olx;
+                            olxButton.classList.remove('d-none'); 
+                        }
+
+                        const codButton = document.getElementById('cod-button');
+                        const codForm = document.getElementById('cod-form');
+                        const codProductName = document.getElementById('cod-product-name');
+
+                        if (productLinks.link_formspree) {
+                            codForm.action = productLinks.link_formspree;
+                            codProductName.value = product.nazwa;
+                            codButton.classList.remove('d-none');
+Z                        }
+                    }
 
                     const thumbnailsContainer = document.getElementById('gallery-thumbnails');
                     product.zdjecia.forEach((imgSrc, index) => {
@@ -139,12 +232,14 @@
                     document.getElementById('product-content').classList.remove('d-none');
                 })
                 .catch(error => {
-                    console.error('Błąd wczytywania produktu:', error);
+                    // Ten .catch złapie błędy z OBU plików (produkty.json lub linki.json)
+                    console.error('Błąd wczytywania danych produktu lub linków:', error);
                     document.body.innerHTML = `<h1 class="text-center mt-5 text-danger">Wystąpił błąd:</h1><p class="text-center">${error.message}</p>`;
                 });
+            
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <footer class="py-5 bg-dark">
     <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Kettle Sklep 2025</p>
