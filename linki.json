@@ -1,13 +1,14 @@
 {
   "produkt-1": {
     "link_olx": "https://www.olx.pl/oferta/link-do-produktu-1",
-    "link_formspree": "https://formspree.io/f/TWOJ_FORMULARZ_PROD_1"
+    "link_formspree": "https://formspree.io/f/mvgwqyop"
   },
   "produkt-2": {
-    "link_olx": "https://www.olx.pl/oferta/link-do-produktu-2"
+    "link_olx": "https://www.olx.pl/oferta/link-do-produktu-2",
+    "link_formspree": "https://formspree.io/f/mvgwqyop"
   },
   "produkt-3": {
-    "link_formspree": "https://formspree.io/f/TWOJ_FORMULARZ_PROD_3"
+    "link_formspree": "https://formspree.io/f/mvgwqyop"
   },
   "produkt-4": {
     "link_olx": "https://www.olx.pl/d/1035397743/?bs=olx_pro_listing",
