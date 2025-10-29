@@ -178,7 +178,7 @@
                     const productLinks = allLinks[productId]; 
 
                     // === POCZĄTEK SEKCJI DEBUGOWANIA ===
-                    // Dodałem ten kod, aby zobaczyć, co wczytuje przeglądarka
+                    // Ten kod nadal tu jest, aby pomóc nam w diagnozie
                     console.log("--- START DEBUGOWANIA ---");
                     console.log("Szukane ID produktu (z URL):", productId);
                     console.log("Cała zawartość pliku linki.json:", allLinks);
@@ -210,8 +210,9 @@
                         if (productLinks.link_formspree) {
                             codForm.action = productLinks.link_formspree;
                             codProductName.value = product.nazwa;
-                            codButton.classList.remove('d-none');
-Z                        }
+                            codButton.classList.remove('d-none'); 
+                        }
+                        // TUTAJ BYŁ BŁĄD - USUNIĘTO ZBĘDNĄ LITERĘ 'Z'
                     }
 
                     const thumbnailsContainer = document.getElementById('gallery-thumbnails');
@@ -239,7 +240,7 @@ Z                        }
             
         });
     </script>
-    <script src="https://cdn.jsdelivr.npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <footer class="py-5 bg-dark">
     <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Kettle Sklep 2025</p>
