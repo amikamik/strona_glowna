@@ -1,0 +1,76 @@
+Tak, to doskonały pomysł na organizację. Utrzymanie niestandardowych stron w osobnym folderze to bardzo czysta i profesjonalna praktyka.
+
+Twój plan jest poprawny. Oto jak go wykonać krok po kroku w terminalu, a następnie wyjaśnię, jak dodawać kolejne strony w przyszłości.
+
+Krok 1: Organizacja plików (Lokalnie)
+Musimy stworzyć nowy folder i przenieść do niego Twój niestandardowy plik. Użyjemy do tego komendy git mv, która jest lepsza niż zwykłe przeniesienie, ponieważ Git będzie wiedział, że plik został przeniesiony (a nie usunięty i dodany na nowo).
+
+Otwórz terminal w głównym folderze projektu: PS C:\Users\hp\Desktop\olx-kategoryzator\wszystkie_sklepy_github\strona_glowna>
+
+Stwórz nowy folder. Użyj cudzysłowu, jeśli nazwa ma spacje (dla bezpieczeństwa):
+
+PowerShell
+
+mkdir "strony niestandardowe"
+Przenieś plik za pomocą Git:
+
+PowerShell
+
+git mv mata-puzzle-produkt-8.html "strony niestandardowe/mata-puzzle-produkt-8.html"
+Krok 2: Aktualizacja "Bazy Danych" (produkty.json)
+Teraz musimy powiedzieć produkty.json, gdzie ma szukać tego pliku.
+
+Otwórz plik produkty.json w VS Code.
+
+Znajdź obiekt dla produkt-8.
+
+Znajdź klucz "link_niestandardowy" i zmień jego wartość, dodając nową ścieżkę do folderu:
+
+Przed: "link_niestandardowy": "mata-puzzle-produkt-8.html"
+
+Po: "link_niestandardowy": "strony niestandardowe/mata-puzzle-produkt-8.html"
+
+Zapisz plik produkty.json.
+
+Krok 3: Weryfikacja index.html (Już gotowe!)
+Dobra wiadomość jest taka, że plik index.html, który ostatnio poprawialiśmy, nie wymaga już żadnych zmian.
+
+Jego logika:
+
+JavaScript
+
+if (product.link_niestandardowy) {
+    productUrl = product.link_niestandardowy; 
+} else {
+    productUrl = `produkt.html?id=${product.id}`;
+}
+jest idealna. Ponieważ czyta on ścieżkę ("strony niestandardowe/mata-puzzle-produkt-8.html") bezpośrednio z pliku JSON, automatycznie użyje nowej, poprawnej ścieżki.
+
+Krok 4: Wyślij zmiany na GitHub
+Teraz wyślijmy wszystkie zmiany na serwer:
+
+W terminalu (będąc w folderze strona_glowna):
+
+PowerShell
+
+# 'git add .' doda zarówno przeniesiony plik, jak i zmiany w produkty.json
+git add .
+
+git commit -m "Refaktoryzacja: Przeniesienie stron niestandardowych do folderu"
+
+git push
+Poczekaj na wdrożenie Vercel, zrób twarde odświeżenie (Ctrl+Shift+R) na stronie głównej i przetestuj, czy link do produktu-8 nadal działa poprawnie.
+
+Jak dodać inną niestandardową stronę w przyszłości? (Twój nowy proces)
+Teraz masz gotowy, skalowalny proces. Jeśli chcesz zrobić to samo dla, powiedzmy, produkt-7 (Piłkarzyki):
+
+Stwórz nowy plik: Stwórz plik pilkarzyki-produkt-7.html i zapisz go w folderze strony niestandardowe.
+
+Edytuj produkty.json: Znajdź obiekt produkt-7 i dodaj do niego klucz:
+
+JSON
+
+"link_niestandardowy": "strony niestandardowe/pilkarzyki-produkt-7.html"
+Wyślij zmiany: Zapisz produkty.json, zrób git add ., git commit i git push.
+
+To wszystko. Plik index.html jest już wystarczająco inteligentny, aby automatycznie obsłużyć każdy nowy produkt, któremu dodasz ten klucz.
