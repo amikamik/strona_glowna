@@ -112,12 +112,22 @@
                         </div>
                     </div>
 
-                    <div class="d-flex mt-4 flex-wrap gap-2">
-                        <a id="buy-button" class="btn btn-primary btn-lg" href="[WLEJ TUTAJ NOWY LINK OD KURIERA]">
-                            <i class="bi-cart-fill me-1"></i>
-                            Kup Teraz (Dostawa Kurierem)
+                    <div id="paczkomat-section" class="card bg-light p-3 mt-4">
+                        <h5 class="mb-2">Wybór Paczkomatu</h5>
+                        <p class="small text-muted">Kliknij przycisk poniżej, aby otworzyć oficjalną mapę InPost w nowej karcie...</p>
+                        <a href="https://inpost.pl/znajdz-paczkomat" target="_blank" class="btn btn-warning w-100 fw-bold">
+                            <i class="bi bi-box-seam me-1"></i> Otwórz mapę Paczkomatów
                         </a>
-                        
+                        <p class="small text-muted mt-3 mb-0">
+                            <b>Ważne:</b> ...podaj nam proszę w odpowiednim miejscu po kliknięciu "Kup Teraz".
+                        </p>
+                    </div>
+
+                    <div class="d-flex mt-4 flex-wrap gap-2">
+                        <a id="buy-button" class="btn btn-primary btn-lg" href="https://buy.stripe.com/aFadRb77i7F11oj7jr4ko1r">
+                            <i class="bi-cart-fill me-1"></i>
+                            Kup Teraz
+                        </a>
                         <a id="olx-button" class="btn btn-success btn-lg d-none" href="#" target="_blank">
                             <i class="bi bi-box-arrow-up-right me-1"></i>
                             Zamów z OLX
@@ -134,46 +144,7 @@
 
     <div class="modal fade" id="codModal" tabindex="-1" aria-labelledby="codModalLabel" aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="codModalLabel">Zamówienie za pobraniem</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form id="cod-form" action="[WSTAW LINK FORMSpree DLA POBRAŃ]" method="POST">
-              <input type="hidden" id="cod-product-name" name="produkt" value="Mata Puzzle produkt-8">
-              <div class="mb-3">
-                <label for="cod-name" class="form-label">Imię i nazwisko</label>
-                <input type="text" class="form-control" id="cod-name" name="imie_nazwisko" required>
-              </div>
-              <div class="mb-3">
-                <label for="cod-address" class="form-label">Adres (Ulica i numer)</label>
-                <input type="text" class="form-control" id="cod-address" name="adres" required>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <label for="cod-zip" class="form-label">Kod pocztowy</label>
-                  <input type="text" class="form-control" id="cod-zip" name="kod_pocztowy" placeholder="np. 41-000" required>
-                </div>
-                <div class="col-md-6">
-                  <label for="cod-city" class="form-label">Miejscowość</label>
-                  <input type="text" class="form-control" id="cod-city" name="miejscowosc" required>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="cod-phone" class="form-label">Numer telefonu</label>
-                <input type="tel" class="form-control" id="cod-phone" name="telefon" required>
-              </div>
-               <div class="mb-3">
-                <label for="cod-email" class="form-label">Adres e-mail</label>
-                <input type="email" class="form-control" id="cod-email" name="email" required>
-                <div class="form-text">Potrzebny do potwierdzenia zamówienia.</div>
-              </div>
-              <button type="submit" class="btn btn-primary w-100">Potwierdzam zamówienie za pobraniem</button>
-            </form>
-          </div>
         </div>
-      </div>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
