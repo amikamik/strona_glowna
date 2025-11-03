@@ -29,16 +29,36 @@
     </script>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
     
     <style>
-        body { background-color: #f8f9fa; }
-        .gallery-thumbnails img { cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s; }
+        body { background-color: #fff; /* Czyste białe tło */ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        .gallery-thumbnails img { cursor: pointer; border: 2px solid #eee; transition: border-color 0.2s; border-radius: 4px; }
         .gallery-thumbnails img.active { border-color: #0d6efd; }
+        
+        /* Style dla sekcji "Social Proof" */
+        .trust-badge { display: flex; align-items: center; padding: 10px; background-color: #f8f9fa; border-radius: 8px; margin-bottom: 10px; }
+        .trust-badge .icon { font-size: 1.8rem; color: #0d6efd; margin-right: 15px; }
+        .trust-badge .text { font-size: 0.9rem; color: #333; line-height: 1.4;}
+
+        /* Style dla sekcji "Zalety" */
+        .benefits-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        .benefits-list .icon {
+            font-size: 1.5rem;
+            color: #198754; /* Zielony */
+            margin-right: 10px;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
-    <section class="py-5">
+
+    <section class="py-5" style="background-color: #f8f9fa;">
         <div class="container px-4 px-lg-5 my-5">
 
             <div class="mb-4">
@@ -47,10 +67,10 @@
                 </a>
             </div>
             
-            <div id="product-content" class="row gx-4 gx-lg-5 align-items-center">
+            <div id="product-content" class="row gx-4 gx-lg-5 align-items-start">
+                
                 <div class="col-md-6">
-                    
-                    <div class="alert alert-info text-center mb-3">
+                    <div class="alert alert-info text-center mb-3 shadow-sm">
                         <h5 class="alert-heading mb-1 fw-bold">Masz pytania?</h5>
                         Skontaktuj się z nami:<br>
                         <i class="bi bi-telephone-fill me-1"></i>
@@ -59,73 +79,129 @@
                         </a>
                     </div>
                     
-                    <img class="card-img-top mb-5 mb-md-0 rounded-3 shadow-sm" id="main-image" src="/produkty/produkt-8/images/zdjecie1.jpeg" alt="Mata Puzzle" />
+                    <img class="card-img-top mb-3 rounded-3 shadow" id="main-image" src="/produkty/produkt-8/images/zdjecie1.jpeg" alt="Mata Puzzle" />
                     
-                    <div id="gallery-thumbnails" class="mt-3 d-flex">
-                        <img class="img-fluid w-25 p-1 active" src="/produkty/produkt-8/images/zdjecie1.jpeg" alt="Mata Puzzle" onclick="document.getElementById('main-image').src=this.src; document.querySelectorAll('#gallery-thumbnails img').forEach(i => i.classList.remove('active')); this.classList.add('active');">
-                        <img class="img-fluid w-25 p-1" src="/produkty/produkt-8/images/zdjecie2.jpeg" alt="Mata Puzzle" onclick="document.getElementById('main-image').src=this.src; document.querySelectorAll('#gallery-thumbnails img').forEach(i => i.classList.remove('active')); this.classList.add('active');">
-                        <img class="img-fluid w-25 p-1" src="/produkty/produkt-8/images/zdjecie3.jpeg" alt="Mata Puzzle" onclick="document.getElementById('main-image').src=this.src; document.querySelectorAll('#gallery-thumbnails img').forEach(i => i.classList.remove('active')); this.classList.add('active');">
-                        <img class="img-fluid w-25 p-1" src="/produkty/produkt-8/images/zdjecie4.jpeg" alt="Mata Puzzle" onclick="document.getElementById('main-image').src=this.src; document.querySelectorAll('#gallery-thumbnails img').forEach(i => i.classList.remove('active')); this.classList.add('active');">
+                    <div id="gallery-thumbnails" class="mt-3 d-flex justify-content-between">
+                        <img class="img-fluid w-25 p-1 active" src="/produkty/produkt-8/images/zdjecie1.jpeg" alt="Miniatura 1" onclick="document.getElementById('main-image').src=this.src; document.querySelectorAll('#gallery-thumbnails img').forEach(i => i.classList.remove('active')); this.classList.add('active');">
+                        <img class="img-fluid w-25 p-1" src="/produkty/produkt-8/images/zdjecie2.jpeg" alt="Miniatura 2" onclick="document.getElementById('main-image').src=this.src; document.querySelectorAll('#gallery-thumbnails img').forEach(i => i.classList.remove('active')); this.classList.add('active');">
+                        <img class="img-fluid w-25 p-1" src="/produkty/produkt-8/images/zdjecie3.jpeg" alt="Miniatura 3" onclick="document.getElementById('main-image').src=this.src; document.querySelectorAll('#gallery-thumbnails img').forEach(i => i.classList.remove('active')); this.classList.add('active');">
+                        <img class="img-fluid w-25 p-1" src="/produkty/produkt-8/images/zdjecie4.jpeg" alt="Miniatura 4" onclick="document.getElementById('main-image').src=this.src; document.querySelectorAll('#gallery-thumbnails img').forEach(i => i.classList.remove('active')); this.classList.add('active');">
+                        <img class="img-fluid w-25 p-1" src="/produkty/produkt-8/images/zdjecie5.jpeg" alt="Miniatura 5" onclick="document.getElementById('main-image').src=this.src; document.querySelectorAll('#gallery-thumbnails img').forEach(i => i.classList.remove('active')); this.classList.add('active');">
+
                     </div>
                 </div>
+
                 <div class="col-md-6">
                     <div id="product-id" class="small mb-1">SKU: PRODUKT-8</div>
                     <h1 id="product-name" class="display-5 fw-bolder">Stwórz Bezpieczną Strefę Treningu – Gruba Mata Ochronna Puzzle 12mm</h1>
                     
-                    <div class="fs-5 mb-4">
-                        <span id="product-price">149 zł</span>
+                    <div class="fs-5 my-4">
+                        <span id="product-price" class="fw-bold" style="font-size: 2.2rem; color: #dc3545;">149 zł</span>
+                        <span class="text-muted text-decoration-line-through ms-2 fs-4">179 zł</span>
+                    </div>
+
+                    <div class="mb-4">
+                        <ul class="list-unstyled benefits-list">
+                            <li><span class="icon">🛡️</span> <span>Skutecznie **zabezpiecza podłogę** przed uszkodzeniem</span></li>
+                            <li><span class="icon">🔇</span> <span>**Zmniejsza hałas** i drgania wywołane ćwiczeniami</span></li>
+                            <li><span class="icon">👟</span> <span>**Antypoślizgowa** powierzchnia zwiększa bezpieczeństwo</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="card shadow-sm border-0 p-3 mb-4">
+                        <div class="d-grid gap-3">
+                            <a id="buy-button" class="btn btn-primary btn-lg" href="https://buy.stripe.com/dRmaEZdvG0czaYT5bj4ko1x">
+                                <i class="bi-cart-fill me-2"></i>
+                                Kup Teraz (Dostawa Kurierem)
+                            </a>
+                            
+                            <a id="olx-button" class="btn btn-outline-success btn-lg" href="https://www.olx.pl/d/1036252560/?bs=olx_pro_listing" target="_blank">
+                                <i class="bi bi-box-arrow-up-right me-1"></i>
+                                Zamów przez OLX
+                            </a>
+                            
+                            <button id="cod-button" class="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#codModal">
+                                <i class="bi bi-truck me-1"></i>
+                                Zamów za pobraniem
+                                <span class="badge bg-dark ms-2">+ 10 zł</span>
+                            </button>
+                        </div>
                     </div>
                     
-                    <div id="product-description" class="lead">
-                        <style>
-                            .product-description-container { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }
-                            #description-full-produkt-8 { margin-top: 15px; }
-                            #description-full-produkt-8 h3 { border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 20px; }
-                            #description-full-produkt-8 ul { list-style-type: none; padding-left: 5px; }
-                             #description-full-produkt-8 ul li { margin-bottom: 5px; }
-                        </style>
-                        <div class="product-description-container">
-                            <div class="description-short">
-                                <p>Stwórz idealną przestrzeń do ćwiczeń w swoim domu! Nasza mata puzzle o grubości 12 mm to wszechstronne rozwiązanie do yogi, treningu siłowego czy pod sprzęt fitness, jak orbitrek.</p>
-                                <p>Wykonana z wytrzymałej pianki EVA, nie tylko <strong>chroni Twoją podłogę</strong> przed zarysowaniami, ale także <strong>zapewnia komfort i bezpieczeństwo</strong>, redukując hałas oraz drgania. Dzięki systemowi łatwego montażu typu "puzzle" możesz dowolnie konfigurować stabilną, antypoślizgową powierzchnię.</p>
+                    <div class="mb-4">
+                        <div class="trust-badge">
+                            <div class="icon"><i class="bi bi-patch-check-fill"></i></div>
+                            <div class="text">
+                                <strong>Gwarancja Jakości</strong><br>
+                                Wybieramy tylko sprawdzone produkty z wytrzymałej pianki EVA.
                             </div>
-                            <div id="description-full-produkt-8">
-                                <p>Mata posiada niezliczone zastosowania – świetnie sprawdzi się również podczas nieskrępowanej zabawy z rodziną lub jako zabezpieczenie podłogi w trakcie składania mebli. Głębokie wcięcia gwarantują stabilność złożonej maty.</p>
-                                <h3>Kluczowe Zalety:</h3>
-                                <ul>
-                                    <li>🛡️ Skutecznie zabezpiecza podłogę przed uszkodzeniem</li>
-                                    <li>🔇 Zmniejsza hałas i drgania wywołane ćwiczeniami</li>
-                                    <li>👟 Antypoślizgowa, perforowana powierzchnia zwiększa bezpieczeństwo</li>
-                                    <li>🧩 System "puzzle" gwarantuje łatwe łączenie i rozłączanie elementów</li>
-                                    <li>💧 Materiał EVA jest łatwy w czyszczeniu i wodoodporny</li>
-                                </ul>
-                                <h3>Specyfikacja Techniczna:</h3>
-                                <ul>
-                                    <li>💪 <strong>Materiał:</strong> Pianka EVA</li>
-                                    <li>📏 <strong>Grubość:</strong> 12 mm</li>
-                                    <li>🏋️ <strong>Twardość:</strong> 30</li>
-                                    <li>🧩 <strong>Bok 1 kwadratu (1 szt.):</strong> 60 cm (Wymiar 60 x 60 cm)</li>
-                                    <li>📐 <strong>Bok całej maty (9 szt.):</strong> 180 cm (Wymiar 180 x 180 cm)</li>
-                                    <li>✅ <strong>Gwarancja:</strong> 24 miesiące</li>
-                                </ul>
+                        </div>
+                        <div class="trust-badge">
+                            <div class="icon"><i class="bi bi-credit-card-2-front"></i></div>
+                            <div class="text">
+                                <strong>Bezpieczne Płatności</strong><br>
+                                Obsługiwane przez Stripe, światowego lidera płatności online.
+                            </div>
+                        </div>
+                        <div class="trust-badge">
+                            <div class="icon"><i class="bi bi-truck"></i></div>
+                            <div class="text">
+                                <strong>Darmowa Dostawa Kurierem</strong><br>
+                                Paczka jest za duża na Paczkomat – wysyłamy ją bezpiecznie kurierem.
                             </div>
                         </div>
                     </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="d-flex mt-4 flex-wrap gap-2">
-                        <a id="buy-button" class="btn btn-primary btn-lg" href="https://buy.stripe.com/aFadRbfDOe3peb57jr4ko1w">
-                            <i class="bi-cart-fill me-1"></i>
-                            Kup Teraz (Darmowa Dostawa Kurierem)
-                        </a>
-                        
-                        <a id="olx-button" class="btn btn-success btn-lg d-none" href="#" target="_blank">
-                            <i class="bi bi-box-arrow-up-right me-1"></i>
-                            Zamów z OLX
-                        </a>
-                        <button id="cod-button" class="btn btn-secondary btn-lg d-none" data-bs-toggle="modal" data-bs-target="#codModal">
-                            <i class="bi bi-truck me-1"></i>
-                            Zamów za pobraniem
-                        </button>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="fw-bolder mb-4 text-center">Niezliczone Zastosowania i Pełna Specyfikacja</h2>
+                    
+                    <p>Mata posiada niezliczone zastosowania – świetnie sprawdzi się również podczas nieskrępowanej zabawy z rodziną lub jako zabezpieczenie podłogi w trakcie składania mebli. Głębokie wcięcia gwarantują stabilność złożonej maty.</p>
+                    <p>Dzięki systemowi "puzzle" możesz dowolnie konfigurować i łączyć wiele zestawów, aby pokryć całą podłogę w siłowni, garażu czy pokoju zabaw.</p>
+
+                    <div class="row mt-5">
+                        <div class="col-md-6">
+                            <h3>Kluczowe Zalety:</h3>
+                            <ul class="list-unstyled benefits-list">
+                                <li><span class="icon">🛡️</span> <span>Skutecznie zabezpiecza podłogę przed uszkodzeniem</span></li>
+                                <li><span class="icon">🔇</span> <span>Zmniejsza hałas i drgania wywołane ćwiczeniami</span></li>
+                                <li><span class="icon">👟</span> <span>Antypoślizgowa, perforowana powierzchnia zwiększa bezpieczeństwo</span></li>
+                                <li><span class="icon">🧩</span> <span>System "puzzle" gwarantuje łatwe łączenie i rozłączanie</span></li>
+                                <li><span class="icon">💧</span> <span>Materiał EVA jest łatwy w czyszczeniu i wodoodporny</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Specyfikacja Techniczna:</h3>
+                             <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    <strong>Materiał:</strong>
+                                    <span>Pianka EVA</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    <strong>Grubość:</strong>
+                                    <span>12 mm</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    <strong>Twardość:</strong>
+                                    <span>30</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    <strong>Bok 1 Puzzla:</strong>
+                                    <span>60 cm x 60 cm</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    <strong>Wymiar Zestawu (9 szt.):</strong>
+                                    <span>180 cm x 180 cm</span>
+                                </li>
+                                </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -136,12 +212,12 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="codModalLabel">Zamówienie za pobraniem</h5>
+            <h5 class="modal-title" id="codModalLabel">Zamówienie za pobraniem (+10 zł)</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="cod-form" action="[WSTAW LINK FORMSpree DLA POBRAŃ]" method="POST">
-              <input type="hidden" id="cod-product-name" name="produkt" value="Mata Puzzle produkt-8">
+            <form id="cod-form" action="https://formspree.io/f/xwpwlgng" method="POST">
+              <input type="hidden" id="cod-product-name" name="produkt" value="Mata Puzzle produkt-8 (Pobranie)">
               <div class="mb-3">
                 <label for="cod-name" class="form-label">Imię i nazwisko</label>
                 <input type="text" class="form-control" id="cod-name" name="imie_nazwisko" required>
@@ -169,6 +245,9 @@
                 <input type="email" class="form-control" id="cod-email" name="email" required>
                 <div class="form-text">Potrzebny do potwierdzenia zamówienia.</div>
               </div>
+              <div class="alert alert-warning">
+                Koszt zamówienia zostanie powiększony o 10 zł opłaty za pobranie.
+              </div>
               <button type="submit" class="btn btn-primary w-100">Potwierdzam zamówienie za pobraniem</button>
             </form>
           </div>
@@ -177,14 +256,16 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Kettle Sklep 2025</p>
-        <p class="m-0 text-center text-white mt-2">
-            <a href="/regulamin.html" class="text-white-50">Regulamin</a>
-            <span class="text-white-50 mx-2">|</span>
-            <a href="/polityka-prywatnosci.html" class="text-white-50">Polityka Prywatności</a>
-        </p>
-    </div>
-</footer></body>
+    
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Tothemoonshine 2025</p>
+            <p class="m-0 text-center text-white mt-2">
+                <a href="/regulamin.html" class="text-white-50">Regulamin</a>
+                <span class="text-white-50 mx-2">|</span>
+                <a href="/polityka-prywatnosci.html" class="text-white-50">Polityka Prywatności</a>
+            </p>
+        </div>
+    </footer>
+</body>
 </html>
