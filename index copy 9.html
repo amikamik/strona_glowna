@@ -73,16 +73,16 @@
                 <div id="pelnyOpis" class="hidden-content text-start mx-auto" style="max-width: 800px; padding: 20px; background-color: rgba(255, 255, 255, 0.05); border-radius: 8px;">
                      <h2 style="color: #007bff; text-align: center; font-size: 2em; margin-bottom: 20px;">
                         Koncepcja Dopiero W Budowie, Ale Pierwszy Etap Startu Już Za Nami.
-                     </h2>
-                     <p style="color: #ccc;">
+                    </h2>
+                    <p style="color: #ccc;">
                         W **Tothemoonshine** budujemy coś więcej niż tylko sklep – tworzymy platformę, która redefiniuje inteligentne zakupy. Wierzymy, że czas marnowany na poszukiwanie jakości w gąszczu ofert powinien się skończyć. Nasza wizja to stworzenie miejsca, gdzie trafiają wyłącznie produkty, które już osiągnęły **"moonshine"** – szczyt popularności, jakości i zaufania.
-                     </p>
-                     <p style="color: #ccc;">
+                    </p>
+                    <p style="color: #ccc;">
                         Tak, nasza pełna wizja kosmicznej floty jest jeszcze w budowie. Codziennie doskonalimy algorytmy i poszerzamy źródła informacji, aby w przyszłości móc prezentować Państwu wyselekcjonowane produkty z niemal każdej kategorii.
-                     </p>
-                     <p style="background-color: rgba(233, 236, 239, 0.2); padding: 15px; border-radius: 6px; font-style: italic; color: #ccc;">
+                    </p>
+                    <p style="background-color: rgba(233, 236, 239, 0.2); padding: 15px; border-radius: 6px; font-style: italic; color: #ccc;">
                         Jednak już teraz, w ramach naszego **"Testu Wartości"**, oferujemy pierwszą partię produktów, które doskonale wpisują się w naszą misję: są to sprawdzone, użyteczne i poszukiwane przedmioty, które udało nam się pozyskać na wyjątkowych warunkach.
-                     </p>
+                    </p>
                 </div>
                 
                 <div id="formularzKontaktowy" class="hidden-content row justify-content-center">
@@ -197,18 +197,7 @@
                 .then(response => response.json())
                 .then(products => {
                     products.forEach(product => {
-                        
-                        // === POCZĄTEK ZMIANY ===
-                        // Zastąpiliśmy jedną linijkę tym blokiem logicznym
-                        let productUrl;
-                        if (product.link_niestandardowy) {
-                            // Jeśli produkt ma specjalny link, użyj go
-                            productUrl = product.link_niestandardowy;
-                        } else {
-                            // W przeciwnym razie, użyj standardowego szablonu
-                            productUrl = `produkt.html?id=${product.id}`;
-                        }
-                        // === KONIEC ZMIANY ===
+                        const productUrl = `produkt.html?id=${product.id}`;
 
                         const productCard = `
                             <div class="col mb-5">
