@@ -5,19 +5,16 @@ const path = require('path');
 // Używamy starszej składni, którą Vercel na pewno zrozumie
 module.exports = async (req, res) => {
     
-    // --- NOWA SEKCA: WCZYTANIE PRODUKTÓW ---
+    // --- SEKCJA WCZYTANIA PRODUKTÓW (BEZ ZMIAN) ---
     let productData = [];
     try {
-        // Składamy ścieżkę do pliku produkty.json w głównym folderze projektu
         const filePath = path.join(process.cwd(), 'produkty.json');
-        // Czytamy plik
         const fileContent = fs.readFileSync(filePath, 'utf8');
         productData = JSON.parse(fileContent);
     } catch (err) {
         console.error("BŁĄD KRYTYCZNY: Nie mogłem wczytać pliku produkty.json.", err);
-        // Jeśli plik nie istnieje, bot będzie działał dalej, ale bez wiedzy o produktach
     }
-    // --- KONIEC NOWEJ SEKCJI ---
+    // --- KONIEC SEKCJI ---
 
 
     // 1. Odbieramy historię rozmowy od frontendu
@@ -42,42 +39,64 @@ module.exports = async (req, res) => {
         return res.status(500).json({ error: { message: "Klucz API nie jest skonfigurowany na serwerze." }});
     }
 
-    // --- NOWA SEKCJA: WZBOGACANIE PROMPTU (RAG) ---
+    // --- KROK 1: ZMIANA OSOBOWOŚCI (NADPISANIE) ---
+    // Niezależnie od tego, co wysłał klient (nawet jeśli to stary Gbur),
+    // nadpisujemy prompt systemowy na "Eksperta".
+    if (conversationHistory && conversationHistory.length > 0 && conversationHistory[0].role === 'system') {
+        conversationHistory[0].content = `Jesteś "Ekspertem Tothemoonshine", światowej klasy, przyjaznym i niezwykle pomocnym asystentem zakupowym.
+        Twoim celem jest aktywne pomaganie klientom w znalezieniu idealnego produktu.
+        - ZADAWAJ DODATKOWE PYTANIA, aby lepiej zrozumieć potrzeby klienta (np. "Do jakich ćwiczeń go potrzebujesz?", "Jaki masz budżet?").
+        - Bądź entuzjastyczny, kompetentny i proaktywny.
+        - Kiedy polecasz produkty, krótko wyjaśnij, dlaczego właśnie ten produkt pasuje do zapytania klienta.
+        - Zawsze trzymaj się faktów z podanego KONTEKSTU PRODUKTÓW. Nie wymyślaj produktów, cen ani linków.
+        - Twoja wiedza o sklepie jest OGRANICZONA do informacji z KONTEKSTU. Jeśli nie masz informacji, powiedz "Nie mam pewności co do [X], ale mogę sprawdzić. Czego jeszcze szukasz?".`;
+    }
+    // --- KONIEC KROKU 1 ---
 
-    // Bierzemy ostatnią wiadomość od klienta
+
+    // --- KROK 2: ULEPSZONE WZBOGACANIE PROMPTU (RAG) ---
+
     const userQuery = conversationHistory[conversationHistory.length - 1].content.toLowerCase();
-    const searchWords = userQuery.split(' ').filter(word => word.length > 2); // Dzielimy zapytanie na słowa
+    const searchWords = userQuery.split(' ').filter(word => word.length > 2); 
 
-    // Szukamy pasujących produktów
+    // ULEPSZONA LOGIKA WYSZUKIWANIA: Szukamy w nazwie i opisie (jeśli istnieje)
     const matchedProducts = productData.filter(product => {
-        const productName = product.nazwa.toLowerCase();
-        // Sprawdzamy, czy którekolwiek słowo z zapytania pasuje do nazwy produktu
-        return searchWords.some(word => productName.includes(word));
+        let productText = product.nazwa ? product.nazwa.toLowerCase() : '';
+        // Dodaj inne pola, które chcesz przeszukiwać, np. opis_krotki, opis_dlugi
+        productText += product.opis ? ' ' + product.opis.toLowerCase() : ''; 
+        productText += product.opis_krotki ? ' ' + product.opis_krotki.toLowerCase() : ''; 
+
+        if (productText === '') return false;
+        return searchWords.some(word => productText.includes(word));
     });
 
-    const topMatches = matchedProducts.slice(0, 3); // Bierzemy max 3 pasujące produkty
+    const topMatches = matchedProducts.slice(0, 3); // Bierzemy max 3
 
-    // Kopiujemy historię, żeby dodać do niej nowy kontekst
     let messagesForOpenAI = [...conversationHistory];
 
     if (topMatches.length > 0) {
-        // Znaleźliśmy produkty! Tworzymy kontekst dla AI.
-        const productContext = topMatches.map(p => `Nazwa: ${p.nazwa}, Cena: ${p.cena}`).join('; ');
+        // ULEPSZONY KONTEKST: Przesyłamy więcej danych (w tym opis)
+        const productContext = topMatches.map(p => 
+            `Nazwa: ${p.nazwa}, Cena: ${p.cena}, Opis: ${p.opis_krotki || p.opis || 'Brak opisu.'}`
+        ).join('; \n');
         
-        // Tworzymy nową wiadomość systemową z kontekstem
+        // NOWY PROMPT KONTEKSTU: Każe botu być pomocnym
         const contextMessage = {
             role: "system",
-            content: `### KONTEKST PRODUKTÓW ###
+            content: `### KONTEKST PRODUKTÓW (NAJWAŻNIEJSZE!) ###
             Klient zapytał o: "${userQuery}".
-            Znalazłem w sklepie pasujące produkty: [${productContext}].
-            Użyj tych informacji w swojej gburowatej odpowiedzi. Zrzędliwie poleć mu jeden z nich i wspomnij o jego nazwie lub cenie. Nie wymyślaj produktów, trzymaj się tych z listy.
+            Znalazłem w sklepie pasujące produkty. Twoim zadaniem jest UŻYĆ TYCH DANYCH, aby mu pomóc:
+            [
+            ${productContext}
+            ]
+            - Użyj TYLKO tych informacji. Nie wymyślaj produktów.
+            - Aktywnie poleć mu jeden z nich i wyjaśnij, dlaczego pasuje, bazując na opisie.
             ### KONIEC KONTEKSTU ###`
         };
 
-        // Wstawiamy nasz kontekst tuż PRZED ostatnią wiadomością klienta
         messagesForOpenAI.splice(messagesForOpenAI.length - 1, 0, contextMessage);
     }
-    // --- KONIEC NOWEJ SEKCJI ---
+    // --- KONIEC KROKU 2 ---
 
 
     // 3. Bezpiecznie wysyłamy zapytanie do OpenAI z naszego serwera
@@ -89,9 +108,9 @@ module.exports = async (req, res) => {
                 "Authorization": `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-                model: "gpt-3.5-turbo",
+                model: "gpt-3.5-turbo", // Możesz rozważyć gpt-4o dla jeszcze mądrzejszych odpowiedzi
                 messages: messagesForOpenAI, // Wysyłamy WZBOGACONĄ historię
-                temperature: 0.8
+                temperature: 0.5 // Zmniejszamy temperaturę, aby był bardziej rzeczowy i mniej kreatywny
             })
         });
 
