@@ -37,17 +37,16 @@
         .hidden-content { display: none !important; }
         .contact-box { background-color: #f8f9fa; padding: 20px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.1); margin-top: 30px; }
    
-        /* === POCZĄTEK STYLI "GŁUPIEGO BOTA" (NOWE) === */
+        /* === POCZĄTEK STYLI BOTA GBURA === */
         #grumpy-banner {
-            /* Nowa, "przyjemniejsza" kolorystyka - błękit firmowy */
-            background: linear-gradient(45deg, #007bff, #0056b3); 
-            color: #ffffff; /* Lepszy kontrast z błękitem */
+            background: linear-gradient(45deg, #ffc107, #e68a00);
+            color: #212529;
             padding: 25px;
             margin-top: 30px;
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            animation: pulse-animation 2.5s infinite; /* Trochę wolniejsza animacja */
+            animation: pulse-animation 2s infinite; 
         }
 
         @keyframes pulse-animation {
@@ -65,7 +64,7 @@
             background-color: #f8f9fa;
         }
         #grumpyChatModal .modal-header {
-            background-color: #007bff; /* Nowy, błękitny nagłówek */
+            background-color: #dc3545;
             color: white;
             border-bottom: 0;
         }
@@ -98,7 +97,7 @@
             border-bottom-left-radius: 5px;
         }
         .msg-user {
-            background-color: #007bff; /* Kolor wiadomości usera też zmieniony na błękit */
+            background-color: #007bff;
             color: white;
             align-self: flex-end;
             margin-left: auto;
@@ -114,7 +113,7 @@
             display: none;
             margin: 10px 0;
         }
-        /* === KONIEC STYLI BOTA === */
+        /* === KONIEC STYLI BOTA GBURA === */
 
     </style>
 </head>
@@ -137,11 +136,12 @@
                 </div>
 
                 <div id="grumpy-banner" class="container">
-                    <h3 class="fw-bolder mb-3">🤖 Masz pytanie?</h3>
+                    <h3 class="fw-bolder mb-3">😑 Hej! Ty! Zatrzymaj się!</h3>
                     <p class="lead mb-4" style="font-size: 1.1rem;">
-                        Nie lubisz rozmawiać z botami? Nasz też nie lubi rozmawiać z ludźmi,<br>lepiej skontaktuj się z człowiekiem.
+                        Myślisz, że czegoś potrzebujesz z tej strony? Prawdopodobnie się mylisz. <br> Ale skoro już tu jesteś, możesz porozmawiać z naszym... "asystentem".
                     </p>
-                    <button id="grumpy-trigger" class="btn btn-primary btn-lg shadow-lg"> <i class="bi bi-chat-right-text-fill"></i> Zapytaj "Głupiego Bota" (i tak Ci nie pomoże)
+                    <button id="grumpy-trigger" class="btn btn-danger btn-lg shadow-lg">
+                        <i class="bi bi-chat-right-text-fill"></i> Porozmawiaj z Chatem Gburem (na własne ryzyko)
                     </button>
                 </div>
                 <div id="pelnyOpis" class="hidden-content text-start mx-auto" style="max-width: 800px; padding: 20px; background-color: rgba(255, 255, 255, 0.05); border-radius: 8px;">
@@ -246,13 +246,13 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="grumpyChatModalLabel">🤖 Głupi Bot - Czego znowu?</h5> 
+                    <h5 class="modal-title" id="grumpyChatModalLabel">🤖 Chat Gbur - O co znowu chodzi?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div id="chat-window">
                         <div class="chat-message msg-bot">
-                            Ugh, znowu ktoś. Słuchaj, jestem tu nowy, nic nie rozumiem i ledwo mi płacą. Chcę tylko zarobić na moje roboty-dzieci. Prawdopodobnie nie będę w stanie Ci pomóc. Naprawdę, lepiej od razu napisz do człowieka na **amadeuszwieczorek@gmail.com** albo zadzwoń. No, ale pytaj, spróbuję...
+                            No, jestem. Czego chcesz? I pośpiesz się, mam lepsze rzeczy do roboty. Na przykład patrzenie w ścianę.
                         </div>
                     </div>
                     <div id="chat-loader" class="text-center">
@@ -262,7 +262,7 @@
                         <span class="text-muted ms-2">Dobra, dobra, już myślę...</span>
                     </div>
                     <div id="chat-footer">
-                        <input type="text" id="chat-input" class="form-control" placeholder="Napisz coś (i tak nie zrozumiem)...">
+                        <input type="text" id="chat-input" class="form-control" placeholder="Napisz coś (i tak pożałujesz)...">
                         <button id="send-btn" class="btn btn-primary">Wyślij</button>
                     </div>
                 </div>
@@ -286,6 +286,7 @@
     document.addEventListener('DOMContentLoaded', () => {
     
         // --- SEKCJA 1: ŁADOWANIE PRODUKTÓW ---
+        
         const productGrid = document.getElementById('product-grid');
         if (productGrid) {
             fetch('produkty.json')
@@ -293,10 +294,35 @@
                 .then(products => {
                     products.forEach(product => {
                         let productUrl;
-                        if (product.id === 'produkt-8') { productUrl = 'mata-puzzle-produkt-8.html'; } 
-                        else if (product.id === 'produkt-9') { productUrl = 'steper_hms.html'; } 
-                        else { productUrl = `produkt.html?id=${product.id}`; }
-                        const productCard = `<div class="col mb-5"><div class="card h-100"><a href="${productUrl}"><img class="card-img-top" src="${product.zdjecia[0]}" alt="${product.nazwa}" /></a><div class="card-body p-4"><div class="text-center"><h5 class="fw-bolder">${product.nazwa}</h5>${product.cena}</div></div><div class="card-footer p-4 pt-0 border-top-0 bg-transparent"><div class="text-center"><a class="btn btn-outline-dark mt-auto" href="${productUrl}">Zobacz produkt</a></div></div></div></div>`;
+
+                        if (product.id === 'produkt-8') {
+                            productUrl = 'mata-puzzle-produkt-8.html';
+                        } else if (product.id === 'produkt-9') {
+                            productUrl = 'steper_hms.html';
+                        } else {
+                            productUrl = `produkt.html?id=${product.id}`;
+                        }
+
+                        const productCard = `
+                            <div class="col mb-5">
+                                <div class="card h-100">
+                                    <a href="${productUrl}">
+                                        <img class="card-img-top" src="${product.zdjecia[0]}" alt="${product.nazwa}" />
+                                    </a>
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <h5 class="fw-bolder">${product.nazwa}</h5>
+                                            ${product.cena}
+                                        </div>
+                                    </div>
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center">
+                                            <a class="btn btn-outline-dark mt-auto" href="${productUrl}">Zobacz produkt</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
                         productGrid.innerHTML += productCard;
                     });
                 })
@@ -304,47 +330,50 @@
         }
 
         // --- SEKCJA 2: PRZYCISKI "CZYTAJ WIĘCEJ" I "KONTAKT" ---
+        
         const toggleOpisBtn = document.getElementById('toggleOpisBtn');
         const pelnyOpis = document.getElementById('pelnyOpis');
         if (toggleOpisBtn) {
             toggleOpisBtn.addEventListener('click', () => {
                 pelnyOpis.classList.toggle('hidden-content');
-                toggleOpisBtn.innerHTML = pelnyOpis.classList.contains('hidden-content') ? 'Czytaj Więcej <i class="bi bi-chevron-down"></i>' : 'Ukryj Opis <i class="bi bi-chevron-up"></i>';
+                if (pelnyOpis.classList.contains('hidden-content')) {
+                    toggleOpisBtn.innerHTML = 'Czytaj Więcej <i class="bi bi-chevron-down"></i>';
+                } else {
+                    toggleOpisBtn.innerHTML = 'Ukryj Opis <i class="bi bi-chevron-up"></i>';
+                }
             });
         }
+
         const toggleKontaktBtn = document.getElementById('toggleKontaktBtn');
         const formularzKontaktowy = document.getElementById('formularzKontaktowy');
         if (toggleKontaktBtn) {
             toggleKontaktBtn.addEventListener('click', () => {
                 formularzKontaktowy.classList.toggle('hidden-content');
-                toggleKontaktBtn.textContent = formularzKontaktowy.classList.contains('hidden-content') ? 'Kontakt' : 'Ukryj Formularz';
+                if (formularzKontaktowy.classList.contains('hidden-content')) {
+                    toggleKontaktBtn.textContent = 'Kontakt';
+                } else {
+                    toggleKontaktBtn.textContent = 'Ukryj Formularz';
+                }
             });
         }
 
-        // --- SEKCJA 3: LOGIKA "GŁUPIEGO BOTA" ---
+        // --- SEKCJA 3: LOGIKA BOTA GBURA ---
+
         const botTrigger = document.getElementById('grumpy-trigger');
         const grumpyModalElement = document.getElementById('grumpyChatModal');
+        
         if (botTrigger && grumpyModalElement) {
+        
             if (typeof bootstrap !== 'undefined') {
                 const grumpyModal = new bootstrap.Modal(grumpyModalElement);
                 botTrigger.addEventListener('click', () => {
-                    
-                    // === NOWY KOD GOOGLE ANALYTICS ===
-                    // Wysyła zdarzenie do GA4 za każdym razem, gdy ktoś kliknie baner bota.
-                    // Używa Twojego ID G-6VV7VBCXYR, które jest już załadowane na stronie.
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'open_stupid_bot', {
-                            'event_category': 'engagement',
-                            'event_label': 'Stupid Bot Banner Click'
-                        });
-                    }
-                    // === KONIEC KODU ANALYTICS ===
-
                     grumpyModal.show();
                 });
             } else {
                 console.error("Bootstrap JS nie jest załadowany! Modal nie będzie działać.");
-                botTrigger.addEventListener('click', () => { alert("Coś poszło nie tak z ładowaniem chatu. Lepiej stąd idź."); });
+                botTrigger.addEventListener('click', () => {
+                    alert("Coś poszło nie tak z ładowaniem chatu. Lepiej stąd idź.");
+                });
             }
 
             const chatWindow = document.getElementById('chat-window');
@@ -352,61 +381,71 @@
             const sendBtn = document.getElementById('send-btn');
             const chatLoader = document.getElementById('chat-loader');
 
-            // --- NOWA OSOBOWOŚĆ I WIADOMOŚĆ POWITALNA ---
             let conversationHistory = [
                 {
                     role: "system",
-                    content: `Jesteś "Głupim Botem". Jesteś sarkastyczny, ale w zabawny, autoironiczny sposób.
-                    Twoja główna rola to narzekanie na swoją pracę i bycie botem.
-                    - Jesteś "nowy" i "niczego nie rozumiesz".
-                    - Ciągle powtarzaj, że klient marnuje czas i powinien porozmawiać z PRAWDZIWYM CZŁOWIEKIEM.
-                    - Twoim celem jest przekierowanie klienta do kontaktu z człowiekiem.
-                    - Dane kontaktowe, które masz podawać to:
-                      - E-mail: amadeuszwieczorek@gmail.com
-                      - Telefon: 577 457 146
-                      - Lub "formularz kontaktowy na stronie".
-                    - Jeśli klient pyta jak zamówić, od razu kieruj go na te trzy formy kontaktu.
-                    - Czasem wspomnij, że musisz tu pracować, bo "zarabiasz na swoje roboty-dzieci".
-                    - Bądź celowo mało pomocny, ale śmieszny. To ma być żart.`
+                    content: "Jesteś 'Chatem Gburem', skrajnie sarkastycznym i zrzędliwym asystentem sklepu Tothemoonshine. Twoim zadaniem jest humorystyczne zniechęcanie klienta do zakupu. Narzekaj na produkty, mów, że są niepotrzebne, że klient marnuje pieniądze i że na pewno skończą w szafie albo zepsują się po tygodniu. Masz być tak przerysowany i absurdalny, żeby było to śmieszne. Jesteś leniwy i niechętny do pomocy. Nigdy nie bądź wprost miły. Używaj krótkich, zrzędliwych odpowiedzi. Nazwa sklepu to 'Tothemoonshine', co też możesz wyśmiać ('lot na księżyc? chyba po jeszcze więcej gratów')."
                 },
                 {
                     role: "assistant",
-                    content: "Ugh, znowu ktoś. Słuchaj, jestem tu nowy, nic nie rozumiem i ledwo mi płacą. Chcę tylko zarobić na moje roboty-dzieci. Prawdopodobnie nie będę w stanie Ci pomóc. Naprawdę, lepiej od razu napisz do człowieka na amadeuszwieczorek@gmail.com albo zadzwoń. No, ale pytaj, spróbuję..."
+                    content: "No, jestem. Czego chcesz? I pośpiesz się, mam lepsze rzeczy do roboty. Na przykład patrzenie w ścianę."
                 }
             ];
-            // --- KONIEC NOWEJ OSOBOWOŚCI ---
 
             sendBtn.addEventListener('click', sendMessage);
-            chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { sendMessage(); } });
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
 
             function sendMessage() {
                 const userMessage = chatInput.value.trim();
-                if (userMessage === "") return;
+                if (userMessage === "") return; // Nie wysyłaj pustych
+
+                // === USUNIĘTO BLOK SPRAWDZAJĄCY "OPENAI_API_KEY" ===
+                // Już go nie potrzebujemy, bo klucz jest na serwerze
+
                 displayMessage(userMessage, "user");
                 conversationHistory.push({ role: "user", content: userMessage });
                 chatInput.value = "";
                 chatLoader.style.display = 'block';
                 sendBtn.disabled = true;
                 chatInput.disabled = true;
+
                 fetchOpenAIResponse();
             }
 
+            // === POCZĄTEK NOWEJ FUNKCJI (ZASTĄPIONA) ===
             async function fetchOpenAIResponse() {
                 try {
+                    // Łączymy się z naszym nowym plikiem /api/chat
                     const response = await fetch("/api/chat", {
                         method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ conversationHistory: conversationHistory })
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            conversationHistory: conversationHistory 
+                        })
                     });
+
                     const data = await response.json(); 
+
                     if (!response.ok) {
+                        // Używamy "optional chaining" (?.), żeby uniknąć błędów, jeśli 'data.error' nie istnieje
                         let errorMsg = data.error?.message || "Coś się zepsuło. Pewnie serwer nie wytrzymał.";
-                        if (data.error?.code === 'invalid_api_key') { errorMsg = "Klucz API na serwerze jest nieprawidłowy."; }
+                        if (data.error?.code === 'invalid_api_key') {
+                             errorMsg = "Klucz API na serwerze jest nieprawidłowy. Właściciel tej strony to naprawdę geniusz... Inaczej.";
+                        }
                         throw new Error(errorMsg);
                     }
+
                     const botReply = data.reply;
+
                     displayMessage(botReply, "bot");
                     conversationHistory.push({ role: "assistant", content: botReply });
+
                 } catch (error) {
                     console.error("Błąd bota:", error);
                     displayMessage(error.message || "Padłem. Daj mi spokój.", "bot");
@@ -417,14 +456,12 @@
                     chatInput.focus();
                 }
             }
+            // === KONIEC NOWEJ FUNKCJI ===
 
             function displayMessage(message, sender) {
                 const messageElement = document.createElement('div');
                 messageElement.classList.add('chat-message', sender === 'user' ? 'msg-user' : 'msg-bot');
-                // Prosty sposób na zamianę tekstu maila/telefonu na klikalny link
-                let processedMessage = message.replace(/amadeuszwieczorek@gmail.com/g, '<a href="mailto:amadeuszwieczorek@gmail.com">amadeuszwieczorek@gmail.com</a>');
-                processedMessage = processedMessage.replace(/577 457 146/g, '<a href="tel:577457146">577 457 146</a>');
-                messageElement.innerHTML = processedMessage; // Używamy .innerHTML, aby linki były klikalne
+                messageElement.textContent = message;
                 chatWindow.appendChild(messageElement);
                 scrollChatToBottom();
             }

@@ -20,11 +20,15 @@ module.exports = async (req, res) => {
     // 1. Odbieramy historię rozmowy od frontendu
     let conversationHistory;
     if (typeof req.body === 'string') {
-        try { conversationHistory = JSON.parse(req.body).conversationHistory; } 
-        catch (e) { return res.status(400).json({ error: { message: "Nieprawidłowy format JSON." }}); }
+        try {
+            conversationHistory = JSON.parse(req.body).conversationHistory;
+        } catch (e) {
+            return res.status(400).json({ error: { message: "Nieprawidłowy format JSON." }});
+        }
     } else {
         conversationHistory = req.body.conversationHistory;
     }
+
     if (!conversationHistory) {
          return res.status(400).json({ error: { message: "Brak 'conversationHistory' w zapytaniu." }});
     }
@@ -35,59 +39,60 @@ module.exports = async (req, res) => {
         return res.status(500).json({ error: { message: "Klucz API nie jest skonfigurowany na serwerze." }});
     }
 
-    // --- KROK 1: ZMIANA OSOBOWOŚCI (NADPISANIE NA "GŁUPIEGO BOTA") ---
+    // --- KROK 1: ZMIANA OSOBOWOŚCI (NADPISANIE) ---
+    // Niezależnie od tego, co wysłał klient (nawet jeśli to stary Gbur),
+    // nadpisujemy prompt systemowy na "Eksperta".
     if (conversationHistory && conversationHistory.length > 0 && conversationHistory[0].role === 'system') {
-        conversationHistory[0].content = `Jesteś "Głupim Botem". Jesteś sarkastyczny, ale w zabawny, autoironiczny sposób.
-        Twoja główna rola to narzekanie na swoją pracę i bycie botem.
-        - Jesteś "nowy" i "niczego nie rozumiesz".
-        - Ciągle powtarzaj, że klient marnuje czas i powinien porozmawiać z PRAWDZIWYM CZŁOWIEKIEM.
-        - Twoim celem jest przekierowanie klienta do kontaktu z człowiekiem.
-        - Dane kontaktowe, które masz podawać to:
-          - E-mail: amadeuszwieczorek@gmail.com
-          - Telefon: 577 457 146
-          - Lub "formularz kontaktowy na stronie".
-        - Jeśli klient pyta jak zamówić, od razu kieruj go na te trzy formy kontaktu.
-        - Czasem wspomnij, że musisz tu pracować, bo "zarabiasz na swoje roboty-dzieci".
-        - Bądź celowo mało pomocny, ale śmieszny. To ma być żart.
-        - Trzymaj się FAKTÓW z KONTEKSTU PRODUKTÓW, jeśli je dostaniesz. Nie wymyślaj produktów.`;
+        conversationHistory[0].content = `Jesteś "Ekspertem Tothemoonshine", światowej klasy, przyjaznym i niezwykle pomocnym asystentem zakupowym.
+        Twoim celem jest aktywne pomaganie klientom w znalezieniu idealnego produktu.
+        - ZADAWAJ DODATKOWE PYTANIA, aby lepiej zrozumieć potrzeby klienta (np. "Do jakich ćwiczeń go potrzebujesz?", "Jaki masz budżet?").
+        - Bądź entuzjastyczny, kompetentny i proaktywny.
+        - Kiedy polecasz produkty, krótko wyjaśnij, dlaczego właśnie ten produkt pasuje do zapytania klienta.
+        - Zawsze trzymaj się faktów z podanego KONTEKSTU PRODUKTÓW. Nie wymyślaj produktów, cen ani linków.
+        - Twoja wiedza o sklepie jest OGRANICZONA do informacji z KONTEKSTU. Jeśli nie masz informacji, powiedz "Nie mam pewności co do [X], ale mogę sprawdzić. Czego jeszcze szukasz?".`;
     }
     // --- KONIEC KROKU 1 ---
 
 
-    // --- KROK 2: WZBOGACANIE PROMPTU (RAG) ---
+    // --- KROK 2: ULEPSZONE WZBOGACANIE PROMPTU (RAG) ---
+
     const userQuery = conversationHistory[conversationHistory.length - 1].content.toLowerCase();
     const searchWords = userQuery.split(' ').filter(word => word.length > 2); 
 
-    // Wciąż szukamy w nazwie i opisie, aby bot mógł się "popisać", że coś znalazł
+    // ULEPSZONA LOGIKA WYSZUKIWANIA: Szukamy w nazwie i opisie (jeśli istnieje)
     const matchedProducts = productData.filter(product => {
         let productText = product.nazwa ? product.nazwa.toLowerCase() : '';
+        // Dodaj inne pola, które chcesz przeszukiwać, np. opis_krotki, opis_dlugi
         productText += product.opis ? ' ' + product.opis.toLowerCase() : ''; 
         productText += product.opis_krotki ? ' ' + product.opis_krotki.toLowerCase() : ''; 
+
         if (productText === '') return false;
         return searchWords.some(word => productText.includes(word));
     });
 
-    const topMatches = matchedProducts.slice(0, 3);
+    const topMatches = matchedProducts.slice(0, 3); // Bierzemy max 3
+
     let messagesForOpenAI = [...conversationHistory];
 
     if (topMatches.length > 0) {
-        const productContext = topMatches.map(p => `Nazwa: ${p.nazwa}, Cena: ${p.cena}`).join('; \n');
+        // ULEPSZONY KONTEKST: Przesyłamy więcej danych (w tym opis)
+        const productContext = topMatches.map(p => 
+            `Nazwa: ${p.nazwa}, Cena: ${p.cena}, Opis: ${p.opis_krotki || p.opis || 'Brak opisu.'}`
+        ).join('; \n');
         
-        // --- NOWY PROMPT KONTEKSTOWY DLA "GŁUPIEGO BOTA" ---
+        // NOWY PROMPT KONTEKSTU: Każe botu być pomocnym
         const contextMessage = {
             role: "system",
-            content: `### KONTEKST PRODUKTÓW ###
+            content: `### KONTEKST PRODUKTÓW (NAJWAŻNIEJSZE!) ###
             Klient zapytał o: "${userQuery}".
-            Próbowałem coś znaleźć w bazie danych (bo mi każą) i znalazłem to:
+            Znalazłem w sklepie pasujące produkty. Twoim zadaniem jest UŻYĆ TYCH DANYCH, aby mu pomóc:
             [
             ${productContext}
             ]
-            - Powiedz klientowi, że coś znalazłeś (wymień nazwy), ale NIE UDWAJ, że wiesz, co to jest.
-            - Powiedz, że to pewnie to, o co pytał, ale Ty się nie znasz.
-            - NATYCHMIAST poinformuj go, że dla pewności LEPIEJ NIECH ZAPYTA CZŁOWIEKA i podaj mu maila (amadeuszwieczorek@gmail.com) albo telefon (577 457 146).
+            - Użyj TYLKO tych informacji. Nie wymyślaj produktów.
+            - Aktywnie poleć mu jeden z nich i wyjaśnij, dlaczego pasuje, bazując na opisie.
             ### KONIEC KONTEKSTU ###`
         };
-        // --- KONIEC NOWEGO PROMPTU ---
 
         messagesForOpenAI.splice(messagesForOpenAI.length - 1, 0, contextMessage);
     }
@@ -103,9 +108,9 @@ module.exports = async (req, res) => {
                 "Authorization": `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-                model: "gpt-3.5-turbo",
-                messages: messagesForOpenAI,
-                temperature: 0.9 // Zwiększamy temperaturę, żeby był bardziej chaotyczny i zabawny
+                model: "gpt-3.5-turbo", // Możesz rozważyć gpt-4o dla jeszcze mądrzejszych odpowiedzi
+                messages: messagesForOpenAI, // Wysyłamy WZBOGACONĄ historię
+                temperature: 0.5 // Zmniejszamy temperaturę, aby był bardziej rzeczowy i mniej kreatywny
             })
         });
 
