@@ -1,1 +1,2 @@
-.vercel
+// To jest zawartość pliku .gitignore
+config.js

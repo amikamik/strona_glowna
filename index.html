@@ -20,6 +20,7 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=2369850443532061&ev=PageView&noscript=1"
     /></noscript>
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6VV7VBCXYR"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -28,12 +29,94 @@
     
       gtag('config', 'G-6VV7VBCXYR');
     </script>
+    
+    <script src="config.js"></script> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
         html { scroll-behavior: smooth; }
         .hidden-content { display: none !important; }
         .contact-box { background-color: #f8f9fa; padding: 20px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.1); margin-top: 30px; }
+   
+        /* === POCZĄTEK STYLI BOTA GBURA === */
+        #grumpy-banner {
+            background: linear-gradient(45deg, #ffc107, #e68a00); /* Przyciągający wzrok kolor */
+            color: #212529;
+            padding: 25px;
+            margin-top: 30px; /* Odstęp od przycisków */
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            /* Subtelna animacja, żeby "nie dało się nie kliknąć" */
+            animation: pulse-animation 2s infinite; 
+        }
+
+        @keyframes pulse-animation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        #grumpy-trigger {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        #grumpyChatModal .modal-content {
+            background-color: #f8f9fa;
+        }
+        #grumpyChatModal .modal-header {
+            background-color: #dc3545; /* Gburowaty czerwony */
+            color: white;
+            border-bottom: 0;
+        }
+        #grumpyChatModal .modal-header .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+        #chat-window {
+            height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chat-message {
+            margin-bottom: 5px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 80%;
+            line-height: 1.4;
+            flex-shrink: 0;
+        }
+        .msg-bot {
+            background-color: #e9ecef;
+            color: #212529;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        .msg-user {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        #chat-footer {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        #chat-input { flex-grow: 1; }
+        #chat-loader {
+            display: none; /* Ukryty domyślnie */
+            margin: 10px 0;
+        }
+        /* === KONIEC STYLI BOTA GBURA === */
+
     </style>
 </head>
 <body>
@@ -53,18 +136,28 @@
                     </button>
                     <a href="#produkty" class="btn btn-outline-light btn-lg">Przejdź do Produktów</a>
                 </div>
+
+                <div id="grumpy-banner" class="container">
+                    <h3 class="fw-bolder mb-3">😑 Hej! Ty! Zatrzymaj się!</h3>
+                    <p class="lead mb-4" style="font-size: 1.1rem;">
+                        Myślisz, że czegoś potrzebujesz z tej strony? Prawdopodobnie się mylisz. <br> Ale skoro już tu jesteś, możesz porozmawiać z naszym... "asystentem".
+                    </p>
+                    <button id="grumpy-trigger" class="btn btn-danger btn-lg shadow-lg">
+                        <i class="bi bi-chat-right-text-fill"></i> Porozmawiaj z Chatem Gburem (na własne ryzyko)
+                    </button>
+                </div>
                 <div id="pelnyOpis" class="hidden-content text-start mx-auto" style="max-width: 800px; padding: 20px; background-color: rgba(255, 255, 255, 0.05); border-radius: 8px;">
                      <h2 style="color: #007bff; text-align: center; font-size: 2em; margin-bottom: 20px;">
-                        Koncepcja Dopiero W Budowie, Ale Pierwszy Etap Startu Już Za Nami.
+                         Koncepcja Dopiero W Budowie, Ale Pierwszy Etap Startu Już Za Nami.
                      </h2>
                      <p style="color: #ccc;">
-                        W **Tothemoonshine** budujemy coś więcej niż tylko sklep – tworzymy platformę, która redefiniuje inteligentne zakupy. Wierzymy, że czas marnowany na poszukiwanie jakości w gąszczu ofert powinien się skończyć. Nasza wizja to stworzenie miejsca, gdzie trafiają wyłącznie produkty, które już osiągnęły **"moonshine"** – szczyt popularności, jakości i zaufania.
+                         W **Tothemoonshine** budujemy coś więcej niż tylko sklep – tworzymy platformę, która redefiniuje inteligentne zakupy. Wierzymy, że czas marnowany na poszukiwanie jakości w gąszczu ofert powinien się skończyć. Nasza wizja to stworzenie miejsca, gdzie trafiają wyłącznie produkty, które już osiągnęły **"moonshine"** – szczyt popularności, jakości i zaufania.
                      </p>
                      <p style="color: #ccc;">
-                        Tak, nasza pełna wizja kosmicznej floty jest jeszcze w budowie. Codziennie doskonalimy algorytmy i poszerzamy źródła informacji, aby w przyszłości móc prezentować Państwu wyselekcjonowane produkty z niemal każdej kategorii.
+                         Tak, nasza pełna wizja kosmicznej floty jest jeszcze w budowie. Codziennie doskonalimy algorytmy i poszerzamy źródła informacji, aby w przyszłości móc prezentować Państwu wyselekcjonowane produkty z niemal każdej kategorii.
                      </p>
                      <p style="background-color: rgba(233, 236, 239, 0.2); padding: 15px; border-radius: 6px; font-style: italic; color: #ccc;">
-                        Jednak już teraz, w ramach naszego **"Testu Wartości"**, oferujemy pierwszą partię produktów, które doskonale wpisują się w naszą misję: są to sprawdzone, użyteczne i poszukiwane przedmioty, które udało nam się pozyskać na wyjątkowych warunkach.
+                         Jednak już teraz, w ramach naszego **"Testu Wartości"**, oferujemy pierwszą partię produktów, które doskonale wpisują się w naszą misję: są to sprawdzone, użyteczne i poszukiwane przedmioty, które udało nam się pozyskać na wyjątkowych warunkach.
                      </p>
                 </div>
                 <div id="formularzKontaktowy" class="hidden-content row justify-content-center">
@@ -72,7 +165,7 @@
                         <div class="contact-box">
                             <h3 class="fw-bolder mb-3 text-center" style="color: #17a2b8;">Masz Pytania? Skontaktuj Się!</h3>
                             <p class="text-center mb-4 lead" style="font-size: 1em; color: #333;">
-                                Zadaj dowolne pytania! Nasza strona jest jeszcze w budowie, więc jeżeli chcesz zamówić produkt w innej formie, **dostosujemy się do Ciebie**. Możesz do nas zadzwonić: **577 457 146** lub skorzystaj z formularza.
+                                 Zadaj dowolne pytania! Nasza strona jest jeszcze w budowie, więc jeżeli chcesz zamówić produkt w innej formie, **dostosujemy się do Ciebie**. Możesz do nas zadzwonić: **577 457 146** lub skorzystaj z formularza.
                             </p>
                             <form action="https://formspree.io/f/xovkreeo" method="POST">
                                 <input type="hidden" name="_subject" value="Zapytanie z Tothemoonshine (W Budowie)">
@@ -151,6 +244,33 @@
         </div>
     </section>
 
+    <div class="modal fade" id="grumpyChatModal" tabindex="-1" aria-labelledby="grumpyChatModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="grumpyChatModalLabel">🤖 Chat Gbur - O co znowu chodzi?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="chat-window">
+                        <div class="chat-message msg-bot">
+                            No, jestem. Czego chcesz? I pośpiesz się, mam lepsze rzeczy do roboty. Na przykład patrzenie w ścianę.
+                        </div>
+                    </div>
+                    <div id="chat-loader" class="text-center">
+                        <div class="spinner-border spinner-border-sm text-muted" role="status">
+                            <span class="visually-hidden">Myśli...</span>
+                        </div>
+                        <span class="text-muted ms-2">Dobra, dobra, już myślę...</span>
+                    </div>
+                    <div id="chat-footer">
+                        <input type="text" id="chat-input" class="form-control" placeholder="Napisz coś (i tak pożałujesz)...">
+                        <button id="send-btn" class="btn btn-primary">Wyślij</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Tothemoonshine 2025</p> 
@@ -162,83 +282,215 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            const productGrid = document.getElementById('product-grid');
-            fetch('produkty.json')
-                .then(response => response.json())
-                .then(products => {
-                    products.forEach(product => {
-                        
-                       // === POCZĄTEK ZMIANY (NOWA LOGIKA) ===
-    // Hardkodujemy sprawdzanie ID produktu, omijając problem z 'link_niestandardowy'
-    
-    let productUrl;
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        const productGrid = document.getElementById('product-grid');
+        fetch('produkty.json')
+            .then(response => response.json())
+            .then(products => {
+                products.forEach(product => {
+                    
+                   // === POCZĄTEK ZMIANY (NOWA LOGIKA) ===
+                    // Hardkodujemy sprawdzanie ID produktu, omijając problem z 'link_niestandardowy'
+                    
+                    let productUrl;
 
-    if (product.id === 'produkt-8') {
-        // Jeśli to JEST produkt-8, kieruj do pliku statycznego
-        productUrl = 'mata-puzzle-produkt-8.html';
+                    if (product.id === 'produkt-8') {
+                        // Jeśli to JEST produkt-8, kieruj do pliku statycznego
+                        productUrl = 'mata-puzzle-produkt-8.html';
 
-    } else if (product.id === 'produkt-9') {
-        // === DODANO: Obsługa produktu-9 ===
-        // Kieruj do nowego pliku statycznego dla steppera
-        productUrl = 'steper_hms.html'; // <-- WAŻNA ZMIANA
+                    } else if (product.id === 'produkt-9') {
+                        // === DODANO: Obsługa produktu-9 ===
+                        // Kieruj do nowego pliku statycznego dla steppera
+                        productUrl = 'steper_hms.html'; // <-- WAŻNA ZMIANA
 
-    } else {
-        // Dla wszystkich innych, użyj starego szablonu
-        productUrl = `produkt.html?id=${product.id}`;
-    }
-    // === KONIEC ZMIANY ===
+                    } else {
+                        // Dla wszystkich innych, użyj starego szablonu
+                        productUrl = `produkt.html?id=${product.id}`;
+                    }
+                    // === KONIEC ZMIANY ===
 
-                        const productCard = `
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <a href="${productUrl}">
-                                        <img class="card-img-top" src="${product.zdjecia[0]}" alt="${product.nazwa}" />
-                                    </a>
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <h5 class="fw-bolder">${product.nazwa}</h5>
-                                            ${product.cena}
-                                        </div>
+                    const productCard = `
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <a href="${productUrl}">
+                                    <img class="card-img-top" src="${product.zdjecia[0]}" alt="${product.nazwa}" />
+                                </a>
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <h5 class="fw-bolder">${product.nazwa}</h5>
+                                        ${product.cena}
                                     </div>
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center">
-                                            <a class="btn btn-outline-dark mt-auto" href="${productUrl}">Zobacz produkt</a>
-                                        </div>
+                                </div>
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-dark mt-auto" href="${productUrl}">Zobacz produkt</a>
                                     </div>
                                 </div>
                             </div>
-                        `;
-                        productGrid.innerHTML += productCard;
-                    });
+                        </div>
+                    `;
+                    productGrid.innerHTML += productCard;
+                });
+            });
+
+        // 1. Obsługa przycisku "Czytaj Więcej"
+        const toggleOpisBtn = document.getElementById('toggleOpisBtn');
+        const pelnyOpis = document.getElementById('pelnyOpis');
+        toggleOpisBtn.addEventListener('click', () => {
+            pelnyOpis.classList.toggle('hidden-content');
+            if (pelnyOpis.classList.contains('hidden-content')) {
+                toggleOpisBtn.innerHTML = 'Czytaj Więcej <i class="bi bi-chevron-down"></i>';
+            } else {
+                toggleOpisBtn.innerHTML = 'Ukryj Opis <i class="bi bi-chevron-up"></i>';
+            }
+        });
+
+        // 2. Obsługa przycisku "Kontakt"
+        const toggleKontaktBtn = document.getElementById('toggleKontaktBtn');
+        const formularzKontaktowy = document.getElementById('formularzKontaktowy');
+        toggleKontaktBtn.addEventListener('click', () => {
+            formularzKontaktowy.classList.toggle('hidden-content');
+            if (formularzKontaktowy.classList.contains('hidden-content')) {
+                toggleKontaktBtn.textContent = 'Kontakt';
+            } else {
+                toggleKontaktBtn.textContent = 'Ukryj Formularz';
+            }
+        });
+    });
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // === CAŁY KOD BOTA GBURA ===
+
+        // --- 1. Konfiguracja ---
+        
+        // === KLUCZ API ZOSTAŁ USUNIĘTY ===
+        // Zmienna "OPENAI_API_KEY" jest teraz ładowana
+        // z pliku "config.js" dodanego w <head>
+        
+        const botTrigger = document.getElementById('grumpy-trigger');
+        const grumpyModalElement = document.getElementById('grumpyChatModal');
+        // Upewniamy się, że skrypt Bootstrapa się załadował
+        if (typeof bootstrap !== 'undefined') {
+            const grumpyModal = new bootstrap.Modal(grumpyModalElement);
+            botTrigger.addEventListener('click', () => {
+                grumpyModal.show();
+            });
+        } else {
+            console.error("Bootstrap JS nie jest załadowany! Modal nie będzie działać.");
+            // Awaryjne pokazanie banera, gdyby JS bootstrapa padł
+            botTrigger.addEventListener('click', () => {
+                 alert("Coś poszło nie tak z ładowaniem chatu. Lepiej stąd idź.");
+            });
+        }
+
+        const chatWindow = document.getElementById('chat-window');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const chatLoader = document.getElementById('chat-loader');
+
+        // Historia rozmowy do wysłania do API
+        let conversationHistory = [
+            {
+                role: "system",
+                content: "Jesteś 'Chatem Gburem', skrajnie sarkastycznym i zrzędliwym asystentem sklepu Tothemoonshine. Twoim zadaniem jest humorystyczne zniechęcanie klienta do zakupu. Narzekaj na produkty, mów, że są niepotrzebne, że klient marnuje pieniądze i że na pewno skończą w szafie albo zepsują się po tygodniu. Masz być tak przerysowany i absurdalny, żeby było to śmieszne. Jesteś leniwy i niechętny do pomocy. Nigdy nie bądź wprost miły. Używaj krótkich, zrzędliwych odpowiedzi. Nazwa sklepu to 'Tothemoonshine', co też możesz wyśmiać ('lot na księżyc? chyba po jeszcze więcej gratów')."
+            },
+            {
+                role: "assistant",
+                content: "No, jestem. Czego chcesz? I pośpiesz się, mam lepsze rzeczy do roboty. Na przykład patrzenie w ścianę."
+            }
+        ];
+
+        // --- 2. Event Listeners (już wewnątrz głównego DOMContentLoaded) ---
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // --- 3. Funkcje Chatu ---
+
+        function sendMessage() {
+            const userMessage = chatInput.value.trim();
+            if (userMessage === "") return; // Nie wysyłaj pustych
+
+            // Sprawdzamy, czy klucz został poprawnie załadowany z config.js
+            if (typeof OPENAI_API_KEY === 'undefined' || OPENAI_API_KEY === "") {
+                displayMessage("Wygląda na to, że właściciel strony nie ustawił klucza API w pliku config.js. Ech, amator. Nie pogadamy. Idź już sobie.", "bot");
+                return;
+            }
+
+            displayMessage(userMessage, "user");
+            conversationHistory.push({ role: "user", content: userMessage });
+            chatInput.value = "";
+            chatLoader.style.display = 'block'; // Pokaż spinner
+            sendBtn.disabled = true;
+            chatInput.disabled = true;
+
+            fetchOpenAIResponse();
+        }
+
+        async function fetchOpenAIResponse() {
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${OPENAI_API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-3.5-turbo", // Szybki i tani, idealny do tego celu
+                        messages: conversationHistory,
+                        temperature: 0.8 // Trochę więcej kreatywności dla lepszych docinków
+                    })
                 });
 
-            // 1. Obsługa przycisku "Czytaj Więcej"
-            const toggleOpisBtn = document.getElementById('toggleOpisBtn');
-            const pelnyOpis = document.getElementById('pelnyOpis');
-            toggleOpisBtn.addEventListener('click', () => {
-                pelnyOpis.classList.toggle('hidden-content');
-                if (pelnyOpis.classList.contains('hidden-content')) {
-                    toggleOpisBtn.innerHTML = 'Czytaj Więcej <i class="bi bi-chevron-down"></i>';
-                } else {
-                    toggleOpisBtn.innerHTML = 'Ukryj Opis <i class="bi bi-chevron-up"></i>';
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error("Błąd API:", errorData);
+                    let errorMsg = "Coś się zepsuło. Pewnie serwer nie wytrzymał mojego geniuszu.";
+                    if (errorData.error && errorData.error.code === 'invalid_api_key') {
+                        errorMsg = "Klucz API jest nieprawidłowy. Właściciel tej strony to naprawdę geniusz... Inaczej.";
+                    }
+                    throw new Error(errorMsg);
                 }
-            });
 
-            // 2. Obsługa przycisku "Kontakt"
-            const toggleKontaktBtn = document.getElementById('toggleKontaktBtn');
-            const formularzKontaktowy = document.getElementById('formularzKontaktowy');
-            toggleKontaktBtn.addEventListener('click', () => {
-                formularzKontaktowy.classList.toggle('hidden-content');
-                if (formularzKontaktowy.classList.contains('hidden-content')) {
-                    toggleKontaktBtn.textContent = 'Kontakt';
-                } else {
-                    toggleKontaktBtn.textContent = 'Ukryj Formularz';
-                }
-            });
-        });
+                const data = await response.json();
+                const botReply = data.choices[0].message.content;
+
+                displayMessage(botReply, "bot");
+                conversationHistory.push({ role: "assistant", content: botReply });
+
+            } catch (error) {
+                console.error("Błąd bota:", error);
+                displayMessage(error.message || "Padłem. Daj mi spokój.", "bot");
+            } finally {
+                chatLoader.style.display = 'none'; // Ukryj spinner
+                sendBtn.disabled = false;
+                chatInput.disabled = false;
+                chatInput.focus(); // Ustaw fokus z powrotem na polu tekstowym
+            }
+        }
+
+        function displayMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message', sender === 'user' ? 'msg-user' : 'msg-bot');
+            messageElement.textContent = message; // Używamy textContent dla bezpieczeństwa (zapobiega XSS)
+            chatWindow.appendChild(messageElement);
+            scrollChatToBottom();
+        }
+
+        function scrollChatToBottom() {
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+    });
     </script>
-</body>
+    </body>
 </html>
