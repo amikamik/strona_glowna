@@ -171,25 +171,18 @@
                 .then(products => {
                     products.forEach(product => {
                         
-                       // === POCZĄTEK ZMIANY (NOWA LOGIKA) ===
-    // Hardkodujemy sprawdzanie ID produktu, omijając problem z 'link_niestandardowy'
-    
-    let productUrl;
-
-    if (product.id === 'produkt-8') {
-        // Jeśli to JEST produkt-8, kieruj do pliku statycznego
-        productUrl = 'mata-puzzle-produkt-8.html';
-
-    } else if (product.id === 'produkt-9') {
-        // === DODANO: Obsługa produktu-9 ===
-        // Kieruj do nowego pliku statycznego dla steppera
-        productUrl = 'step-as002-produkt-9.html'; // <-- WAŻNA ZMIANA
-
-    } else {
-        // Dla wszystkich innych, użyj starego szablonu
-        productUrl = `produkt.html?id=${product.id}`;
-    }
-    // === KONIEC ZMIANY ===
+                        // === POCZĄTEK ZMIANY (NOWA LOGIKA) ===
+                        // Hardkodujemy sprawdzanie ID produktu, omijając problem z 'link_niestandardowy'
+                        
+                        let productUrl;
+                        if (product.id === 'produkt-8') {
+                            // Jeśli to JEST produkt-8, kieruj do pliku statycznego
+                            productUrl = 'mata-puzzle-produkt-8.html';
+                        } else {
+                            // Dla wszystkich innych, użyj starego szablonu
+                            productUrl = `produkt.html?id=${product.id}`;
+                        }
+                        // === KONIEC ZMIANY ===
 
                         const productCard = `
                             <div class="col mb-5">
