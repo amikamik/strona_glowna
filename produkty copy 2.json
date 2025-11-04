@@ -113,20 +113,5 @@
     "produkty/produkt-8/images/zdjecie4.jpeg"
     
   ]
-},
-{
-  "id": "produkt-9",
-  "nazwa": "Stwórz Bezpieczną Strefę Treningu o boku 1,8m – Gruba Mata Ochronna Puzzle 12mm",
-  "cena": "149 zł",
-  "opis": "<style>\n.product-description-container { \n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; \n    line-height: 1.6; \n    color: #333; \n}\n/* Usunięto style dla 'czytaj więcej', pełen opis zawsze widoczny */\n#description-full-produkt-8 {\n     margin-top: 15px; /* Dodano odstęp dla lepszej czytelności */\n}\n#description-full-produkt-8 h3 {\n    border-bottom: 1px solid #eee;\n    padding-bottom: 5px;\n    margin-top: 20px;\n}\n/* Dodane style dla list z ikonami */\n#description-full-produkt-8 ul {\n    list-style-type: none; /* Usuwa domyślne kropki */\n    padding-left: 5px; /* Redukuje domyślne wcięcie */\n}\n #description-full-produkt-8 ul li {\n    margin-bottom: 5px; /* Lepszy odstęp */\n}\n</style>\n\n<div class=\"product-description-container\">\n\n    \n    <div class=\"description-short\">\n        <p>Stwórz idealną przestrzeń do ćwiczeń w swoim domu! Nasza mata puzzle o grubości 12 mm to wszechstronne rozwiązanie do yogi, treningu siłowego czy pod sprzęt fitness, jak orbitrek.</p>\n        <p>Wykonana z wytrzymałej pianki EVA, nie tylko <strong>chroni Twoją podłogę</strong> przed zarysowaniami, ale także <strong>zapewnia komfort i bezpieczeństwo</strong>, redukując hałas oraz drgania. Dzięki systemowi łatwego montażu typu \"puzzle\" możesz dowolnie konfigurować stabilną, antypoślizgową powierzchnię.</p>\n    </div>\n\n    \n    \n\n    \n    <div id=\"description-full-produkt-8\">\n        <p>Mata posiada niezliczone zastosowania – świetnie sprawdzi się również podczas nieskrępowanej zabawy z rodziną lub jako zabezpieczenie podłogi w trakcie składania mebli. Głębokie wcięcia gwarantują stabilność złożonej maty.</p>\n\n        <h3>Kluczowe Zalety:</h3>\n        <ul>\n            <li>🛡️ Skutecznie zabezpiecza podłogę przed uszkodzeniem</li>\n            <li>🔇 Zmniejsza hałas i drgania wywołane ćwiczeniami</li>\n            <li>👟 Antypoślizgowa, perforowana powierzchnia zwiększa bezpieczeństwo</li>\n            <li>🧩 System \"puzzle\" gwarantuje łatwe łączenie i rozłączanie elementów</li>\n            <li>💧 Materiał EVA jest łatwy w czyszczeniu i wodoodporny</li>\n        </ul>\n\n        <h3>Specyfikacja Techniczna:</h3>\n        <ul>\n            <li>💪 <strong>Materiał:</strong> Pianka EVA</li>\n            <li>📏 <strong>Grubość:</strong> 12 mm</li>\n            <li>🏋️ <strong>Twardość:</strong> 30</li>\n            <li>🧩 <strong>Bok 1 kwadratu (1 szt.):</strong> 60 cm (Wymiar 60 x 60 cm)</li>\n            <li>📐 <strong>Bok całej maty (9 szt.):</strong> 180 cm (Wymiar 180 x 180 cm)</li>\n            <li>✅ <strong>Gwarancja:</strong> 24 miesiące</li>\n        </ul>\n    </div>\n\n</div>\n\n\n",
-  "link_stripe": "https://buy.stripe.com/aFadRb77i7F11oj7jr4ko1r",
-  "link_niestandardowy": "steper_hms.html",
-  "zdjecia": [
-    "produkty/produkt-8/images/zdjecie1.jpeg",
-    "produkty/produkt-8/images/zdjecie2.jpeg",
-    "produkty/produkt-8/images/zdjecie3.jpeg",
-    "produkty/produkt-8/images/zdjecie4.jpeg"
-    
-  ]
 }
 ]
